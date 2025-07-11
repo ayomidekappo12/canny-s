@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import App from "@/components/layouts/app";
+import App from "@/components/layout/app";
 import { Sora, Inter } from "next/font/google";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });

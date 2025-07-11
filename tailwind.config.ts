@@ -1,89 +1,109 @@
 import type { Config } from "tailwindcss";
 
-const config = {
+const config: Config = {
   darkMode: "class",
-
   content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
   ],
-  prefix: "",
   theme: {
     container: {
       center: true,
       padding: "2rem",
       screens: {
         sm: "640px",
-        // => @media (min-width: 640px) { ... }
-
         md: "768px",
-        // => @media (min-width: 768px) { ... }
-
         lg: "1024px",
-        // => @media (min-width: 1024px) { ... }
-
         xl: "1280px",
-        // => @media (min-width: 1280px) { ... }
-
         "2xl": "1536px",
-        // => @media (min-width: 1536px) { ... }
       },
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: "oklch(var(--background) / <alpha-value>)",
+        foreground: "oklch(var(--foreground) / <alpha-value>)",
+        card: "oklch(var(--card) / <alpha-value>)",
+        "card-foreground": "oklch(var(--card-foreground) / <alpha-value>)",
+        popover: "oklch(var(--popover) / <alpha-value>)",
+        "popover-foreground":
+          "oklch(var(--popover-foreground) / <alpha-value>)",
         primary: {
-          DEFAULT: "#4A169B",
-          foreground: "hsl(var(--primary-foreground))",
-          darker: "#502F9D",
+          DEFAULT: "oklch(var(--primary) / <alpha-value>)",
+          foreground: "oklch(var(--primary-foreground) / <alpha-value>)",
+          darker: "#502F9D", // optional fallback/shade
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "oklch(var(--secondary) / <alpha-value>)",
+          foreground: "oklch(var(--secondary-foreground) / <alpha-value>)",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "oklch(var(--destructive) / <alpha-value>)",
+          foreground: "oklch(var(--destructive-foreground) / <alpha-value>)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "oklch(var(--muted) / <alpha-value>)",
+          foreground: "oklch(var(--muted-foreground) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "#FF4A47",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "oklch(var(--accent) / <alpha-value>)",
+          foreground: "oklch(var(--accent-foreground) / <alpha-value>)",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        border: "oklch(var(--border) / <alpha-value>)",
+        input: "oklch(var(--input) / <alpha-value>)",
+        ring: "oklch(var(--ring) / <alpha-value>)",
+
+        // Sidebar
+        sidebar: "oklch(var(--sidebar) / <alpha-value>)",
+        "sidebar-foreground":
+          "oklch(var(--sidebar-foreground) / <alpha-value>)",
+        "sidebar-primary": "oklch(var(--sidebar-primary) / <alpha-value>)",
+        "sidebar-primary-foreground":
+          "oklch(var(--sidebar-primary-foreground) / <alpha-value>)",
+        "sidebar-accent": "oklch(var(--sidebar-accent) / <alpha-value>)",
+        "sidebar-accent-foreground":
+          "oklch(var(--sidebar-accent-foreground) / <alpha-value>)",
+        "sidebar-border": "oklch(var(--sidebar-border) / <alpha-value>)",
+        "sidebar-ring": "oklch(var(--sidebar-ring) / <alpha-value>)",
+
+        // Charts
+        "chart-1": "oklch(var(--chart-1) / <alpha-value>)",
+        "chart-2": "oklch(var(--chart-2) / <alpha-value>)",
+        "chart-3": "oklch(var(--chart-3) / <alpha-value>)",
+        "chart-4": "oklch(var(--chart-4) / <alpha-value>)",
+        "chart-5": "oklch(var(--chart-5) / <alpha-value>)",
       },
       borderColor: {
-        DEFAULT: "hsl(var(--border))",
-        border: "hsl(var(--border))",
+        DEFAULT: "oklch(var(--border) / <alpha-value>)",
       },
       outlineColor: {
-        ring: "hsl(var(--ring))",
+        ring: "oklch(var(--ring) / <alpha-value>)",
+      },
+      borderRadius: {
+        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) - 2px)",
+        lg: "var(--radius)",
+        xl: "calc(var(--radius) + 4px)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
         sora: ["var(--font-sora)", "sans-serif"],
       },
-
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      boxShadow: {
+        soft: "var(--shadow-soft)",
+        medium: "var(--shadow-medium)",
+        strong: "var(--shadow-strong)",
+      },
+      backgroundImage: {
+        "gradient-hero": "var(--gradient-hero)",
+        "gradient-hero-fallback": "var(--gradient-hero-fallback)",
+        "gradient-trust": "var(--gradient-trust)",
+        "gradient-card": "var(--gradient-card)",
+      },
+      transitionProperty: {
+        smooth: "var(--transition-smooth)",
+        bounce: "var(--transition-bounce)",
       },
       keyframes: {
         "accordion-down": {
@@ -102,6 +122,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+};
 
 export default config;
