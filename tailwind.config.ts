@@ -22,6 +22,10 @@ const config: Config = {
     },
     extend: {
       colors: {
+        success: "#517D55",
+        "success-green": "oklch(var(--success-green) / <alpha-value>)",
+        "professional-navy": "oklch(var(--professional-navy) / <alpha-value>)",
+
         background: "oklch(var(--background) / <alpha-value>)",
         foreground: "oklch(var(--foreground) / <alpha-value>)",
         card: "oklch(var(--card) / <alpha-value>)",
@@ -32,7 +36,6 @@ const config: Config = {
         primary: {
           DEFAULT: "oklch(var(--primary) / <alpha-value>)",
           foreground: "oklch(var(--primary-foreground) / <alpha-value>)",
-          darker: "#502F9D", // optional fallback/shade
         },
         secondary: {
           DEFAULT: "oklch(var(--secondary) / <alpha-value>)",
@@ -54,8 +57,7 @@ const config: Config = {
         input: "oklch(var(--input) / <alpha-value>)",
         ring: "oklch(var(--ring) / <alpha-value>)",
 
-        // Sidebar
-        sidebar: "oklch(var(--sidebar) / <alpha-value>)",
+        sidebar: "oklch(var(--sidebar-background) / <alpha-value>)",
         "sidebar-foreground":
           "oklch(var(--sidebar-foreground) / <alpha-value>)",
         "sidebar-primary": "oklch(var(--sidebar-primary) / <alpha-value>)",
@@ -67,7 +69,6 @@ const config: Config = {
         "sidebar-border": "oklch(var(--sidebar-border) / <alpha-value>)",
         "sidebar-ring": "oklch(var(--sidebar-ring) / <alpha-value>)",
 
-        // Charts
         "chart-1": "oklch(var(--chart-1) / <alpha-value>)",
         "chart-2": "oklch(var(--chart-2) / <alpha-value>)",
         "chart-3": "oklch(var(--chart-3) / <alpha-value>)",
@@ -87,19 +88,18 @@ const config: Config = {
         xl: "calc(var(--radius) + 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        sora: ["var(--font-sora)", "sans-serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
       },
       boxShadow: {
-        soft: "var(--shadow-soft)",
-        medium: "var(--shadow-medium)",
-        strong: "var(--shadow-strong)",
+        soft: "0 2px 10px oklch(var(--primary) / 0.1)",
+        medium: "0 8px 30px oklch(var(--primary) / 0.15)",
+        strong: "0 20px 40px oklch(var(--primary) / 0.2)",
       },
       backgroundImage: {
         "gradient-hero": "var(--gradient-hero)",
-        "gradient-hero-fallback": "var(--gradient-hero-fallback)",
-        "gradient-trust": "var(--gradient-trust)",
         "gradient-card": "var(--gradient-card)",
+        "gradient-trust": "var(--gradient-trust)",
       },
       transitionProperty: {
         smooth: "var(--transition-smooth)",

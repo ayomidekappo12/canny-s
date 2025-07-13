@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Phone, Shield, Star } from "lucide-react";
+import { Menu, Phone, Star } from "lucide-react";
+import Image from "next/image";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,16 +18,18 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        {/* Logo */}
+    <header className="sticky top-0 z-50 w-full  border-b border-gray-200 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex h-16 items-center justify-between mx-8">
         <Link href="/" className="flex items-center space-x-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-hero">
-            <Shield className="h-5 w-5 text-white" />
-          </div>
-          <span className="font-bold text-xl text-professional-navy">
-            CleanPro London
-          </span>
+          <Image
+            src={"/images/Logo.png"}
+            alt="Logo"
+            width={75}
+            height={70}
+            className="brightness-110 contrast-125"
+            quality={90}
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -53,7 +56,7 @@ export function Header() {
             <Phone className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium">020 7946 0958</span>
           </div>
-          <Button variant="booking" size="sm" asChild>
+          <Button size="sm" asChild>
             <Link href="/booking">Book Now</Link>
           </Button>
         </div>
@@ -86,7 +89,7 @@ export function Header() {
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   <span>4.9/5 rating • 2,400+ reviews</span>
                 </div>
-                <Button variant="booking" size="lg" className="w-full" asChild>
+                <Button size="lg" className="w-full" asChild>
                   <Link href="/booking" onClick={() => setIsOpen(false)}>
                     Book Cleaning Now
                   </Link>

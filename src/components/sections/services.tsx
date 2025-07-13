@@ -112,13 +112,16 @@ export function Services() {
 
   return (
     <section className="py-20 bg-background">
-      <div className="container">
+      <div className="mx-8">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <Badge variant="outline" className="mb-4">
+          <Badge
+            variant="outline"
+            className="mb-4 text-lg lg:text-xl font-bold rounded-2xl border border-gray-200"
+          >
             Our Services
           </Badge>
-          <h2 className="text-3xl lg:text-5xl font-bold text-professional-navy">
+          <h2 className="text-3xl lg:text-5xl font-bold text-[#1E293B]">
             Complete Cleaning Solutions
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -134,14 +137,15 @@ export function Services() {
             return (
               <Card
                 key={service.title}
-                className={`relative transition-all duration-300 hover:shadow-strong hover:-translate-y-1 ${
-                  service.popular ? "border-primary shadow-medium" : ""
+                className={`relative border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${
+                  service.popular ? "border-primary shadow-xl" : ""
                 }`}
               >
                 {service.popular && (
                   <Badge
                     variant="default"
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-trust"
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 text-white"
+                    style={{ backgroundImage: "var(--gradient-trust)" }}
                   >
                     Most Popular
                   </Badge>
@@ -151,7 +155,7 @@ export function Services() {
                   <div className="mx-auto p-3 rounded-lg bg-primary/10 w-fit mb-4">
                     <Icon className="h-8 w-8 text-primary" />
                   </div>
-                  <CardTitle className="text-xl text-professional-navy">
+                  <CardTitle className="text-xl text-[#1E293B]">
                     {service.title}
                   </CardTitle>
                   <div className="text-2xl font-bold text-primary">
@@ -167,7 +171,7 @@ export function Services() {
                   <ul className="space-y-2">
                     {service.features.map((feature) => (
                       <li key={feature} className="flex items-center space-x-2">
-                        <CheckCircle className="h-4 w-4 text-success-green" />
+                        <CheckCircle className="h-4 w-4 text-[#1de72e]" />
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
@@ -175,13 +179,13 @@ export function Services() {
 
                   <div className="flex flex-col space-y-2">
                     <Button
-                      variant={service.popular ? "hero" : "default"}
-                      className="w-full"
+                      variant={service.popular ? "default" : "default"}
+                      className="w-full hover:scale-105 shadow-xl hover:shadow-2xl"
                       asChild
                     >
                       <Link href={service.href}>
                         Learn More
-                        <ArrowRight className="h-4 w-4" />
+                        <ArrowRight className="mx-1.5 h-4 w-5" />
                       </Link>
                     </Button>
                     <Button
@@ -201,11 +205,14 @@ export function Services() {
 
         {/* Bottom CTA */}
         <div className="text-center space-y-6">
-          <Card className="bg-gradient-card border-0 shadow-medium">
+          <Card
+            className="border-0 shadow-medium"
+            style={{ backgroundImage: "var(--gradient-card)" }}
+          >
             <CardContent className="p-8">
               <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
                 <div className="text-left space-y-2">
-                  <h3 className="text-2xl font-bold text-professional-navy">
+                  <h3 className="text-2xl font-bold text-[#1E293B]">
                     Need a Custom Quote?
                   </h3>
                   <p className="text-muted-foreground">
@@ -218,7 +225,7 @@ export function Services() {
                     <Clock className="h-4 w-4" />
                     <span>Response within 1 hour</span>
                   </div>
-                  <Button variant="booking" size="lg" asChild>
+                  <Button size="lg" asChild>
                     <Link href="/contact">Get Custom Quote</Link>
                   </Button>
                 </div>

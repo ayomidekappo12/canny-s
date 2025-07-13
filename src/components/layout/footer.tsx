@@ -2,30 +2,36 @@
 
 import Link from "next/link";
 import {
-  Shield,
   Phone,
   Mail,
   MapPin,
   Star,
-  Facebook,
-  Instagram,
-  Twitter,
 } from "lucide-react";
+import { SiFacebook, SiX, SiInstagram } from "react-icons/si";
+import Image from "next/image";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-professional-navy text-white">
-      <div className="container py-12">
+    <footer className="text-white bg-[#1E293B]">
+      <div className="mx-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-hero">
-                <Shield className="h-5 w-5 text-white" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-hero">
+                <Image
+                  src={"/images/Logo.jpg"}
+                  alt="Logo"
+                  width={300}
+                  height={300}
+                  className="brightness-110 contrast-125"
+                  quality={90}
+                  priority
+                />
               </div>
-              <span className="font-bold text-xl">CleanPro London</span>
+              <span className="font-bold text-xl">Canny&apos;s cleaning</span>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
               Professional cleaning services across London and surrounding
@@ -102,7 +108,7 @@ export function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <span>hello@cleanprolondon.co.uk</span>
+                <span>hello@canny.co.uk</span>
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-primary mt-0.5" />
@@ -159,14 +165,6 @@ export function Footer() {
                   Service Areas
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/faq"
-                  className="hover:text-white transition-colors"
-                >
-                  FAQ
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
@@ -182,19 +180,19 @@ export function Footer() {
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  <Facebook className="h-5 w-5" />
+                  <SiFacebook className="h-5 w-4" />
                 </a>
                 <a
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  <Instagram className="h-5 w-5" />
+                  <SiInstagram className="h-5 w-4" />
                 </a>
                 <a
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  <Twitter className="h-5 w-5" />
+                  <SiX className="h-5 w-4" />
                 </a>
               </div>
             </div>
@@ -213,7 +211,7 @@ export function Footer() {
               >
                 Terms of Service
               </Link>
-              <span>© {currentYear} CleanPro London</span>
+              <span>© {currentYear} Canny&apos;s cleaning</span>
             </div>
           </div>
 
