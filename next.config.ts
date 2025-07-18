@@ -1,13 +1,18 @@
 /** @type {import('next').NextConfig} */
-import withBundleAnalyzer from "@next/bundle-analyzer";
-
 const nextConfig = {
+  swcMinify: true, // Enables the faster SWC-based minifier
+  trailingSlash: true, // Optional: Adjust if needed
+  output: "standalone",
+
   images: {
-    domains: ["res.cloudinary.com"], // Allow images from Cloudinary
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+    ],
   },
-  productionBrowserSourceMaps: false, // Prevent source maps from being exposed in production
 };
 
-export default withBundleAnalyzer({
-  enabled: process.env.ANALYZE === "true", // Enable bundle analyzer if ANALYZE=true
-})(nextConfig);
+export default nextConfig;

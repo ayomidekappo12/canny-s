@@ -15,7 +15,7 @@ import {
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-bg-[#f8fdff] to-white py-20 lg:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[var(--clean-blue)] to-white py-20 lg:py-32">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-30 bg-repeat bg-cyan-100"></div>
 

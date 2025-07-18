@@ -23,7 +23,7 @@ export function Services() {
       title: "Domestic Cleaning",
       description:
         "Regular house cleaning to keep your home spotless. Weekly, bi-weekly, or monthly visits.",
-      price: "From £15/hour",
+      price: "From £15/hr",
       features: [
         "Kitchen & bathrooms",
         "Hoovering & mopping",
@@ -38,7 +38,7 @@ export function Services() {
       title: "Deep Cleaning",
       description:
         "Comprehensive top-to-bottom cleaning for move-ins, spring cleaning, or special occasions.",
-      price: "From £120",
+      price: "From £120/hr",
       features: [
         "Inside appliances",
         "Window cleaning",
@@ -53,7 +53,7 @@ export function Services() {
       title: "End of Tenancy",
       description:
         "Professional cleaning to secure your deposit. Landlord approved checklist included.",
-      price: "From £180",
+      price: "From £180/hr",
       features: [
         "Deposit back guarantee",
         "Landlord checklist",
@@ -68,7 +68,7 @@ export function Services() {
       title: "Office Cleaning",
       description:
         "Keep your workplace clean and professional. Daily, weekly, or one-off commercial cleaning.",
-      price: "From £12/hour",
+      price: "From £12/hr",
       features: [
         "Desk sanitization",
         "Kitchen areas",
@@ -83,7 +83,7 @@ export function Services() {
       title: "Carpet & Upholstery",
       description:
         "Professional steam cleaning for carpets, sofas, and chairs. Stain removal included.",
-      price: "From £80",
+      price: "From £80/hr",
       features: [
         "Steam cleaning",
         "Stain treatment",
@@ -98,7 +98,7 @@ export function Services() {
       title: "AirBnB Cleaning",
       description:
         "Turnaround cleaning between guests. Quick, reliable service to maintain 5-star ratings.",
-      price: "From £45",
+      price: "From £45/hr",
       features: [
         "Same-day service",
         "Fresh linens",
@@ -111,13 +111,13 @@ export function Services() {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="bg-gradient-to-br from-[var(--clean-blue)] to-white py-20">
       <div className="mx-8">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
           <Badge
             variant="outline"
-            className="mb-4 text-lg lg:text-xl font-bold rounded-2xl border border-gray-200"
+            className="mb-4 px-4 text-lg lg:text-xl font-bold rounded-2xl border border-gray-200"
           >
             Our Services
           </Badge>
@@ -137,8 +137,10 @@ export function Services() {
             return (
               <Card
                 key={service.title}
-                className={`relative border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${
-                  service.popular ? "border-primary shadow-xl" : ""
+                className={`relative border-gray-100 transition-all duration-300 hover:shadow-[var(--shadow-strong)] hover:-translate-y-1 ${
+                  service.popular
+                    ? "border-primary shadow-[var(--shadow-medium)]"
+                    : ""
                 }`}
               >
                 {service.popular && (
@@ -206,7 +208,7 @@ export function Services() {
         {/* Bottom CTA */}
         <div className="text-center space-y-6">
           <Card
-            className="border-0 shadow-medium"
+            className="border-0 shadow-[var(--shadow-medium)]"
             style={{ backgroundImage: "var(--gradient-card)" }}
           >
             <CardContent className="p-8">
