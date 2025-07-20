@@ -324,7 +324,7 @@ export default function Services() {
                         <div className="grid sm:grid-cols-2 gap-6">
                           <div>
                             <h4 className="font-semibold mb-3">
-                              What's Included:
+                              What&apos;s Included:
                             </h4>
                             <ul className="space-y-2">
                               {service.features.slice(0, 4).map((feature) => (

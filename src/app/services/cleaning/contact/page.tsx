@@ -1,109 +1,191 @@
 "use client";
 
 import React from "react";
+import { useForm } from "react-hook-form";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
-function InputField({
-  label,
-  placeholder,
-  type = "text",
-}: {
-  label: string;
-  placeholder: string;
-  type?: string;
-}) {
-  return (
-    <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-      <label className="flex flex-col min-w-40 flex-1">
-        <p className="text-[#111518] text-base font-medium leading-normal pb-2">
-          {label}
-        </p>
-        <input
-          type={type}
-          placeholder={placeholder}
-          className="form-input flex w-full flex-1 resize-none overflow-hidden rounded-lg text-[#111518] focus:outline-none border-none bg-[#f0f3f4] h-14 placeholder:text-[#637c88] p-4 text-base"
-        />
-      </label>
-    </div>
-  );
-}
+// 1. Define schema
+const formSchema = z.object({
+  name: z
+    .string()
+    .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ]{1,50}(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]{1,50})*$/, {
+      message: "Please enter a valid name",
+    }),
+  email: z
+    .email({ message: "Invalid email format" })
+    .regex(/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/, {
+      message: "Invalid email format",
+    }),
+  phone: z.string().regex(/^\+44\d{12}$/, {
+    message: "Please enter a valid phone number",
+  }),
+  service: z.string().min(1, "Please select a service"),
+  message: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
+    message: "Please enter a well-formatted about text",
+  }),
+});
 
-function TextAreaField({
-  label,
-  placeholder,
-}: {
-  label: string;
-  placeholder: string;
-}) {
-  return (
-    <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-      <label className="flex flex-col min-w-40 flex-1">
-        <p className="text-[#111518] text-base font-medium leading-normal pb-2">
-          {label}
-        </p>
-        <textarea
-          placeholder={placeholder}
-          className="form-input flex w-full flex-1 resize-none overflow-hidden rounded-lg text-[#111518] focus:outline-none border-none bg-[#f0f3f4] min-h-36 placeholder:text-[#637c88] p-4 text-base"
-        ></textarea>
-      </label>
-    </div>
-  );
-}
+type FormData = z.infer<typeof formSchema>;
 
-function SelectField() {
-  return (
-    <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-      <label className="flex flex-col min-w-40 flex-1">
-        <p className="text-[#111518] text-base font-medium leading-normal pb-2">
-          Service of Interest
-        </p>
-        <select className="form-input flex w-full flex-1 overflow-hidden rounded-lg text-[#111518] focus:outline-none border-none bg-[#f0f3f4] h-14 placeholder:text-[#637c88] p-4 text-base">
-          <option>Select a Service</option>
-          <option value="cleaning">Cleaning</option>
-          <option value="deep">Deep Cleaning</option>
-          <option value="move">Move-in/Move-out</option>
-        </select>
-      </label>
-    </div>
-  );
-}
+export default function ContactForm() {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
 
-export default function About() {
+  const onSubmit = async (data: FormData) => {
+    console.log("Form submitted:", data);
+    // simulate async action
+    await new Promise((r) => setTimeout(r, 1000));
+    alert("Message sent successfully!");
+  };
+
   return (
-    <div className="relative flex flex-col min-h-screen bg-white overflow-x-hidden font-sans">
-      <div className="layout-container flex h-full grow flex-col">
+    <div className="relative flex flex-col min-h-screen bg-white overflow-x-hidden">
+      <div className="container flex h-full grow flex-col">
         <main className="px-4 md:px-40 flex flex-1 justify-center py-5">
           <div className="w-full max-w-[960px]">
             <section className="flex flex-wrap justify-between gap-3 p-4">
               <div className="flex min-w-72 flex-col gap-3">
-                <h1 className="text-[#111518] text-[28px] md:text-[32px] font-bold leading-tight">
+                <h1 className="text-[#1E293B] text-3xl md:text-4xl font-bold leading-tight">
                   Get in Touch
                 </h1>
-                <p className="text-[#637c88] text-sm leading-normal">
-                  We're here to help with your cleaning needs. Reach out to us
-                  for inquiries, bookings, or any questions you may have.
+                <p className="text-[#637c88] text-base leading-normal">
+                  We&apos;re here to help with your cleaning needs. Reach out to
+                  us for inquiries, bookings, or any questions you may have.
                 </p>
               </div>
             </section>
 
-            <form className="space-y-2">
-              <InputField label="Name" placeholder="Your Name" />
-              <InputField label="Email" placeholder="Your Email" type="email" />
-              <InputField
-                label="Phone Number"
-                placeholder="Your Phone Number"
-                type="tel"
-              />
-              <SelectField />
-              <TextAreaField label="Message" placeholder="Your Message" />
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-2 w-auto"
+            >
+              {/* Name */}
+              <div className="px-4 py-3">
+                <Label htmlFor="name" className="py-2 px-1">
+                  Name
+                </Label>
+                <Input
+                  id="name"
+                  placeholder="Your Name"
+                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Email */}
+              <div className="px-4 py-3">
+                <Label htmlFor="email" className="py-2 px-1">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Your Email"
+                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Phone */}
+              <div className="px-4 py-3">
+                <Label htmlFor="phone" className="py-2 px-1">
+                  Phone Number{" "}
+                </Label>
+                <Input
+                  id="phone"
+                  placeholder="+44 020 7946 0958"
+                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  {...register("phone")}
+                />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.phone.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Service Select */}
+              <div className="px-4 py-3">
+                <Label htmlFor="service" className="py-2 px-1">
+                  Service of Interest
+                </Label>
+                <Select onValueChange={(value) => setValue("service", value)}>
+                  <SelectTrigger className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#637c88] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal">
+                    <SelectValue placeholder="Select a Service" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="cleaning">Cleaning</SelectItem>
+                    <SelectItem value="deep">Deep Cleaning</SelectItem>
+                    <SelectItem value="move">Move-in/Move-out</SelectItem>
+                  </SelectContent>
+                </Select>
+                {errors.service && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.service.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Message */}
+              <div className="px-4 py-3">
+                <Label htmlFor="message" className="py-2 px-1">
+                  Message
+                </Label>
+                <Textarea
+                  id="message"
+                  placeholder="Your Message"
+                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  {...register("message")}
+                />
+                {errors.message && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.message.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Submit Button */}
               <div className="flex px-4 py-3 justify-end">
-                <button className="bg-[#19a1e5] text-white rounded-lg px-4 h-10 text-sm font-bold">
-                  Submit
-                </button>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="bg-primary text-white rounded-lg px-4 h-10 text-sm font-bold cursor-pointer"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
               </div>
             </form>
 
             <section className="px-4 pt-5">
-              <h2 className="text-[#111518] text-[20px] md:text-[22px] font-bold leading-tight">
+              <h2 className="text-[#1E293B] text-[20px] md:text-[22px] font-bold leading-tight">
                 Or Contact Us Directly
               </h2>
               <p className="text-base pt-2">Phone: +44 020 7946 0958</p>

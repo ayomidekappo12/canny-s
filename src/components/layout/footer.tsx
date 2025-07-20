@@ -104,7 +104,7 @@ export function Footer() {
             <div className="space-y-3 text-sm text-gray-300">
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-primary" />
-                <span>020 7946 0958</span>
+                <span>+44 020 7946 0958</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-primary" />
@@ -135,7 +135,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/about"
+                  href="/services/cleaning/about"
                   className="hover:text-white transition-colors"
                 >
                   About Us
@@ -143,7 +143,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/services/cleaning/contact"
                   className="hover:text-white transition-colors"
                 >
                   Contact
@@ -152,6 +152,8 @@ export function Footer() {
               <li>
                 <Link
                   href="/reviews"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
                   Customer Reviews
@@ -159,10 +161,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/areas"
+                  href="/services/cleaning/service"
                   className="hover:text-white transition-colors"
                 >
-                  Service Areas
+                  Services
                 </Link>
               </li>
             </ul>
@@ -178,18 +180,24 @@ export function Footer() {
               <div className="flex space-x-3">
                 <a
                   href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <SiFacebook className="h-5 w-4" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/cannyscleaning/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <SiInstagram className="h-5 w-4" />
                 </a>
                 <a
                   href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <SiX className="h-5 w-4" />
@@ -201,12 +209,16 @@ export function Footer() {
             <div className="flex items-center space-x-4 text-sm text-gray-400">
               <Link
                 href="/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
               >
                 Terms of Service

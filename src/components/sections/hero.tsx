@@ -79,7 +79,7 @@ export function Hero() {
                     Satisfaction Guarantee
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Not happy? We'll return free
+                    Not happy? We&apos;ll return free
                   </p>
                 </div>
               </div>
@@ -160,7 +160,8 @@ export function Hero() {
                       ))}
                     </div>
                     <p className="mt-1">
-                      "Outstanding service, highly recommend!" - Sarah M.
+                      &quot;Outstanding service, highly recommend!&quot; - Sarah
+                      M.
                     </p>
                   </div>
                 </div>

@@ -125,8 +125,8 @@ export function Services() {
             Complete Cleaning Solutions
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            From regular house cleaning to specialized deep cleans, we've got
-            every cleaning need covered across London.
+            From regular house cleaning to specialized deep cleans, we&apos;ve
+            got every cleaning need covered across London.
           </p>
         </div>
 

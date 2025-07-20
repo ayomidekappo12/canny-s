@@ -44,13 +44,29 @@ const bookingSchema = z.object({
   duration: z.string().min(1, "Please select duration"),
   property: z.string().min(1, "Please select property type"),
   bedrooms: z.string().min(1, "Please select number of bedrooms"),
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
+  firstName: z
+    .string()
+    .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ]{1,50}(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]{1,50})*$/, {
+      message: "Please enter a valid first name",
+    }),
+  lastName: z
+    .string()
+    .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ]{1,50}(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]{1,50})*$/, {
+      message: "Please enter a valid last name",
+    }),
+  email: z
+    .email({ message: "Invalid email format" })
+    .regex(/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/, {
+      message: "Invalid email format",
+    }),
+  phone: z.string().regex(/^\+44\d{12}$/, {
+    message: "Please enter a valid phone number",
+  }),
   address: z.string().min(5, "Please enter your full address"),
   postcode: z.string().min(5, "Please enter a valid postcode"),
-  notes: z.string().optional(),
+  notes: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
+    message: "Please enter a well-formatted about text",
+  }),
 });
 
 type BookingFormData = z.infer<typeof bookingSchema>;
@@ -67,12 +83,12 @@ export default function BookingForm() {
   });
 
   const services = [
-    { value: "domestic", label: "Domestic Cleaning - £15/hour" },
-    { value: "deep", label: "Deep Cleaning - From £120" },
-    { value: "end-tenancy", label: "End of Tenancy - From £180" },
-    { value: "office", label: "Office Cleaning - £12/hour" },
-    { value: "carpet", label: "Carpet & Upholstery - From £80" },
-    { value: "airbnb", label: "AirBnB Cleaning - From £45" },
+    { value: "domestic", label: "Domestic Cleaning - £15/hr" },
+    { value: "deep", label: "Deep Cleaning - From £120/hr" },
+    { value: "end-tenancy", label: "End of Tenancy - From £180/hr" },
+    { value: "office", label: "Office Cleaning - £12/hr" },
+    { value: "carpet", label: "Carpet & Upholstery - From £80/hr" },
+    { value: "airbnb", label: "AirBnB Cleaning - From £45/hr" },
   ];
 
   const timeSlots = [
@@ -138,14 +154,15 @@ export default function BookingForm() {
   };
 
   return (
-    <div className="container py-20">
+    <div className="container py-14 sm:py-20">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-professional-navy mb-4">
+          <h1 className="text-4xl font-bold text-[#1E293B] mb-4">
             Book Your Cleaning Service
           </h1>
-          <p className="text-xl text-muted-foreground">
-            Fill out the form below and we'll get back to you within the hour
+          <p className="text-xl text-muted-foreground mx-2 sm:mx-0">
+            Fill out the form below and we&apos;ll get back to you within the
+            hour
           </p>
         </div>
 
@@ -153,7 +170,7 @@ export default function BookingForm() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Service Details */}
-              <Card>
+              <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Clock className="h-5 w-5 text-primary" />
@@ -172,7 +189,7 @@ export default function BookingForm() {
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select a service" />
                             </SelectTrigger>
                           </FormControl>
@@ -229,7 +246,7 @@ export default function BookingForm() {
                                 date < new Date() ||
                                 date < new Date("1900-01-01")
                               }
-                              initialFocus
+                              autoFocus
                               className="p-3 pointer-events-auto"
                             />
                           </PopoverContent>
@@ -250,7 +267,7 @@ export default function BookingForm() {
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select time" />
                             </SelectTrigger>
                           </FormControl>
@@ -278,7 +295,7 @@ export default function BookingForm() {
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select duration" />
                             </SelectTrigger>
                           </FormControl>
@@ -301,7 +318,7 @@ export default function BookingForm() {
               </Card>
 
               {/* Property Details */}
-              <Card>
+              <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-primary" />
@@ -320,7 +337,7 @@ export default function BookingForm() {
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select property type" />
                             </SelectTrigger>
                           </FormControl>
@@ -348,7 +365,7 @@ export default function BookingForm() {
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select bedrooms" />
                             </SelectTrigger>
                           </FormControl>
@@ -404,7 +421,7 @@ export default function BookingForm() {
             </div>
 
             {/* Contact Details */}
-            <Card>
+            <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5 text-primary" />
@@ -466,7 +483,7 @@ export default function BookingForm() {
                       <FormItem>
                         <FormLabel>Phone Number</FormLabel>
                         <FormControl>
-                          <Input placeholder="07123 456789" {...field} />
+                          <Input placeholder="+44 020 7946 0958" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -498,15 +515,15 @@ export default function BookingForm() {
             <div className="text-center">
               <Button
                 type="submit"
-                variant="booking"
+                variant="default"
                 size="xl"
                 disabled={isSubmitting}
-                className="w-full md:w-auto px-12"
+                className="w-fit sm:w-auto px-12 cursor-pointer"
               >
                 {isSubmitting ? "Submitting..." : "Book My Cleaning Service"}
               </Button>
               <p className="text-sm text-muted-foreground mt-4">
-                We'll contact you within 1 hour to confirm your booking
+                We&apos;ll contact you within 1 hour to confirm your booking
               </p>
             </div>
           </form>
