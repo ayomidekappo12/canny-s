@@ -1,6 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import BookingFormDialog from "@/app/services/cleaning/custom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -17,6 +19,7 @@ import {
 } from "lucide-react";
 
 export function Services() {
+  const [open, setOpen] = useState(false);
   const services = [
     {
       icon: Home,
@@ -227,9 +230,15 @@ export function Services() {
                     <Clock className="h-4 w-4" />
                     <span>Response within 1 hour</span>
                   </div>
-                  <Button size="lg" asChild>
-                    <Link href="/contact">Get Custom Quote</Link>
+                  <Button
+                    onClick={() => setOpen(true)}
+                    size="xl"
+                    className="cursor-pointer"
+                  >
+                    Get Custom Quote
                   </Button>
+
+                  <BookingFormDialog open={open} onOpenChange={setOpen} />
                 </div>
               </div>
             </CardContent>

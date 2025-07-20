@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import BookingFormDialog from "@/app/services/cleaning/custom";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,6 +22,7 @@ import {
 } from "lucide-react";
 
 export default function Services() {
+  const [open, setOpen] = useState(false);
   const services = [
     {
       id: "domestic",
@@ -286,13 +289,13 @@ export default function Services() {
                       <div className="space-y-6">
                         <div className="flex items-center space-x-4">
                           <div className="p-3 rounded-lg bg-primary/10">
-                            <Icon className="h-8 w-8 text-primary" />
+                            <Icon className="h-10 w-8 text-primary" />
                           </div>
                           <div>
-                            <h2 className="text-3xl font-bold text-[#1E293B]">
+                            <h2 className="text-xl sm:text-3xl font-bold text-[#1E293B]">
                               {service.title}
                             </h2>
-                            <p className="text-lg text-muted-foreground">
+                            <p className="text-base sm:text-lg text-muted-foreground">
                               {service.subtitle}
                             </p>
                           </div>
@@ -302,9 +305,9 @@ export default function Services() {
                           {service.description}
                         </p>
 
-                        <div className="flex items-center space-x-6">
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-primary">
+                        <div className="flex items-center space-x-4 sm:space-x-36">
+                          <div className="sm:text-center">
+                            <div className="text-xl sm:text-2xl font-bold text-primary">
                               {service.price}
                             </div>
                             <div className="text-sm text-muted-foreground">
@@ -385,7 +388,7 @@ export default function Services() {
             style={{ backgroundImage: "var(--gradient-card)" }}
           >
             <CardContent className="p-12 text-center">
-              <h2 className="text-3xl font-bold text-[#1E293B] mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E293B] mb-6">
                 Need a Custom Cleaning Solution?
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -393,17 +396,22 @@ export default function Services() {
                 your specific needs, schedule, and budget requirements.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="xl" asChild>
-                  <Link href="/contact">
-                    Get Custom Quote
-                    <ArrowRight className="mx-1.5 h-4 w-5" />
-                  </Link>
+                <Button onClick={() => setOpen(true)} size="xl" className="cursor-pointer">
+                  Get Custom Quote
                 </Button>
-                <Button variant="outline" size="xl">
+
+                <BookingFormDialog open={open} onOpenChange={setOpen} />
+
+                <Button
+                  variant="outline"
+                  size="xl"
+                  className="cursor-not-allowed"
+                >
                   <Clock className="mx-1.5 h-4 w-5" />
                   Call 020 7946 0958
                 </Button>
               </div>
+
               <p className="text-sm text-muted-foreground mt-6">
                 ✓ Free quotes ✓ Same-day response ✓ No obligation
               </p>

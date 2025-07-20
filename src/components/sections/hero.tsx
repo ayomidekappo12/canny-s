@@ -97,7 +97,11 @@ export function Hero() {
                   <ArrowRight className="mx-1.5 h-4 w-5" />
                 </Link>
               </Button>
-              <Button variant="outline" size="xl" className="text-lg">
+              <Button
+                variant="outline"
+                size="xl"
+                className="text-lg cursor-not-allowed"
+              >
                 <Phone className="mx-1.5 h-4 w-5" />
                 Call 020 7946 0958
               </Button>
