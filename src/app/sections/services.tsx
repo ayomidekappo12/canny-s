@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import BookingFormDialog from "@/app/services/cleaning/customBooking";
+import BookingFormDialog from "@/components/customBooking";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -114,137 +114,141 @@ export function Services() {
   ];
 
   return (
-    <section className="bg-gradient-to-br from-[var(--clean-blue)] to-white py-20">
-      <div className="mx-8">
-        {/* Header */}
-        <div className="text-center space-y-4 mb-16">
-          <Badge
-            variant="outline"
-            className="mb-4 px-4 text-lg lg:text-xl font-bold rounded-2xl border border-gray-200"
-          >
-            Our Services
-          </Badge>
-          <h2 className="text-3xl lg:text-5xl font-bold text-[#1E293B]">
-            Complete Cleaning Solutions
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            From regular house cleaning to specialized deep cleans, we&apos;ve
-            got every cleaning need covered across London.
-          </p>
-        </div>
+    <>
+      <section className="bg-gradient-to-br from-[var(--clean-blue)] to-white py-20">
+        <div className="mx-8">
+          {/* Header */}
+          <div className="text-center space-y-4 mb-16">
+            <Badge
+              variant="outline"
+              className="mb-4 px-4 text-lg lg:text-xl font-bold rounded-2xl border border-gray-200"
+            >
+              Our Services
+            </Badge>
+            <h2 className="text-3xl lg:text-5xl font-bold text-[#1E293B]">
+              Complete Cleaning Solutions
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              From regular house cleaning to specialized deep cleans, we&apos;ve
+              got every cleaning need covered across London.
+            </p>
+          </div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {services.map((service) => {
-            const Icon = service.icon;
-            return (
-              <Card
-                key={service.title}
-                className={`relative border-gray-100 transition-all duration-300 hover:shadow-[var(--shadow-strong)] hover:-translate-y-1 ${
-                  service.popular
-                    ? "border-primary shadow-[var(--shadow-medium)]"
-                    : ""
-                }`}
-              >
-                {service.popular && (
-                  <Badge
-                    variant="default"
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 text-white"
-                    style={{ backgroundImage: "var(--gradient-trust)" }}
-                  >
-                    Most Popular
-                  </Badge>
-                )}
-
-                <CardHeader className="text-center pb-4">
-                  <div className="mx-auto p-3 rounded-lg bg-primary/10 w-fit mb-4">
-                    <Icon className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl text-[#1E293B]">
-                    {service.title}
-                  </CardTitle>
-                  <div className="text-2xl font-bold text-primary">
-                    {service.price}
-                  </div>
-                </CardHeader>
-
-                <CardContent className="space-y-6">
-                  <p className="text-muted-foreground text-center">
-                    {service.description}
-                  </p>
-
-                  <ul className="space-y-2">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center space-x-2">
-                        <CheckCircle className="h-4 w-4 text-[#1de72e]" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-col space-y-2">
-                    <Button
-                      variant={service.popular ? "default" : "default"}
-                      className="w-full hover:scale-105 shadow-xl hover:shadow-2xl"
-                      asChild
+          {/* Services Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Card
+                  key={service.title}
+                  className={`relative border-gray-100 transition-all duration-300 hover:shadow-[var(--shadow-strong)] hover:-translate-y-1 ${
+                    service.popular
+                      ? "border-primary shadow-[var(--shadow-medium)]"
+                      : ""
+                  }`}
+                >
+                  {service.popular && (
+                    <Badge
+                      variant="default"
+                      className="absolute -top-3 left-1/2 -translate-x-1/2 text-white"
+                      style={{ backgroundImage: "var(--gradient-trust)" }}
                     >
-                      <Link href={service.href}>
-                        Learn More
-                        <ArrowRight className="mx-1.5 h-4 w-5" />
-                      </Link>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full"
-                      asChild
-                    >
-                      <Link href="/booking">Book Now</Link>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                      Most Popular
+                    </Badge>
+                  )}
 
-        {/* Bottom CTA */}
-        <div className="text-center space-y-6">
-          <Card
-            className="border-0 shadow-[var(--shadow-medium)]"
-            style={{ backgroundImage: "var(--gradient-card)" }}
-          >
-            <CardContent className="p-8">
-              <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-                <div className="text-left space-y-2">
-                  <h3 className="text-2xl font-bold text-[#1E293B]">
-                    Need a Custom Quote?
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Get personalized pricing for multiple services or large
-                    properties.
-                  </p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4" />
-                    <span>Response within 1 hour</span>
+                  <CardHeader className="text-center pb-4">
+                    <div className="mx-auto p-3 rounded-lg bg-primary/10 w-fit mb-4">
+                      <Icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl text-[#1E293B]">
+                      {service.title}
+                    </CardTitle>
+                    <div className="text-2xl font-bold text-primary">
+                      {service.price}
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="space-y-6">
+                    <p className="text-muted-foreground text-center">
+                      {service.description}
+                    </p>
+
+                    <ul className="space-y-2">
+                      {service.features.map((feature) => (
+                        <li
+                          key={feature}
+                          className="flex items-center space-x-2"
+                        >
+                          <CheckCircle className="h-4 w-4 text-[#1de72e]" />
+                          <span className="text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex flex-col space-y-2">
+                      <Button
+                        variant={service.popular ? "default" : "default"}
+                        className="w-full hover:scale-105 shadow-xl hover:shadow-2xl"
+                        asChild
+                      >
+                        <Link href={service.href}>
+                          Learn More
+                          <ArrowRight className="mx-1.5 h-4 w-5" />
+                        </Link>
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full"
+                        asChild
+                      >
+                        <Link href="/booking">Book Now</Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center space-y-6">
+            <Card
+              className="border-0 shadow-[var(--shadow-medium)]"
+              style={{ backgroundImage: "var(--gradient-card)" }}
+            >
+              <CardContent className="p-8">
+                <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+                  <div className="text-left space-y-2">
+                    <h3 className="text-2xl font-bold text-[#1E293B]">
+                      Need a Custom Quote?
+                    </h3>
+                    <p className="text-muted-foreground">
+                      Get personalized pricing for multiple services or large
+                      properties.
+                    </p>
                   </div>
-                  <Button
-                    onClick={() => setOpen(true)}
-                    size="xl"
-                    className="cursor-pointer"
-                  >
-                    Get Custom Quote
-                  </Button>
-                  
-                  <BookingFormDialog open={open} onOpenChange={setOpen} />
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                      <Clock className="h-4 w-4" />
+                      <span>Response within 1 hour</span>
+                    </div>
+                    <Button
+                      onClick={() => setOpen(true)}
+                      size="xl"
+                      className="cursor-pointer"
+                    >
+                      Get Custom Quote
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <BookingFormDialog open={open} onOpenChange={setOpen} />
+    </>
   );
 }

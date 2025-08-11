@@ -37,9 +37,7 @@ import { cn } from "@/lib/utils";
 
 const bookingSchema = z.object({
   service: z.string().min(1, "Please select a service"),
-  date: z.date().refine((d) => d instanceof Date && !isNaN(d.getTime()), {
-    message: "Please select a date",
-  }),
+  date: z.date().nullable().optional(), // allow missing/cleared date
   time: z.string().min(1, "Please select a time"),
   duration: z.string().min(1, "Please select duration"),
   property: z.string().min(1, "Please select property type"),
@@ -54,19 +52,25 @@ const bookingSchema = z.object({
     .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ]{1,50}(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]{1,50})*$/, {
       message: "Please enter a valid last name",
     }),
-  email: z
-    .email({ message: "Invalid email format" })
-    .regex(/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/, {
-      message: "Invalid email format",
+  email: z.email({ message: "Invalid email format" }),
+  phone: z
+    .string()
+    .trim()
+    .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
+    .refine((val) => /^(\+44\d{9,10}|07\d{9})$/.test(val), {
+      message: "Enter a valid UK phone number (+44xxxxxxxxxx or 07xxxxxxxxx)",
     }),
-  phone: z.string().regex(/^\+44\d{12}$/, {
-    message: "Please enter a valid phone number",
-  }),
   address: z.string().min(5, "Please enter your full address"),
-  postcode: z.string().min(5, "Please enter a valid postcode"),
-  notes: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
-    message: "Please enter a well-formatted about text",
-  }),
+  postcode: z
+    .string()
+    .min(5, "Please enter a valid postcode")
+    .max(8)
+    .regex(
+      // common UK postcode regex - reasonably permissive (case-insensitive)
+      /^[A-Z]{1,2}\d{1,2}[A-Z]?\s*\d[A-Z]{2}$/i,
+      "Please enter a valid UK postcode"
+    ),
+  notes: z.string().max(500).optional(),
 });
 
 type BookingFormData = z.infer<typeof bookingSchema>;
@@ -77,7 +81,20 @@ export default function BookingForm() {
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
+    mode: "onTouched",
     defaultValues: {
+      service: "",
+      date: undefined,
+      time: "",
+      duration: "",
+      property: "",
+      bedrooms: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address: "",
+      postcode: "",
       notes: "",
     },
   });
@@ -129,23 +146,35 @@ export default function BookingForm() {
 
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
-
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1200));
 
       toast({
-        title: "Booking Confirmed!",
+        title: "Booking received",
         description:
-          "We'll contact you within 1 hour to confirm your booking details.",
+          "Thanks — we'll contact you within 1 hour to confirm details.",
       });
 
-      form.reset();
-    } catch (error) {
+      form.reset({
+        service: "",
+        date: undefined,
+        time: "",
+        duration: "",
+        property: "",
+        bedrooms: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        postcode: "",
+        notes: "",
+      });
+    } catch (err) {
       toast({
-        title: "Booking Failed",
-        description:
-          "Something went wrong. Please try again or call us directly.",
+        title: "Submission failed",
+        description: "Something went wrong — please try again or call us.",
         variant: "destructive",
       });
     } finally {
@@ -170,7 +199,7 @@ export default function BookingForm() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Service Details */}
-              <Card className="mx-4 md:mx-0 border border-accent/20">
+              <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Clock className="h-5 w-5 text-primary" />
@@ -184,26 +213,26 @@ export default function BookingForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Service Type</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
+                        <FormControl>
+                          <Select
+                            value={field.value}
+                            onValueChange={(val) => field.onChange(val)}
+                          >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select a service" />
                             </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="bg-background border border-accent/20 z-50">
-                            {services.map((service) => (
-                              <SelectItem
-                                key={service.value}
-                                value={service.value}
-                              >
-                                {service.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                            <SelectContent className="bg-background border border-accent/20 z-50">
+                              {services.map((service) => (
+                                <SelectItem
+                                  key={service.value}
+                                  value={service.value}
+                                >
+                                  {service.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -214,7 +243,7 @@ export default function BookingForm() {
                     name="date"
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel>Preferred Date</FormLabel>
+                        <FormLabel>Preferred Date (optional)</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
@@ -225,10 +254,10 @@ export default function BookingForm() {
                                   !field.value && "text-muted-foreground"
                                 )}
                               >
-                                {field.value ? (
+                                {field.value instanceof Date ? (
                                   format(field.value, "PPP")
                                 ) : (
-                                  <span>Pick a date</span>
+                                  <span>Pick a date (optional)</span>
                                 )}
                                 <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                               </Button>
@@ -240,13 +269,14 @@ export default function BookingForm() {
                           >
                             <Calendar
                               mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) =>
-                                date < new Date() ||
-                                date < new Date("1900-01-01")
-                              }
-                              autoFocus
+                              selected={field.value ?? undefined}
+                              onSelect={(d) => field.onChange(d ?? undefined)}
+                              disabled={(date) => {
+                                // Do not allow past dates
+                                const today = new Date();
+                                today.setHours(0, 0, 0, 0);
+                                return date < today;
+                              }}
                               className="p-3 pointer-events-auto"
                             />
                           </PopoverContent>
@@ -262,23 +292,23 @@ export default function BookingForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Preferred Time</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
+                        <FormControl>
+                          <Select
+                            value={field.value}
+                            onValueChange={(val) => field.onChange(val)}
+                          >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select time" />
                             </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="bg-background border border-accent/20 z-50">
-                            {timeSlots.map((time) => (
-                              <SelectItem key={time} value={time}>
-                                {time}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                            <SelectContent className="bg-background border border-accent/20 z-50">
+                              {timeSlots.map((time) => (
+                                <SelectItem key={time} value={time}>
+                                  {time}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -290,26 +320,26 @@ export default function BookingForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Expected Duration</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
+                        <FormControl>
+                          <Select
+                            value={field.value}
+                            onValueChange={(val) => field.onChange(val)}
+                          >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select duration" />
                             </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="bg-background border z-50 border-accent/20">
-                            {durations.map((duration) => (
-                              <SelectItem
-                                key={duration.value}
-                                value={duration.value}
-                              >
-                                {duration.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                            <SelectContent className="bg-background border z-50 border-accent/20">
+                              {durations.map((duration) => (
+                                <SelectItem
+                                  key={duration.value}
+                                  value={duration.value}
+                                >
+                                  {duration.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -318,7 +348,7 @@ export default function BookingForm() {
               </Card>
 
               {/* Property Details */}
-              <Card className="mx-4 md:mx-0 border border-accent/20">
+              <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-primary" />
@@ -332,23 +362,23 @@ export default function BookingForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Property Type</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
+                        <FormControl>
+                          <Select
+                            value={field.value}
+                            onValueChange={(val) => field.onChange(val)}
+                          >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select property type" />
                             </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="bg-background border border-accent/20 z-50">
-                            {propertyTypes.map((type) => (
-                              <SelectItem key={type.value} value={type.value}>
-                                {type.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                            <SelectContent className="bg-background border border-accent/20 z-50">
+                              {propertyTypes.map((type) => (
+                                <SelectItem key={type.value} value={type.value}>
+                                  {type.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -360,26 +390,26 @@ export default function BookingForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Number of Bedrooms</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
+                        <FormControl>
+                          <Select
+                            value={field.value}
+                            onValueChange={(val) => field.onChange(val)}
+                          >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select bedrooms" />
                             </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="bg-background border border-accent/20 z-50">
-                            {bedroomOptions.map((option) => (
-                              <SelectItem
-                                key={option.value}
-                                value={option.value}
-                              >
-                                {option.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                            <SelectContent className="bg-background border border-accent/20 z-50">
+                              {bedroomOptions.map((option) => (
+                                <SelectItem
+                                  key={option.value}
+                                  value={option.value}
+                                >
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -421,7 +451,7 @@ export default function BookingForm() {
             </div>
 
             {/* Contact Details */}
-            <Card className="mx-4 md:mx-0 border border-accent/20">
+            <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5 text-primary" />
@@ -483,7 +513,7 @@ export default function BookingForm() {
                       <FormItem>
                         <FormLabel>Phone Number</FormLabel>
                         <FormControl>
-                          <Input placeholder="+44 020 7946 0958" {...field} />
+                          <Input placeholder="+44 7700 900123" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

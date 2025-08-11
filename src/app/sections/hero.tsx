@@ -17,8 +17,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[var(--clean-blue)] to-white py-20 lg:py-32">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30 bg-repeat bg-cyan-100"></div>
-
+      <div className="absolute inset-0 opacity-30 bg-cyan-100"></div>
       <div className="flex mx-8 relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -62,7 +61,7 @@ export function Hero() {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold text-bg-[#131620]">
+                  <p className="font-semibold text-[#131620]">
                     Same Day Service
                   </p>
                   <p className="text-sm text-muted-foreground">
@@ -75,7 +74,7 @@ export function Hero() {
                   <CheckCircle className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-bg-[#131620]">
+                  <p className="font-semibold text-[#131620]">
                     Satisfaction Guarantee
                   </p>
                   <p className="text-sm text-muted-foreground">
@@ -97,13 +96,11 @@ export function Hero() {
                   <ArrowRight className="mx-1.5 h-4 w-5" />
                 </Link>
               </Button>
-              <Button
-                variant="outline"
-                size="xl"
-                className="text-lg cursor-not-allowed"
-              >
-                <Phone className="mx-1.5 h-4 w-5" />
-                Call 020 7946 0958
+              <Button variant="outline" size="xl" asChild className="text-lg">
+                <a href="tel:02079460958">
+                  <Phone className="mx-1.5 h-4 w-5" />
+                  Call 020 7946 0958
+                </a>
               </Button>
             </div>
 
@@ -121,7 +118,7 @@ export function Hero() {
               <CardContent className="p-8">
                 <div className="space-y-6">
                   <div className="text-center">
-                    <h3 className="text-2xl font-bold text-bg-[#131620] mb-2">
+                    <h3 className="text-2xl font-bold text-[#131620] mb-2">
                       Get Your Free Quote
                     </h3>
                     <p className="text-muted-foreground">

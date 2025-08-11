@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {
   Select,
   SelectTrigger,
@@ -16,19 +16,28 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-// 1. Define schema
+//  More forgiving & realistic UK schema
 const formSchema = z.object({
-  name: z.string().regex(/^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/, {
-    message: "Please enter a valid name",
-  }),
+  name: z
+    .string()
+    .min(2, "Name is too short")
+    .max(50, "Name is too long")
+    .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/, {
+      message: "Please enter a valid name",
+    }),
   email: z.email({ message: "Invalid email format" }),
-  phone: z.string().regex(/^\+44\d{9,10}$/, {
-    message: "Please enter a valid phone number",
-  }),
+  phone: z
+    .string()
+    .trim()
+    .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
+    .refine((val) => /^(\+44\d{9,10}|07\d{9})$/.test(val), {
+      message: "Enter a valid UK phone number (+44xxxxxxxxxx or 07xxxxxxxxx)",
+    }),
   service: z.string().min(1, "Please select a service"),
-  message: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
-    message: "Please enter a well-formatted about text",
-  }),
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters")
+    .max(500, "Message must be under 500 characters"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -37,17 +46,25 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      message: "",
+    },
   });
 
   const onSubmit = async (data: FormData) => {
     console.log("Form submitted:", data);
-    // simulate async action
     await new Promise((r) => setTimeout(r, 1000));
     alert("Message sent successfully!");
+    reset();
   };
 
   return (
@@ -79,7 +96,7 @@ export default function ContactForm() {
                 <Input
                   id="name"
                   placeholder="Your Name"
-                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  className="bg-[#f0f3f4] h-14"
                   {...register("name")}
                 />
                 {errors.name && (
@@ -98,7 +115,7 @@ export default function ContactForm() {
                   id="email"
                   type="email"
                   placeholder="Your Email"
-                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  className="bg-[#f0f3f4] h-14"
                   {...register("email")}
                 />
                 {errors.email && (
@@ -111,12 +128,12 @@ export default function ContactForm() {
               {/* Phone */}
               <div className="px-4 py-3">
                 <Label htmlFor="phone" className="py-2 px-1">
-                  Phone Number{" "}
+                  Phone Number
                 </Label>
                 <Input
                   id="phone"
-                  placeholder="+44 020 7946 0958"
-                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  placeholder="+44 7700 900123"
+                  className="bg-[#f0f3f4] h-14"
                   {...register("phone")}
                 />
                 {errors.phone && (
@@ -126,21 +143,27 @@ export default function ContactForm() {
                 )}
               </div>
 
-              {/* Service Select */}
+              {/* Service Select - now with Controller */}
               <div className="px-4 py-3">
                 <Label htmlFor="service" className="py-2 px-1">
                   Service of Interest
                 </Label>
-                <Select onValueChange={(value) => setValue("service", value)}>
-                  <SelectTrigger className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#637c88] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal">
-                    <SelectValue placeholder="Select a Service" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="cleaning">Cleaning</SelectItem>
-                    <SelectItem value="deep">Deep Cleaning</SelectItem>
-                    <SelectItem value="move">Move-in/Move-out</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Controller
+                  name="service"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="bg-[#f0f3f4] w-full h-14">
+                        <SelectValue placeholder="Select a Service" />
+                      </SelectTrigger>
+                      <SelectContent className="border-accent/20">
+                        <SelectItem value="cleaning">Cleaning</SelectItem>
+                        <SelectItem value="deep">Deep Cleaning</SelectItem>
+                        <SelectItem value="move">Move-in/Move-out</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
                 {errors.service && (
                   <p className="text-red-500 text-sm mt-1">
                     {errors.service.message}
@@ -156,7 +179,7 @@ export default function ContactForm() {
                 <Textarea
                   id="message"
                   placeholder="Your Message"
-                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  className="bg-[#f0f3f4] min-h-[120px]"
                   {...register("message")}
                 />
                 {errors.message && (
@@ -171,7 +194,7 @@ export default function ContactForm() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-primary text-white rounded-lg px-4 h-10 text-sm font-bold cursor-pointer"
+                  className="bg-primary text-white rounded-lg px-4 h-10 text-sm font-bold"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
@@ -179,7 +202,7 @@ export default function ContactForm() {
             </form>
 
             <section className="px-4 pt-5">
-              <h2 className="text-[#1E293B] text-[20px] md:text-[22px] font-bold leading-tight">
+              <h2 className="text-[#1E293B] text-[20px] md:text-[22px] font-bold">
                 Or Contact Us Directly
               </h2>
               <p className="text-base pt-2">Phone: +44 020 7946 0958</p>

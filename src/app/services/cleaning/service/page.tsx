@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import BookingFormDialog from "@/app/services/cleaning/customBooking";
+import BookingFormDialog from "@/components/customBooking";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +15,7 @@ import {
   Sofa,
   Plane,
   CheckCircle,
-  Clock,
+  Phone,
   Star,
   ArrowRight,
   Shield,
@@ -255,24 +255,19 @@ export default function Services() {
                   className=" border-gray-200 overflow-hidden shadow-[var(--shadow-medium)] hover:shadow-[var(--shadow-strong)] transition-all duration-300 p-0"
                 >
                   <div
-                    className={`grid lg:grid-cols-2 gap-0 ${
-                      !isEven ? "lg:grid-flow-col-dense" : ""
+                    className={`flex flex-col ${
+                      !isEven ? "lg:flex-row-reverse" : "lg:flex-row"
                     }`}
                   >
                     {/* Image */}
-                    <div
-                      className={`relative h-64 lg:h-auto ${
-                        !isEven ? "lg:col-start-2" : ""
-                      }`}
-                    >
+                    <div className="relative h-64 lg:h-auto lg:w-3/4">
                       <Image
                         src={service.image}
                         alt={service.title}
-                        width={500}
-                        height={500}
-                        className="w-full h-full object-cover brightness-110 contrast-100"
+                        className="object-cover brightness-110 contrast-100"
+                        fill
                         quality={90}
-                        priority
+                        priority={index === 0}
                       />
                       {service.popular && (
                         <Badge
@@ -396,19 +391,25 @@ export default function Services() {
                 your specific needs, schedule, and budget requirements.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={() => setOpen(true)} size="xl" className="cursor-pointer">
+                <Button
+                  onClick={() => setOpen(true)}
+                  size="xl"
+                  className="cursor-pointer"
+                >
                   Get Custom Quote
                 </Button>
-
-                <BookingFormDialog open={open} onOpenChange={setOpen} />
-
                 <Button
                   variant="outline"
                   size="xl"
-                  className="cursor-not-allowed"
+                  className="cursor-pointer"
                 >
-                  <Clock className="mx-1.5 h-4 w-5" />
-                  Call 020 7946 0958
+                  <a
+                    href="tel:02079460958"
+                    className="inline-flex items-center"
+                  >
+                    <Phone className="mx-1.5 h-4 w-5" />
+                    Call 020 7946 0958
+                  </a>
                 </Button>
               </div>
 
@@ -419,6 +420,7 @@ export default function Services() {
           </Card>
         </div>
       </section>
+      <BookingFormDialog open={open} onOpenChange={setOpen} />
     </div>
   );
 }

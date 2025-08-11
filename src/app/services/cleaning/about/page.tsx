@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 export default function About() {
@@ -8,7 +6,7 @@ export default function About() {
       <div className="container flex h-full grow flex-col">
         {/* Story Section */}
         <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+          <div className="flex flex-col max-w-[960px] flex-1">
             <StorySection />
             <ImageGrid />
             <MissionSection />
@@ -50,24 +48,30 @@ function StorySection() {
 
 function ImageGrid() {
   return (
-    <section className="w-full h-full py-4 sm:p-4 grid grid-cols-[2fr_1fr_1fr] gap-2 rounded-lg">
-      <div
-        className="bg-cover bg-center aspect-auto row-span-2 h-96"
-        style={{
-          backgroundImage:
-            "url(https://lh3.googleusercontent.com/aida-public/AB6AXuDw6Ykc2gXb1rMrjBFgOb22MSyQoUCxCDFi1yji4L08aW_59WcUIZRgnXb5Ks1Oa3OUQ2aBBUzrXhwR0ju_QYk4Rw9n59j6Yy8IhBooCfyCPrJiuMZAFXHMA-dURTVyM6sf79KyfLSghceed6ZBdDAaqVkaTL5lLaoBI5-ScasNImpXuRftj_tVNU69O8jvGNGGAmlsQaNs7_lscdZpC7G5L4tOnwQSpkTW9roGmWox5eMbOiE0_EuCQ-10iHsd9fp1zqBV2LtnJJQ)",
-        }}
-      ></div>
-      <div
-        className="bg-cover bg-center aspect-auto col-span-2 row-span-2 h-96"
-        style={{
-          backgroundImage:
-            "url(https://lh3.googleusercontent.com/aida-public/AB6AXuBJL20o_X-gVgnFyydARnycluRmWjIGLULfcd-Phcf53Ii8nf34oNBccKqIO581roeE7w3PppxRq9F3LiFw7dJNXwpCOIuOY-IXbPWEB-QnnzSdNrhaiIN06WHcReeuEcLUCYUNjgAXKLHexdVjFdgRb5LRW90kdtsOrBjxdK7WlesBMUBLbQyxLoLW_EoVf7eToEpyfvl3yQIOE7-52s9SQmjcAhDKA6-kiMFbjbzr262Q1QWiUhQpl098LVJypfcoiyJICUKo2ow)",
-        }}
-      ></div>
+    <section className="w-full h-full py-4 sm:p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 rounded-lg">
+        {/* Large Left Image */}
+        <div
+          className="bg-cover bg-center rounded-lg sm:col-span-2 sm:row-span-2 h-64 sm:h-96"
+          style={{
+            backgroundImage:
+              "url(https://res.cloudinary.com/dxvf9uqwe/image/upload/v1754945586/unnamed_iaidby.png)",
+          }}
+        ></div>
+
+        {/* Top Right Small Image */}
+        <div
+          className="bg-cover bg-center rounded-lg h-64 sm:h-96"
+          style={{
+            backgroundImage:
+              "url(https://res.cloudinary.com/dxvf9uqwe/image/upload/v1754945586/unnamed_1_agvv7h.png)",
+          }}
+        ></div>
+      </div>
     </section>
   );
 }
+
 
 function MissionSection() {
   return (

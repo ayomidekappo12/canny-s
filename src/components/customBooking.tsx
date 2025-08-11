@@ -54,11 +54,23 @@ const bookingSchema = z.object({
       message: "Please enter a valid last name",
     }),
   email: z.email({ message: "Invalid email format" }),
-  phone: z.string().regex(/^\+44\d{9,10}$/, {
-    message: "Please enter a valid phone number",
-  }),
+  phone: z
+    .string()
+    .trim()
+    .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
+    .refine((val) => /^(\+44\d{9,10}|07\d{9})$/.test(val), {
+      message: "Enter a valid UK phone number (+44xxxxxxxxxx or 07xxxxxxxxx)",
+    }),
   address: z.string().min(5, "Please enter your full address"),
-  postcode: z.string().min(5, "Please enter a valid postcode"),
+  postcode: z
+    .string()
+    .min(5, "Please enter a valid postcode")
+    .max(8)
+    .regex(
+      // common UK postcode regex - reasonably permissive (case-insensitive)
+      /^[A-Z]{1,2}\d{1,2}[A-Z]?\s*\d[A-Z]{2}$/i,
+      "Please enter a valid UK postcode"
+    ),
   notes: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
     message: "Please enter a well-formatted about text",
   }),
@@ -106,10 +118,10 @@ export default function BookingFormDialog({
   };
 
   return (
-    <div className="items-center justify-center">
+    <div className="">
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild></DialogTrigger>
-        <DialogContent className="max-w-4xl overflow-y-auto max-h-[95vh]">
+        <DialogContent className="container max-w-4xl overflow-y-auto max-h-[95vh]">
           <DialogHeader>
             <DialogTitle className="text-2xl my-2">
               Book Your custom Cleaning service

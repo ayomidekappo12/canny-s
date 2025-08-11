@@ -23,18 +23,19 @@ const formSchema = z.object({
     .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ]{1,50}(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]{1,50})*$/, {
       message: "Please enter a valid name",
     }),
-  email: z
-    .email({ message: "Invalid email format" })
-    .regex(/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/, {
-      message: "Invalid email format",
+  email: z.email({ message: "Invalid email format" }),
+  phone: z
+    .string()
+    .trim()
+    .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
+    .refine((val) => /^(\+44\d{9,10}|07\d{9})$/.test(val), {
+      message: "Enter a valid UK phone number (+44xxxxxxxxxx or 07xxxxxxxxx)",
     }),
-  phone: z.string().regex(/^\+44\d{12}$/, {
-    message: "Please enter a valid phone number",
-  }),
   service: z.string().min(1, "Please select a service"),
-  message: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
-    message: "Please enter a well-formatted about text",
-  }),
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters")
+    .max(500, "Message must be under 500 characters"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -44,9 +45,17 @@ export default function ContactForm() {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      message: "",
+    },
   });
 
   const onSubmit = async (data: FormData) => {
@@ -54,6 +63,7 @@ export default function ContactForm() {
     // simulate async action
     await new Promise((r) => setTimeout(r, 1000));
     alert("Message sent successfully!");
+     reset();
   };
 
   return (
@@ -137,11 +147,15 @@ export default function ContactForm() {
                 <Label htmlFor="service" className="py-2 px-1">
                   Service of Interest
                 </Label>
-                <Select onValueChange={(value) => setValue("service", value)}>
+                <Select
+                  onValueChange={(value) =>
+                    setValue("service", value, { shouldValidate: true })
+                  }
+                >
                   <SelectTrigger className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#637c88] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal">
                     <SelectValue placeholder="Select a Service" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="border-accent/20">
                     <SelectItem value="cleaning">Cannys Cleaning</SelectItem>
                     <SelectItem value="deep">Cannys Catering</SelectItem>
                   </SelectContent>
@@ -161,7 +175,7 @@ export default function ContactForm() {
                 <Textarea
                   id="message"
                   placeholder="Your Message"
-                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
+                  className="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1E293B] focus:outline-0 focus:ring-0 border-none bg-muted focus:border-none placeholder:text-[#637c88] p-4 text-base font-normal leading-normal"
                   {...register("message")}
                 />
                 {errors.message && (

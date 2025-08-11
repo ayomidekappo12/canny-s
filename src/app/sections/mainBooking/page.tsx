@@ -50,10 +50,10 @@ const consultationSchema = z.object({
   email: z.email({ message: "Invalid email format" }),
   phone: z
     .string()
-    .transform((val) => val.replace(/\s|-/g, ""))
-    .refine((val) => /^\+44\d{9,14}$/.test(val), {
-      message:
-        "Please enter a valid UK phone number (+44 followed by 9–14 digits)",
+    .trim()
+    .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
+    .refine((val) => /^(\+44\d{9,10}|07\d{9})$/.test(val), {
+      message: "Enter a valid UK phone number (+44xxxxxxxxxx or 07xxxxxxxxx)",
     }),
   serviceType: z
     .enum(["cleaning", "catering", "both"])
