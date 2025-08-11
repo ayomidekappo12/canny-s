@@ -170,7 +170,7 @@ export default function BookingForm() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Service Details */}
-              <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
+              <Card className="mx-4 md:mx-0 border border-accent/20">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Clock className="h-5 w-5 text-primary" />
@@ -193,7 +193,7 @@ export default function BookingForm() {
                               <SelectValue placeholder="Select a service" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-background border z-50">
+                          <SelectContent className="bg-background border border-accent/20 z-50">
                             {services.map((service) => (
                               <SelectItem
                                 key={service.value}
@@ -271,7 +271,7 @@ export default function BookingForm() {
                               <SelectValue placeholder="Select time" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-background border z-50">
+                          <SelectContent className="bg-background border border-accent/20 z-50">
                             {timeSlots.map((time) => (
                               <SelectItem key={time} value={time}>
                                 {time}
@@ -299,7 +299,7 @@ export default function BookingForm() {
                               <SelectValue placeholder="Select duration" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-background border z-50">
+                          <SelectContent className="bg-background border z-50 border-accent/20">
                             {durations.map((duration) => (
                               <SelectItem
                                 key={duration.value}
@@ -318,7 +318,7 @@ export default function BookingForm() {
               </Card>
 
               {/* Property Details */}
-              <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
+              <Card className="mx-4 md:mx-0 border border-accent/20">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-primary" />
@@ -341,7 +341,7 @@ export default function BookingForm() {
                               <SelectValue placeholder="Select property type" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-background border z-50">
+                          <SelectContent className="bg-background border border-accent/20 z-50">
                             {propertyTypes.map((type) => (
                               <SelectItem key={type.value} value={type.value}>
                                 {type.label}
@@ -369,7 +369,7 @@ export default function BookingForm() {
                               <SelectValue placeholder="Select bedrooms" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-background border z-50">
+                          <SelectContent className="bg-background border border-accent/20 z-50">
                             {bedroomOptions.map((option) => (
                               <SelectItem
                                 key={option.value}
@@ -421,7 +421,7 @@ export default function BookingForm() {
             </div>
 
             {/* Contact Details */}
-            <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
+            <Card className="mx-4 md:mx-0 border border-accent/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5 text-primary" />

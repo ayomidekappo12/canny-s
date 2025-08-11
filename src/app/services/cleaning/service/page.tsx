@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import BookingFormDialog from "@/app/services/cleaning/custom";
+import BookingFormDialog from "@/app/services/cleaning/customBooking";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";

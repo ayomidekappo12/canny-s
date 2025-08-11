@@ -18,11 +18,17 @@ import * as z from "zod";
 
 // 1. Define schema
 const formSchema = z.object({
-  name: z.string().regex(/^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/, {
-    message: "Please enter a valid name",
-  }),
-  email: z.email({ message: "Invalid email format" }),
-  phone: z.string().regex(/^\+44\d{9,10}$/, {
+  name: z
+    .string()
+    .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ]{1,50}(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]{1,50})*$/, {
+      message: "Please enter a valid name",
+    }),
+  email: z
+    .email({ message: "Invalid email format" })
+    .regex(/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/, {
+      message: "Invalid email format",
+    }),
+  phone: z.string().regex(/^\+44\d{12}$/, {
     message: "Please enter a valid phone number",
   }),
   service: z.string().min(1, "Please select a service"),
@@ -136,9 +142,8 @@ export default function ContactForm() {
                     <SelectValue placeholder="Select a Service" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="cleaning">Cleaning</SelectItem>
-                    <SelectItem value="deep">Deep Cleaning</SelectItem>
-                    <SelectItem value="move">Move-in/Move-out</SelectItem>
+                    <SelectItem value="cleaning">Cannys Cleaning</SelectItem>
+                    <SelectItem value="deep">Cannys Catering</SelectItem>
                   </SelectContent>
                 </Select>
                 {errors.service && (
@@ -183,7 +188,7 @@ export default function ContactForm() {
                 Or Contact Us Directly
               </h2>
               <p className="text-base pt-2">Phone: +44 020 7946 0958</p>
-              <p className="text-base pt-1">Email: info@cannyscleaning.com</p>
+              <p className="text-base pt-1">Email: info@cannys.com</p>
             </section>
           </div>
         </main>

@@ -6,8 +6,7 @@ import { fetcher } from "@/lib/utils";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ErrorProvider } from "@/lib/ErrorHandlerProvider";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import DynamicLayout from "@/components/layout/Route/dynamicLayout";
 import { Toaster } from "@/components/ui/sonner";
 
 import { LoadingIndicatorProvider } from "@/lib/LoadingIndicatorProvider";
@@ -30,9 +29,9 @@ const App = ({ children }: { children: React.ReactNode }) => {
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <Header />
+            <DynamicLayout>
             {children}
-            <Footer />
+            </DynamicLayout>
             <Toaster />
           </TooltipProvider>
         </div>

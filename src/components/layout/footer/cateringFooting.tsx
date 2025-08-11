@@ -1,16 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Star,
-} from "lucide-react";
+import { Phone, Mail, MapPin, Star } from "lucide-react";
 import { SiFacebook, SiX, SiInstagram } from "react-icons/si";
-import Image from "next/image";
+import { ChefHat, Sparkles } from "lucide-react";
 
-export function Footer() {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -19,23 +14,18 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-0">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-hero">
-                <Image
-                  src={"/images/Logo.jpg"}
-                  alt="Logo"
-                  width={300}
-                  height={300}
-                  className="brightness-110 contrast-125"
-                  quality={90}
-                  priority
-                />
+                <div className="flex">
+                  <Sparkles className="h-4 w-4 text-white" />
+                  <ChefHat className="h-4 w-4 text-white -ml-1" />
+                </div>
               </div>
-              <span className="font-bold text-xl">Canny&apos;s cleaning</span>
+              <span className="font-bold text-xl">cannys</span>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Professional cleaning services across London and surrounding
-              areas. Trusted by over 2,400 satisfied customers.
+              Premium cleaning and catering services across London and the UK.
+              Trusted by over 500 satisfied customers for exceptional quality.
             </p>
             <div className="flex items-center space-x-2">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -46,56 +36,66 @@ export function Footer() {
           {/* Services */}
           <div className="space-y-4">
             <h3 className="font-semibold text-lg">Our Services</h3>
-            <ul className="space-y-2 text-sm text-gray-300">
-              <li>
-                <Link
-                  href="/services/domestic"
-                  className="hover:text-white transition-colors"
-                >
-                  Domestic Cleaning
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/deep"
-                  className="hover:text-white transition-colors"
-                >
-                  Deep Cleaning
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/end-of-tenancy"
-                  className="hover:text-white transition-colors"
-                >
-                  End of Tenancy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/office"
-                  className="hover:text-white transition-colors"
-                >
-                  Office Cleaning
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/carpet"
-                  className="hover:text-white transition-colors"
-                >
-                  Carpet Cleaning
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/airbnb"
-                  className="hover:text-white transition-colors"
-                >
-                  AirBnB Cleaning
-                </Link>
-              </li>
-            </ul>
+            <div className="grid grid-cols-1 gap-3">
+              <div>
+                <h4 className="font-medium text-primary mb-2">Cleaning</h4>
+                <ul className="space-y-1 text-sm text-gray-300">
+                  <li>
+                    <Link
+                      href="/services"
+                      className="hover:text-white transition-colors"
+                    >
+                      Domestic Cleaning
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services"
+                      className="hover:text-white transition-colors"
+                    >
+                      End of Tenancy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services"
+                      className="hover:text-white transition-colors"
+                    >
+                      Office Cleaning
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-medium text-accent mb-2">Catering</h4>
+                <ul className="space-y-1 text-sm text-gray-300">
+                  <li>
+                    <Link
+                      href="/catering"
+                      className="hover:text-white transition-colors"
+                    >
+                      Wedding Catering
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/catering"
+                      className="hover:text-white transition-colors"
+                    >
+                      Corporate Events
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/catering"
+                      className="hover:text-white transition-colors"
+                    >
+                      Private Chef
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           {/* Contact Info */}
@@ -113,9 +113,9 @@ export function Footer() {
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-primary mt-0.5" />
                 <span>
-                  Serving all London boroughs
+                  Serving London, Manchester,
                   <br />
-                  and surrounding areas
+                  Birmingham & UK nationwide
                 </span>
               </div>
             </div>

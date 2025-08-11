@@ -152,9 +152,13 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   * {
-    border-color: oklch(var(--border));
+    border-color: oklch(var(--accent) / 20);
   }
   body {
     @apply bg-background text-foreground;
