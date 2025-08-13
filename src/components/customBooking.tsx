@@ -58,19 +58,20 @@ const bookingSchema = z.object({
     .string()
     .trim()
     .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
-    .refine((val) => /^(\+44\d{9,10}|07\d{9})$/.test(val), {
-      message: "Enter a valid UK phone number (+44xxxxxxxxxx or 07xxxxxxxxx)",
+    .refine((val) => /^(\+44\d{9,11}|07\d{10})$/.test(val), {
+      message:
+        "Enter a valid UK phone number (+44 followed by 9–11 digits or 07 followed by 10 digits)",
     }),
   address: z.string().min(5, "Please enter your full address"),
   postcode: z
-    .string()
-    .min(5, "Please enter a valid postcode")
-    .max(8)
-    .regex(
-      // common UK postcode regex - reasonably permissive (case-insensitive)
-      /^[A-Z]{1,2}\d{1,2}[A-Z]?\s*\d[A-Z]{2}$/i,
-      "Please enter a valid UK postcode"
-    ),
+  .string()
+  .min(5, "Please enter a valid postcode")
+  .max(8, "Please enter a valid postcode")
+  .regex(
+    /^(GIR\s?0AA|(?:(?:AB|AL|B|BA|BB|BD|BH|BL|BN|BR|BS|BT|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)\d{1,2}[A-Z]?\s?\d[A-Z]{2}))$/i,
+    "Please enter a valid UK postcode"
+  ),
+  // Allowing a wide range of characters for notes, ensuring at least 10 <characters>
   notes: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
     message: "Please enter a well-formatted about text",
   }),

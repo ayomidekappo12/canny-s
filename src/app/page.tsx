@@ -11,6 +11,7 @@ import {
   Star,
   Shield,
   Users,
+  NotebookPen,
   Phone,
   Mail,
 } from "lucide-react";
@@ -324,14 +325,16 @@ const Index = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-              <Button
-                size="xl"
-                variant="outline"
-                className="w-full sm:w-auto cursor-pointer"
-              >
-                <Phone className="mx-1.5 w-5 h-5" />
-                Get Free Quote
-              </Button>
+              <Link href="/sections/mainBooking">
+                <Button
+                  size="xl"
+                  variant="outline"
+                  className="w-full sm:w-auto cursor-pointer"
+                >
+                  <NotebookPen className="mx-1.5 w-5 h-5" />
+                  Get Your Free Quote
+                </Button>
+              </Link>
               <Button
                 size="xl"
                 variant="secondary"

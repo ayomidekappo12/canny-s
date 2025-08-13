@@ -28,8 +28,9 @@ const formSchema = z.object({
     .string()
     .trim()
     .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
-    .refine((val) => /^(\+44\d{9,10}|07\d{9})$/.test(val), {
-      message: "Enter a valid UK phone number (+44xxxxxxxxxx or 07xxxxxxxxx)",
+    .refine((val) => /^(\+44\d{9,11}|07\d{10})$/.test(val), {
+      message:
+        "Enter a valid UK phone number (+44 followed by 9–11 digits or 07 followed by 10 digits)",
     }),
   service: z.string().min(1, "Please select a service"),
   message: z

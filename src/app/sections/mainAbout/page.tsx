@@ -12,10 +12,10 @@ import {
   Heart,
   Clock,
   Star,
+  NotebookPen,
   CheckCircle,
   Award,
   Target,
-  Phone,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -79,13 +79,13 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-16 px-4 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+        <section className="pt-28 pb-16 px-4 bg-gradient-to-br from-primary/5 via-background to-accent/5">
           <div className="container mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 py-2 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
               About Canny&apos;s
             </h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-8 leading-relaxed">
               We&apos;re the UK&apos;s premier dual-service provider, uniquely
               combining professional cleaning and exceptional catering to
               deliver comprehensive solutions for your home, office, and special
@@ -352,13 +352,13 @@ const About = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link href="/booking">
+              <Link href="/sections/mainBooking">
                 <Button
                   size="xl"
                   variant="outline"
                   className="w-full sm:w-auto cursor-pointer"
                 >
-                  <Phone className="mx-1.5 w-5 h-5" />
+                  <NotebookPen className="mx-1.5 w-5 h-5" />
                   Get Your Free Quote
                 </Button>
               </Link>

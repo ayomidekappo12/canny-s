@@ -17,6 +17,7 @@ import {
   CheckCircle,
   Phone,
   Star,
+  NotebookPen,
   ArrowRight,
   Shield,
 } from "lucide-react";
@@ -393,16 +394,13 @@ export default function Services() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   onClick={() => setOpen(true)}
-                  size="xl"
-                  className="cursor-pointer"
+                  size="lg"
+                  className="cursor-pointer sm:px-10 h-14"
                 >
+                  <NotebookPen className="mx-1.5 w-5 h-5" />
                   Get Custom Quote
                 </Button>
-                <Button
-                  variant="outline"
-                  size="xl"
-                  className="cursor-pointer"
-                >
+                <Button variant="outline" size="xl" className="cursor-pointer">
                   <a
                     href="tel:02079460958"
                     className="inline-flex items-center"

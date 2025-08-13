@@ -14,6 +14,7 @@ import {
   Sofa,
   Plane,
   Clock,
+  NotebookPen,
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
@@ -236,9 +237,10 @@ export function Services() {
                     </div>
                     <Button
                       onClick={() => setOpen(true)}
-                      size="xl"
-                      className="cursor-pointer"
+                      size="lg"
+                      className="cursor-pointer sm:px-10 h-14"
                     >
+                      <NotebookPen className="mx-1.5 w-5 h-5" />
                       Get Custom Quote
                     </Button>
                   </div>

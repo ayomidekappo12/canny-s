@@ -10,6 +10,7 @@ import {
   Clock,
   CheckCircle,
   Phone,
+  NotebookPen,
   ArrowRight,
 } from "lucide-react";
 
@@ -91,7 +92,8 @@ export function Hero() {
                 asChild
                 className="text-lg hover:scale-105 shadow-xl hover:shadow-2xl font-semibold"
               >
-                <Link href="/booking">
+                <Link href="/services/cleaning/booking">
+                  <NotebookPen className="mx-1.5 w-5 h-5" />
                   Book Online Now
                   <ArrowRight className="mx-1.5 h-4 w-5" />
                 </Link>

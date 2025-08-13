@@ -95,7 +95,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/cleaning/about"
+                  href="/sections/mainAbout"
                   className="hover:text-white transition-colors"
                 >
                   About Us
@@ -103,18 +103,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/cleaning/contact"
+                  href="/sections/mainContact/"
                   className="hover:text-white transition-colors"
                 >
                   Contact
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/cleaning/service"
-                  className="hover:text-white transition-colors"
-                >
-                  Services
                 </Link>
               </li>
             </ul>
