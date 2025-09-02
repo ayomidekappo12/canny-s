@@ -53,6 +53,13 @@ const config: Config = {
           DEFAULT: "oklch(var(--accent) / <alpha-value>)",
           foreground: "oklch(var(--accent-foreground) / <alpha-value>)",
         },
+        canny: {
+          gold: "oklch(var(--canny-gold) / <alpha-value>)",
+          "gold-light": "oklch(var(--canny-gold-light) / <alpha-value>)",
+          "gold-dark": "oklch(var(--canny-gold-dark) / <alpha-value>)",
+          black: "oklch(var(--canny-black) / <alpha-value>)",
+          cream: "oklch(var(--canny-cream) / <alpha-value>)",
+        },
         border: "oklch(var(--border) / <alpha-value>)",
         input: "oklch(var(--input) / <alpha-value>)",
         ring: "oklch(var(--ring) / <alpha-value>)",

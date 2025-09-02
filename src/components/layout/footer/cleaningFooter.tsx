@@ -143,7 +143,7 @@ export default function Footer() {
                   <SiFacebook className="h-5 w-4" />
                 </a>
                 <a
-                  href="https://www.instagram.com/cannyscleaning/"
+                  href="https://www.instagram.com/cannyscleaning"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"

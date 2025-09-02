@@ -1,128 +1,157 @@
 "use client";
 
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
-} from "@/components/ui/sheet";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Menu, Phone, Star, ChefHat, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
 
-export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
+type NavItem = {
+  id: string;
+  label: string;
+  isButton?: boolean;
+  className?: string; // extra classes for desktop
+  mobileClassName?: string; // extra classes for mobile
+};
 
-  const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services/cleaning/service" },
-    { name: "About", href: "/services/cleaning/about" },
-    { name: "Contact", href: "/services/cleaning/contact" },
-  ];
+const navItems: NavItem[] = [
+  {
+    id: "home",
+    label: "Home",
+    className: "text-[#0d0d0d] hover:text-[#eeac00] transition-colors cursor-pointer",
+    mobileClassName:
+      "text-left text-[#0d0d0d] hover:text-[#eeac00] transition-colors cursor-pointer",
+  },
+  {
+    id: "services",
+    label: "Services",
+    className: "text-[#0d0d0d] hover:text-[#eeac00] transition-colors cursor-pointer",
+    mobileClassName:
+      "text-left text-[#0d0d0d] hover:text-[#eeac00] transition-colors cursor-pointer",
+  },
+  {
+    id: "gallery",
+    label: "Gallery",
+    className: "text-[#0d0d0d] hover:text-[#eeac00] transition-colors cursor-pointer",
+    mobileClassName:
+      "text-left text-[#0d0d0d] hover:text-[#eeac00] transition-colors cursor-pointer",
+  },
+  {
+    id: "contact",
+    label: "Contact",
+    className: "text-[#0d0d0d] hover:text-[#eeac00] transition-colors cursor-pointer",
+    mobileClassName:
+      "text-left text-[#0d0d0d] hover:text-[#eeac00] transition-colors cursor-pointer",
+  },
+  {
+    id: "contact",
+    label: "Book Now",
+    isButton: true,
+    className:
+      "bg-[#eeac00] text-white hover:bg-[#eeac00]/90 cursor-pointer",
+    mobileClassName:
+      "w-fit bg-[#eeac00] text-white hover:bg-[#eeac00]/90 cursor-pointer ",
+  },
+];
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
+    setIsMenuOpen(false);
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 text-[#1E293B]">
-      <div className="flex h-16 items-center justify-between mx-5 sm:mx-8">
-        {/* Logo Click */}
-        <Link href="/" className="flex items-center space-x-2 cursor-pointer">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary via-primary-glow to-accent shadow-glow">
-            <div className="flex">
-              <Sparkles className="h-4 w-4 text-white" />
-              <ChefHat className="h-4 w-4 text-white -ml-1" />
+    <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo + Brand */}
+          <div className="flex items-center space-x-3">
+            <Image
+              src="https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756315030/WhatsApp_Image_2025-07-07_at_09.34.44_755afb7a_kpnaod.jpg"
+              alt="Logo"
+              width={100}
+              height={80}
+              className="w-16 h-13 rounded-full brightness-110"
+              quality={90}
+              priority
+            />
+            <div>
+              <h1 className="text-xl font-bold text-[#0d0d0d]">
+                Canny&apos;s Catering
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Nigerian Cuisine Excellence
+              </p>
             </div>
           </div>
-          <span className="font-bold text-2xl italic bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
-            cannys
-          </span>
-        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  isActive
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-primary"
-                }`}
-              >
-                {item.name}
-              </Link>
-            );
-          })}
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navItems.map(({ id, label, isButton, className }) =>
+              isButton ? (
+                <Button
+                  key={label}
+                  className={className}
+                  onClick={() => scrollToSection(id)}
+                >
+                  {label}
+                </Button>
+              ) : (
+                <button
+                  key={label}
+                  onClick={() => scrollToSection(id)}
+                  className={className}
+                >
+                  {label}
+                </button>
+              )
+            )}
+          </nav>
 
-        {/* Trust & CTA */}
-        <div className="hidden md:flex items-center space-x-4">
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            <span className="font-medium">4.9/5</span>
-            <span className="text-xs">2,400+ reviews</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Phone className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium">020 7946 0958</span>
-          </div>
-          <Button size="sm" asChild>
-            <Link href="/booking/">Book Now</Link>
-          </Button>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X size={24} className="text-[#0d0d0d] cursor-pointer" />
+            ) : (
+              <Menu size={24} className="text-[#0d0d0d] cursor-pointer" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-            <SheetTitle>
-              <VisuallyHidden>Hidden but accessible title</VisuallyHidden>
-            </SheetTitle>
-            <div className="flex flex-col space-y-4 mt-6">
-              {navigation.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`text-sm font-medium transition-colors ${
-                      isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-primary"
-                    }`}
+        {isMenuOpen && (
+          <nav className="md:hidden mt-4 pb-4 border-t border-border">
+            <div className="flex flex-col space-y-4 mt-4">
+              {navItems.map(({ id, label, isButton, mobileClassName }) =>
+                isButton ? (
+                  <Button
+                    key={label}
+                    className={mobileClassName}
+                    onClick={() => scrollToSection(id)}
                   >
-                    {item.name}
-                  </Link>
-                );
-              })}
-              <div className="border-t pt-4 space-y-3">
-                <div className="flex items-center space-x-2">
-                  <Phone className="h-4 w-4 text-primary" />
-                  <span className="font-medium">020 7946 0958</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span>4.9/5 rating • 2,400+ reviews</span>
-                </div>
-                <Button size="lg" className="w-full" asChild>
-                  <Link href="/booking" onClick={() => setIsOpen(false)}>
-                    Book Us Now
-                  </Link>
-                </Button>
-              </div>
+                    {label}
+                  </Button>
+                ) : (
+                  <button
+                    key={label}
+                    onClick={() => scrollToSection(id)}
+                    className={mobileClassName}
+                  >
+                    {label}
+                  </button>
+                )
+              )}
             </div>
-          </SheetContent>
-        </Sheet>
+          </nav>
+        )}
       </div>
     </header>
   );
-}
+};
+
+export default Header;

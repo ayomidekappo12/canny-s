@@ -65,7 +65,7 @@ export default function Header() {
           className="flex items-center space-x-2 cursor-pointer"
         >
           <Image
-            src="/images/Logo.png"
+            src={`https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756315207/Logo_papmaz.png`}
             alt="Logo"
             width={75}
             height={70}
