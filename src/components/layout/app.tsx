@@ -9,8 +9,8 @@ import { ErrorProvider } from "@/lib/ErrorHandlerProvider";
 import Header from "./header";
 import Footer from "./footer";
 import { Toaster } from "@/components/ui/sonner";
-
 import { LoadingIndicatorProvider } from "@/lib/LoadingIndicatorProvider";
+import { normalizeError } from "@/lib/errors";
 
 const App = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -18,9 +18,9 @@ const App = ({ children }: { children: React.ReactNode }) => {
       <SWRConfig
         value={{
           fetcher,
-          onError: (error) => {
-            //log
-            console.log(error.message);
+          onError: (error: unknown) => {
+            const normalized = normalizeError(error);
+            console.error("SWR error:", normalized.message);
           },
           revalidateOnFocus: true,
         }}

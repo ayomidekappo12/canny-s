@@ -59,6 +59,7 @@ export default [
       "react-hooks/exhaustive-deps": "warn",
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
+      "react/prop-types": "off",
 
       // Accessibility
       "jsx-a11y/alt-text": "warn",

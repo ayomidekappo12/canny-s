@@ -2,7 +2,7 @@
 import { cookies } from "next/headers";
 import { getIronSession, IronSession, SessionOptions } from "iron-session";
 
-interface SessionData {
+export interface SessionData {
   aut: string;
   role: string;
 }
@@ -45,13 +45,15 @@ async function getSession(): Promise<IronSession<SessionData>> {
     const fallback: IronSession<SessionData> = {
       aut: memorySession?.aut ?? "",
       role: memorySession?.role ?? "",
-      save: async function () {
+      save() {
         memorySession = { aut: this.aut, role: this.role };
+        return Promise.resolve();
       },
-      destroy: async function () {
+      destroy() {
         memorySession = null;
+        return Promise.resolve();
       },
-      updateConfig: function (_newOptions: SessionOptions) {
+      updateConfig(_options: SessionOptions) {
         // no-op for in-memory fallback
       },
     };
@@ -60,12 +62,20 @@ async function getSession(): Promise<IronSession<SessionData>> {
   }
 }
 
-export async function getSessionData() {
+/**
+ * ✅ Strongly typed session data
+ */
+export async function getSessionData(): Promise<SessionData | null> {
   const session = await getSession();
-  return JSON.stringify({
+
+  if (!session.aut || !session.role) {
+    return null;
+  }
+
+  return {
     aut: session.aut,
     role: session.role,
-  });
+  };
 }
 
 export async function createSession(authToken: string, role: string) {

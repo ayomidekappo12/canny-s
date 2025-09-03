@@ -1,14 +1,15 @@
+/*
 "use client";
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import LandingHeader from "@/components/layout/header/landingHeader";
-import CateringHeader from "@/components/layout/header/cateringHeading";
-import CleaningHeader from "@/components/layout/header";
+import CateringHeader from "@/components/layout/Heading";
+import CleaningHeader from "@/components/layout/header/cleaningHeader";
 
 import LandingFooter from "@/components/layout/footer/landingFooter";
-import CateringFooter from "@/components/layout/footer/cateringFooting";
+import CateringFooter from "@/components/layout/Footer";
 import CleaningFooter from "@/components/layout/footer/cleaningFooter";
 
 export default function DynamicLayout({
@@ -25,8 +26,9 @@ export default function DynamicLayout({
 
   if (!mounted) return null;
 
-  let Header = LandingHeader;
-  let Footer = LandingFooter;
+  // ✅ Explicit typing so ESLint/TS know these are React components
+  let Header: React.ComponentType = LandingHeader;
+  let Footer: React.ComponentType = LandingFooter;
 
   if (pathname?.startsWith("/services/cleaning")) {
     Header = CleaningHeader;
@@ -44,3 +46,4 @@ export default function DynamicLayout({
     </>
   );
 }
+*/
