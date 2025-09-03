@@ -24,19 +24,12 @@ const organizationSchema = {
   "@type": "Organization",
   name: "Canny's Cleaning Services",
   url: "https://SynaraDev.com",
-  logo: "https://SynaraDev.com/images/logo.svg",
+  logo: "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg",
   description: "Canny's Cleaning Services Provide cleaning service.",
-  sameAs: [
-    "https://x.com/synaradev",
-    "https://www.linkedin.com/company/synaradev/",
-    "https://www.instagram.com/synaradev/",
-    "http://www.tiktok.com/@synaradev",
-    "https://www.youtube.com/@SynaraDev",
-    "https://web.facebook.com/SynaraDev/",
-  ],
+  sameAs: ["https://www.instagram.com/cannyscleaning"],
   contactPoint: {
     "@type": "ContactPoint",
-    email: "synara.dev@gmail.com",
+    email: "hello@canny.co.uk",
     contactType: "customer support",
   },
 };

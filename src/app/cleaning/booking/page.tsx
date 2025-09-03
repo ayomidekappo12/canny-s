@@ -32,12 +32,20 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useToast } from "@/components/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { toast } from "sonner";
+
 import { cn } from "@/lib/utils";
 
 const bookingSchema = z.object({
   service: z.string().min(1, "Please select a service"),
-  date: z.date().nullable().optional(), // allow missing/cleared date
+  date: z.date().nullable().optional(),
   time: z.string().min(1, "Please select a time"),
   duration: z.string().min(1, "Please select duration"),
   property: z.string().min(1, "Please select property type"),
@@ -56,7 +64,7 @@ const bookingSchema = z.object({
   phone: z
     .string()
     .trim()
-    .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
+    .transform((val) => val.replace(/\s|[-()]/g, ""))
     .refine((val) => /^(\+44\d{9,11}|07\d{10})$/.test(val), {
       message:
         "Enter a valid UK phone number (+44 followed by 9–11 digits or 07 followed by 10 digits)",
@@ -67,7 +75,6 @@ const bookingSchema = z.object({
     .min(5, "Please enter a valid postcode")
     .max(8)
     .regex(
-      // common UK postcode regex - reasonably permissive (case-insensitive)
       /^[A-Z]{1,2}\d{1,2}[A-Z]?\s*\d[A-Z]{2}$/i,
       "Please enter a valid UK postcode"
     ),
@@ -78,7 +85,10 @@ type BookingFormData = z.infer<typeof bookingSchema>;
 
 export default function BookingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+  const [showCalendly, setShowCalendly] = useState(false);
+
+  const calendlyUrl =
+    "https://calendly.com/eventstaffingsolutions/30min?back_to=https://yourdomain.com/booking?booking=success";
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
@@ -148,36 +158,31 @@ export default function BookingForm() {
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1200));
 
-      toast({
-        title: "Booking received",
-        description:
-          "Thanks — we'll contact you within 1 hour to confirm details.",
-      });
+      toast.success(
+        <div>
+          <span className="text-[var(--professional-navy)] font-bold">
+            Consultation Request Submitted!
+          </span>
+          <div className="text-[var(--professional-navy)]">
+            We'll review your details and get back to you shortly. Please
+            schedule a call below if needed.
+          </div>
+        </div>
+      );
+      setShowCalendly(true); // Open Calendly dialog
 
-      form.reset({
-        service: "",
-        date: undefined,
-        time: "",
-        duration: "",
-        property: "",
-        bedrooms: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        address: "",
-        postcode: "",
-        notes: "",
-      });
-    } catch (err) {
-      toast({
-        title: "Submission failed",
-        description: "Something went wrong — please try again or call us.",
-        variant: "destructive",
-      });
+      form.reset();
+    } catch {
+      toast.error(<div>
+        <span className="text-red-400 font-bold">
+          Submission failed
+        </span>
+        <div className="text-[var(--professional-navy)]">
+          Something went wrong — please try again or call us.
+        </div>
+      </div>);
     } finally {
       setIsSubmitting(false);
     }
@@ -186,6 +191,7 @@ export default function BookingForm() {
   return (
     <div className="container py-14 sm:py-20">
       <div className="max-w-4xl mx-auto">
+        {/* Page Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#1E293B] mb-4">
             Book Your Cleaning Service
@@ -196,6 +202,7 @@ export default function BookingForm() {
           </p>
         </div>
 
+        {/* Form */}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid md:grid-cols-2 gap-8">
@@ -559,6 +566,47 @@ export default function BookingForm() {
             </div>
           </form>
         </Form>
+
+        {/*Calendly Dialog */}
+        <Dialog open={showCalendly} onOpenChange={setShowCalendly}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="text-2xl text-primary">
+                Schedule a Consultation call if needed
+              </DialogTitle>
+              <DialogDescription>
+                Click below to schedule your Consultation Call on Calendly in a
+                new tab.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="mt-4">
+              <Button
+                onClick={() => {
+                  const calendlyWindow = window.open(calendlyUrl, "_blank");
+                  setTimeout(() => {
+                    if (calendlyWindow) {
+                      setShowCalendly(false);
+                    } else {
+                      toast.success(
+                        <div>
+                          <span className="text-red-400 font-bold">
+                            Popup blocked
+                          </span>
+                          <div className="text-[var(--professional-navy)]">
+                            Please allow popups to open Calendly.
+                          </div>
+                        </div>
+                      );
+                    }
+                  }, 1000);
+                }}
+                className="w-full cursor-pointer"
+              >
+                Schedule on Calendly
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

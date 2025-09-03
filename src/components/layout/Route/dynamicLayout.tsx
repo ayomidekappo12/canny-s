@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import LandingHeader from "@/components/layout/header/landingHeader";
 import CateringHeader from "@/components/layout/header/cateringHeading";
-import CleaningHeader from "@/components/layout/header/cleaningHeader";
+import CleaningHeader from "@/components/layout/header";
 
 import LandingFooter from "@/components/layout/footer/landingFooter";
 import CateringFooter from "@/components/layout/footer/cateringFooting";

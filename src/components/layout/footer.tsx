@@ -31,7 +31,7 @@ export default function Footer() {
             <div className="flex items-center space-x-2">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-hero">
                 <Image
-                  src={"/images/Logo.jpg"}
+                  src={`https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg`}
                   alt="Logo"
                   width={300}
                   height={300}

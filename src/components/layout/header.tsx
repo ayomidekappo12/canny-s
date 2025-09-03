@@ -12,69 +12,72 @@ import {
 } from "@/components/ui/sheet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu, Phone, Star, NotebookPen } from "lucide-react";
-
-interface NavItem {
-  name: string;
-  href: string;
-}
-
-interface NavLinkProps {
-  item: NavItem;
-  onClick?: () => void; // made optional
-}
+import Image from "next/image";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const navigation: NavItem[] = [
+  const navigation = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/sections/mainAbout" },
-    { name: "Contact", href: "/sections/mainContact" },
+    { name: "Services", href: "/cleaning/service" },
+    { name: "About", href: "/cleaning/about" },
+    { name: "Contact", href: "/cleaning/contact" },
   ];
 
-  // Smart active state checker
-  const isActive = (href: string) => {
-    if (href.includes("#")) {
-      const [base] = href.split("#");
-      return pathname === base || (base === "/" && pathname === "/");
-    }
-    const cleanHref = href.split("#")[0];
-    return pathname === cleanHref || pathname.startsWith(cleanHref + "/");
-  };
+  // Normalize path (removes trailing slash except root)
+  const normalizePath = (path: string) =>
+    path.endsWith("/") && path.length > 1 ? path.slice(0, -1) : path;
 
-  // Navigation link component to avoid repetition
-  const NavLink = ({ item, onClick }: NavLinkProps) => {
-    const active = isActive(item.href);
-    return (
-      <Link
-        href={item.href}
-        scroll={true}
-        onClick={onClick}
-        className={`text-sm font-medium transition-colors ${
-          active ? "text-primary" : "text-muted-foreground hover:text-primary"
-        }`}
-      >
-        {item.name}
-      </Link>
-    );
-  };
+  // Shared nav link component for DRY code
+  const NavLinks = ({ onClick }: { onClick?: () => void }) => (
+    <>
+      {navigation.map((item) => {
+        const isActive =
+          normalizePath(pathname) === normalizePath(item.href) ||
+          (item.href !== "/cleaning" &&
+            normalizePath(pathname).startsWith(normalizePath(item.href)));
+
+        return (
+          <Link
+            key={item.name}
+            href={item.href}
+            onClick={onClick}
+            className={`text-sm font-medium transition-colors ${
+              isActive
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
+            }`}
+          >
+            {item.name}
+          </Link>
+        );
+      })}
+    </>
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 text-[#1E293B]">
       <div className="flex h-16 items-center justify-between mx-5 sm:mx-8">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 cursor-pointer">
-          <span className="font-bold text-2xl italic bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
-            Canny&apos;s
-          </span>
+        {/* Logo Click */}
+        <Link
+          href="/"
+          className="flex items-center space-x-2 cursor-pointer"
+        >
+          <Image
+            src={`https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756315207/Logo_papmaz.png`}
+            alt="Logo"
+            width={75}
+            height={70}
+            className="brightness-110 contrast-125"
+            quality={90}
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
-          {navigation.map((item) => (
-            <NavLink key={item.name} item={item} />
-          ))}
+          <NavLinks />
         </nav>
 
         {/* Trust & CTA */}
@@ -89,29 +92,24 @@ export default function Header() {
             <span className="text-sm font-medium">020 7946 0958</span>
           </div>
           <Button size="sm" asChild>
-            <Link href="/sections/mainBooking">Book Now</Link>
+            <Link href="/cleaning/booking/">Book Now</Link>
           </Button>
         </div>
 
         {/* Mobile Navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden">
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="ghost" size="icon">
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <SheetTitle>
-              <VisuallyHidden>Menu panel</VisuallyHidden>
+              <VisuallyHidden>Hidden but accessible title</VisuallyHidden>
             </SheetTitle>
             <div className="flex flex-col space-y-4 mt-6">
-              {navigation.map((item) => (
-                <NavLink
-                  key={item.name}
-                  item={item}
-                  onClick={() => setIsOpen(false)}
-                />
-              ))}
+              <NavLinks onClick={() => setIsOpen(false)} />
+
               <div className="border-t pt-4 space-y-3">
                 <div className="flex items-center space-x-2">
                   <Phone className="h-4 w-4 text-primary" />
@@ -123,11 +121,11 @@ export default function Header() {
                 </div>
                 <Button size="lg" className="w-full" asChild>
                   <Link
-                    href="/sections/mainBooking"
+                    href="/cleaning/booking"
                     onClick={() => setIsOpen(false)}
                   >
                     <NotebookPen className="mx-1.5 w-5 h-5" />
-                    Book Us Now
+                    Book Cleaning Now
                   </Link>
                 </Button>
               </div>

@@ -92,7 +92,7 @@ export function Hero() {
                 asChild
                 className="text-lg hover:scale-105 shadow-xl hover:shadow-2xl font-semibold"
               >
-                <Link href="/services/cleaning/booking">
+                <Link href="/cleaning/booking/">
                   <NotebookPen className="mx-1.5 w-5 h-5" />
                   Book Online Now
                   <ArrowRight className="mx-1.5 h-4 w-5" />
@@ -150,7 +150,7 @@ export function Hero() {
                   </div>
 
                   <Button size="lg" className="w-full" asChild>
-                    <Link href="/booking">Get Instant Quote</Link>
+                    <Link href="/cleaning/booking/">Get Instant Quote</Link>
                   </Button>
 
                   <div className="text-center text-sm text-muted-foreground">

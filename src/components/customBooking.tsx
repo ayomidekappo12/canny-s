@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useToast } from "@/components/hooks/use-toast";
+import { toast } from "sonner";
 
 const bookingSchema = z.object({
   service: z.string().min(1, "Please select a service"),
@@ -57,21 +57,20 @@ const bookingSchema = z.object({
   phone: z
     .string()
     .trim()
-    .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
+    .transform((val) => val.replace(/\s|[-()]/g, ""))
     .refine((val) => /^(\+44\d{9,11}|07\d{10})$/.test(val), {
       message:
         "Enter a valid UK phone number (+44 followed by 9–11 digits or 07 followed by 10 digits)",
     }),
   address: z.string().min(5, "Please enter your full address"),
   postcode: z
-  .string()
-  .min(5, "Please enter a valid postcode")
-  .max(8, "Please enter a valid postcode")
-  .regex(
-    /^(GIR\s?0AA|(?:(?:AB|AL|B|BA|BB|BD|BH|BL|BN|BR|BS|BT|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)\d{1,2}[A-Z]?\s?\d[A-Z]{2}))$/i,
-    "Please enter a valid UK postcode"
-  ),
-  // Allowing a wide range of characters for notes, ensuring at least 10 <characters>
+    .string()
+    .min(5, "Please enter a valid postcode")
+    .max(8, "Please enter a valid postcode")
+    .regex(
+      /^(GIR\s?0AA|(?:(?:AB|AL|B|BA|BB|BD|BH|BL|BN|BR|BS|BT|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)\d{1,2}[A-Z]?\s?\d[A-Z]{2}))$/i,
+      "Please enter a valid UK postcode"
+    ),
   notes: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
     message: "Please enter a well-formatted about text",
   }),
@@ -89,7 +88,10 @@ export default function BookingFormDialog({
   onOpenChange,
 }: BookingFormDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+  const [showCalendly, setShowCalendly] = useState(false);
+
+  const calendlyUrl =
+    "https://calendly.com/eventstaffingsolutions/30min?back_to=https://yourdomain.com/booking?booking=success";
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
@@ -102,30 +104,42 @@ export default function BookingFormDialog({
     setIsSubmitting(true);
     try {
       await new Promise((r) => setTimeout(r, 2000));
-      toast({
-        title: "Booking Confirmed!",
-        description: "We’ll contact you shortly to confirm details.",
-      });
+      toast.success(
+        <div>
+          <span className="text-[var(--professional-navy)] font-bold">
+            Booking Confirmed!
+          </span>
+          <div className="text-[var(--professional-navy)]">
+            We'll review your details and get back to you shortly. Please
+            schedule a call below if needed.
+          </div>
+        </div>
+      );
       form.reset();
+      setShowCalendly(true); // open Calendly dialog
     } catch (err) {
-      toast({
-        title: "Submission failed",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
+      toast.error(
+        <div>
+          <span className="text-[var(--professional-navy)] font-bold">
+            Submission failed!
+          </span>
+          <div className="text-[var(--professional-navy)]">
+            Please try again later.
+          </div>
+        </div>
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="">
+    <div>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogTrigger asChild></DialogTrigger>
         <DialogContent className="container max-w-4xl overflow-y-auto max-h-[95vh]">
           <DialogHeader>
             <DialogTitle className="text-2xl my-2">
-              Book Your custom Cleaning service
+              Book Your Custom Cleaning Service
             </DialogTitle>
             <DialogDescription className="text-lg mb-4">
               Fill the form below to confirm your service.
@@ -134,7 +148,6 @@ export default function BookingFormDialog({
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              {/* SERVICE INFO */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <FormField
                   control={form.control}
@@ -399,6 +412,47 @@ export default function BookingFormDialog({
               </div>
             </form>
           </Form>
+        </DialogContent>
+      </Dialog>
+
+      {/*Calendly Dialog */}
+      <Dialog open={showCalendly} onOpenChange={setShowCalendly}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-primary">
+              Schedule a Consultation call if needed
+            </DialogTitle>
+            <DialogDescription>
+              Click below to schedule your consultation call on Calendly in a
+              new tab.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4">
+            <Button
+              onClick={() => {
+                const calendlyWindow = window.open(calendlyUrl, "_blank");
+                setTimeout(() => {
+                  if (calendlyWindow) {
+                    setShowCalendly(false);
+                  } else {
+                    toast.success(
+                      <div>
+                        <span className="text-red-400 font-bold">
+                          Popup blocked
+                        </span>
+                        <div className="text-[var(--professional-navy)]">
+                          Please allow popups to open Calendly.
+                        </div>
+                      </div>
+                    );
+                  }
+                }, 1000);
+              }}
+              className="w-full cursor-pointer"
+            >
+              Schedule on Calendly
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
