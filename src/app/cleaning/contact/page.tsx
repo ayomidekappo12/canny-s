@@ -62,8 +62,8 @@ export default function ContactForm() {
     },
   });
 
-  const onSubmit = async (data: FormData) => {
-    console.log("Form submitted:", data);
+  const onSubmit = async (_data: FormData) => {
+    console.log("Form submitted:", _data);
     await new Promise((r) => setTimeout(r, 1000));
     toast.success(
       <div>
@@ -71,7 +71,7 @@ export default function ContactForm() {
           Message sent successfully!
         </span>
         <div className="text-[var(--professional-navy)]">
-          We'll get back to you shortly.
+          We&apos;ll get back to you shortly.
         </div>
       </div>
     );
@@ -96,7 +96,9 @@ export default function ContactForm() {
             </section>
 
             <form
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={(e) => {
+                void handleSubmit(onSubmit)(e);
+              }}
               className="space-y-2 w-auto"
             >
               {/* Name */}
@@ -168,14 +170,20 @@ export default function ContactForm() {
                         <SelectValue placeholder="Select a Service" />
                       </SelectTrigger>
                       <SelectContent className="border-accent/20">
-                        <SelectItem value="end-of-tenancy">End-of-tenancy Cleaning</SelectItem>
+                        <SelectItem value="end-of-tenancy">
+                          End-of-tenancy Cleaning
+                        </SelectItem>
                         <SelectItem value="deep">Deep Cleaning</SelectItem>
                         <SelectItem value="move">Move-in/Move-out</SelectItem>
                         <SelectItem value="carpet">Carpet Cleaning</SelectItem>
-                        <SelectItem value="domestic">Domestic Cleaning</SelectItem>
+                        <SelectItem value="domestic">
+                          Domestic Cleaning
+                        </SelectItem>
                         <SelectItem value="office">Office Cleaning</SelectItem>
                         <SelectItem value="custom">Custom Service</SelectItem>
-                        <SelectItem value="AirBnB Cleaning">AirBnB Cleaning</SelectItem>
+                        <SelectItem value="AirBnB Cleaning">
+                          AirBnB Cleaning
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   )}

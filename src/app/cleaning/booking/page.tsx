@@ -155,7 +155,7 @@ export default function BookingForm() {
     { value: "4", label: "4+ bedrooms" },
   ];
 
-  const onSubmit = async (data: BookingFormData) => {
+  const onSubmit = async (_data: BookingFormData) => {
     setIsSubmitting(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1200));
@@ -175,14 +175,14 @@ export default function BookingForm() {
 
       form.reset();
     } catch {
-      toast.error(<div>
-        <span className="text-red-400 font-bold">
-          Submission failed
-        </span>
-        <div className="text-[var(--professional-navy)]">
-          Something went wrong — please try again or call us.
+      toast.error(
+        <div>
+          <span className="text-red-400 font-bold">Submission failed</span>
+          <div className="text-[var(--professional-navy)]">
+            Something went wrong — please try again or call us.
+          </div>
         </div>
-      </div>);
+      );
     } finally {
       setIsSubmitting(false);
     }

@@ -9,16 +9,16 @@ module.exports = {
   additionalPaths: async (config) => [
     { loc: "/pricing", lastmod: new Date().toISOString(), priority: 0.8 },
     {
-      loc: "/assessment/personal",
+      loc: "/",
       lastmod: new Date().toISOString(),
       priority: 0.8,
     },
     {
-      loc: "/assessment/business",
+      loc: "/",
       lastmod: new Date().toISOString(),
       priority: 0.8,
     },
-    { loc: "/business", lastmod: new Date().toISOString(), priority: 0.7 },
+    { loc: "/", lastmod: new Date().toISOString(), priority: 0.7 },
     { loc: "/contact-us", lastmod: new Date().toISOString(), priority: 0.6 },
   ],
 };

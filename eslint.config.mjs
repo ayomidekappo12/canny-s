@@ -23,6 +23,10 @@ export default [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
+      parserOptions: {
+        project: "./tsconfig.json",
+        tsconfigRootDir: __dirname,
+      },
       globals: {
         ...globals.browser,
         ...globals.node,
@@ -53,6 +57,8 @@ export default [
       // Hooks best practices
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
 
       // Accessibility
       "jsx-a11y/alt-text": "warn",

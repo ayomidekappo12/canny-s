@@ -1,28 +1,67 @@
 "use server";
 import { cookies } from "next/headers";
-import { getIronSession } from "iron-session";
+import { getIronSession, IronSession, SessionOptions } from "iron-session";
 
 interface SessionData {
   aut: string;
   role: string;
 }
 
-async function getSession() {
-  return await getIronSession<SessionData>(await cookies(), {
-    password: `${process.env.SESSION_SECRET}`,
-    cookieName: "TULIP-COOKIE-MONSTER",
-    cookieOptions: {
-      httpOnly: false,
-      secure: false,
-      sameSite: "lax",
-      path: "/",
-    },
-  });
+const isProd = process.env.NODE_ENV === "production";
+
+// In-memory fallback
+let memorySession: SessionData | null = null;
+
+/**
+ * Universal cookies helper that works in Next.js 13/14 (sync)
+ * and Next.js 15 (async).
+ */
+async function getCookieStore() {
+  const result = cookies();
+  if (result instanceof Promise) {
+    return await result; // Next.js 15+
+  }
+  return result; // Next.js 13/14
+}
+
+async function getSession(): Promise<IronSession<SessionData>> {
+  try {
+    const cookieStore = await getCookieStore();
+
+    return await getIronSession<SessionData>(cookieStore, {
+      password: `${process.env.SESSION_SECRET}`,
+      cookieName: "TULIP-COOKIE-MONSTER",
+      cookieOptions: {
+        httpOnly: isProd,
+        secure: isProd,
+        sameSite: "lax",
+        path: "/",
+      },
+    });
+  } catch (err) {
+    console.warn("[Session] Falling back to in-memory session:", err);
+
+    // ✅ Full stub implementing IronSession<SessionData>
+    const fallback: IronSession<SessionData> = {
+      aut: memorySession?.aut ?? "",
+      role: memorySession?.role ?? "",
+      save: async function () {
+        memorySession = { aut: this.aut, role: this.role };
+      },
+      destroy: async function () {
+        memorySession = null;
+      },
+      updateConfig: function (_newOptions: SessionOptions) {
+        // no-op for in-memory fallback
+      },
+    };
+
+    return fallback;
+  }
 }
 
 export async function getSessionData() {
   const session = await getSession();
-
   return JSON.stringify({
     aut: session.aut,
     role: session.role,

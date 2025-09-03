@@ -1,13 +1,11 @@
 export default {
-  titleTemplate: "%s | SynaraDev",
-  defaultTitle:
-    "SynaraDev - Software development, designs and other technical service",
-  description:
-    "We provide software development, designs and other technical service company owners and industries.",
+  titleTemplate: "%s | Cannys",
+  defaultTitle: "Cannys - Canny's Cleaning Services Provide cleaning service.",
+  description: "Canny's Cleaning Services Provide cleaning service.",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "http://synaradev.com",
-    site_name: "SynaraDev",
+    url: "http://Cannys.com",
+    site_name: "Cannys",
   },
 };
