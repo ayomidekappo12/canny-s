@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import * as z from "zod";
 
 //  More forgiving & realistic UK schema
@@ -64,7 +65,16 @@ export default function ContactForm() {
   const onSubmit = async (data: FormData) => {
     console.log("Form submitted:", data);
     await new Promise((r) => setTimeout(r, 1000));
-    alert("Message sent successfully!");
+    toast.success(
+      <div>
+        <span className="text-[var(--professional-navy)] font-bold">
+          Message sent successfully!
+        </span>
+        <div className="text-[var(--professional-navy)]">
+          We'll get back to you shortly.
+        </div>
+      </div>
+    );
     reset();
   };
 
@@ -158,9 +168,14 @@ export default function ContactForm() {
                         <SelectValue placeholder="Select a Service" />
                       </SelectTrigger>
                       <SelectContent className="border-accent/20">
-                        <SelectItem value="cleaning">Cleaning</SelectItem>
+                        <SelectItem value="end-of-tenancy">End-of-tenancy Cleaning</SelectItem>
                         <SelectItem value="deep">Deep Cleaning</SelectItem>
                         <SelectItem value="move">Move-in/Move-out</SelectItem>
+                        <SelectItem value="carpet">Carpet Cleaning</SelectItem>
+                        <SelectItem value="domestic">Domestic Cleaning</SelectItem>
+                        <SelectItem value="office">Office Cleaning</SelectItem>
+                        <SelectItem value="custom">Custom Service</SelectItem>
+                        <SelectItem value="AirBnB Cleaning">AirBnB Cleaning</SelectItem>
                       </SelectContent>
                     </Select>
                   )}

@@ -357,13 +357,10 @@ export default function Services() {
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
                           <Button size="lg" asChild>
-                            <Link href="/booking">
+                            <Link href="/cleaning/booking">
                               Book This Service
                               <ArrowRight className="mx-1.5 h-4 w-5" />
                             </Link>
-                          </Button>
-                          <Button variant="outline" size="lg" asChild>
-                            <Link href="/contact">Get Quote</Link>
                           </Button>
                         </div>
                       </div>

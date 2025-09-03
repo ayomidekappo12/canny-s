@@ -93,7 +93,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <Link
-                  href="/services/cleaning/booking/"
+                  href="/cleaning/booking/"
                   className="hover:text-white transition-colors"
                 >
                   Book Now
@@ -101,7 +101,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/cleaning/about"
+                  href="/cleaning/about"
                   className="hover:text-white transition-colors"
                 >
                   About Us
@@ -109,7 +109,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/cleaning/contact"
+                  href="/cleaning/contact"
                   className="hover:text-white transition-colors"
                 >
                   Contact
@@ -117,7 +117,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/cleaning/service"
+                  href="/cleaning/service"
                   className="hover:text-white transition-colors"
                 >
                   Services

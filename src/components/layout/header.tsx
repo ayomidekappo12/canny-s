@@ -33,10 +33,13 @@ export default function Header() {
   const NavLinks = ({ onClick }: { onClick?: () => void }) => (
     <>
       {navigation.map((item) => {
+        const currentPath = normalizePath(pathname);
+        const targetPath = normalizePath(item.href);
+
+        // Fix: Home only active on exact "/", others active on subpaths too
         const isActive =
-          normalizePath(pathname) === normalizePath(item.href) ||
-          (item.href !== "/cleaning" &&
-            normalizePath(pathname).startsWith(normalizePath(item.href)));
+          currentPath === targetPath ||
+          (item.href !== "/" && currentPath.startsWith(targetPath));
 
         return (
           <Link
@@ -60,10 +63,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 text-[#1E293B]">
       <div className="flex h-16 items-center justify-between mx-5 sm:mx-8">
         {/* Logo Click */}
-        <Link
-          href="/"
-          className="flex items-center space-x-2 cursor-pointer"
-        >
+        <Link href="/" className="flex items-center space-x-2 cursor-pointer">
           <Image
             src={`https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756315207/Logo_papmaz.png`}
             alt="Logo"

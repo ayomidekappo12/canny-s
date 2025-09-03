@@ -35,7 +35,7 @@ export function Services() {
         "Flexible scheduling",
       ],
       popular: false,
-      href: "/services/domestic",
+      href: "/cleaning/service",
     },
     {
       icon: Sparkles,
@@ -50,7 +50,7 @@ export function Services() {
         "Light fixtures",
       ],
       popular: true,
-      href: "/services/deep",
+      href: "/cleaning/service",
     },
     {
       icon: Key,
@@ -65,7 +65,7 @@ export function Services() {
         "Professional equipment",
       ],
       popular: false,
-      href: "/services/end-of-tenancy",
+      href: "/cleaning/service",
     },
     {
       icon: Building,
@@ -80,7 +80,7 @@ export function Services() {
         "Waste management",
       ],
       popular: false,
-      href: "/services/office",
+      href: "/cleaning/service",
     },
     {
       icon: Sofa,
@@ -95,7 +95,7 @@ export function Services() {
         "Fast drying",
       ],
       popular: false,
-      href: "/services/carpet",
+      href: "/cleaning/service",
     },
     {
       icon: Plane,
@@ -110,7 +110,7 @@ export function Services() {
         "Guest-ready standards",
       ],
       popular: false,
-      href: "/services/airbnb",
+      href: "/cleaning/service",
     },
   ];
 
@@ -193,7 +193,7 @@ export function Services() {
                         className="w-full hover:scale-105 shadow-xl hover:shadow-2xl"
                         asChild
                       >
-                        <Link href={service.href}>
+                        <Link href={service.href} className="cursor-pointer">
                           Learn More
                           <ArrowRight className="mx-1.5 h-4 w-5" />
                         </Link>
@@ -204,7 +204,7 @@ export function Services() {
                         className="w-full"
                         asChild
                       >
-                        <Link href="/booking">Book Now</Link>
+                        <Link href="/cleaning/booking">Book Now</Link>
                       </Button>
                     </div>
                   </CardContent>
