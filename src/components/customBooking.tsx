@@ -11,7 +11,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -100,7 +99,7 @@ export default function BookingFormDialog({
     },
   });
 
-  const onSubmit = async (data: BookingFormData) => {
+  const onSubmit = async (_data: BookingFormData) => {
     setIsSubmitting(true);
     try {
       await new Promise((r) => setTimeout(r, 2000));
@@ -110,7 +109,7 @@ export default function BookingFormDialog({
             Booking Confirmed!
           </span>
           <div className="text-[var(--professional-navy)]">
-            We'll review your details and get back to you shortly. Please
+            We&apos;ll review your details and get back to you shortly. Please
             schedule a call below if needed.
           </div>
         </div>
