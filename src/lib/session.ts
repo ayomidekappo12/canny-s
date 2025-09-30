@@ -77,21 +77,17 @@ export async function getSessionData(): Promise<SessionData | null> {
 /**
  * Create a session
  */
-export function createSession(authToken: string, role: string): void {
-  void (async () => {
-    const session = await getSession();
-    session.aut = authToken;
-    session.role = role;
-    await session.save();
-  })();
+export async function createSession(authToken: string, role: string): Promise<void> {
+  const session = await getSession();
+  session.aut = authToken;
+  session.role = role;
+  await session.save();
 }
 
 /**
  * Delete a session
  */
-export function deleteSession(): void {
-  void (async () => {
-    const session = await getSession();
-    await session.destroy();
-  })();
+export async function deleteSession(): Promise<void> {
+  const session = await getSession();
+  await session.destroy();
 }

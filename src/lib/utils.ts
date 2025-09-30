@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { getSessionData } from "@/app/actions";
+import { getSessionData } from "@/lib/session";
 import axios from "axios";
 import { normalizeError, AppError } from "@/lib/errors";
 
