@@ -230,7 +230,7 @@ export function Services() {
                       properties.
                     </p>
                   </div>
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-5">
                     <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                       <Clock className="h-4 w-4" />
                       <span>Response within 1 hour</span>
@@ -238,7 +238,7 @@ export function Services() {
                     <Button
                       onClick={() => setOpen(true)}
                       size="lg"
-                      className="cursor-pointer sm:px-10 h-14"
+                      className="px-2.5 cursor-pointer sm:px-10 h-14"
                     >
                       <NotebookPen className="mx-1.5 w-5 h-5" />
                       Get Custom Quote
