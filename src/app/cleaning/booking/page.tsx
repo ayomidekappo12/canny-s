@@ -156,7 +156,7 @@ export default function BookingForm() {
   ];
 
   // Removed unused variable by not prefixing with "_"
-  const onSubmit = async (data: BookingFormData) => {
+  const onSubmit = async (_data: BookingFormData) => {
     setIsSubmitting(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1200));

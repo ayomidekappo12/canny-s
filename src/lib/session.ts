@@ -1,3 +1,4 @@
+/**
 "use server";
 
 import { cookies } from "next/headers";
@@ -13,10 +14,10 @@ const isProd = process.env.NODE_ENV === "production";
 // In-memory fallback
 let memorySession: SessionData | null = null;
 
-/**
- * Universal cookies helper that always returns a Promise.
- * Handles Next.js 13/14 (sync) and 15 (async).
- */
+
+// Universal cookies helper that always returns a Promise.
+// Handles Next.js 13/14 (sync) and 15 (async).
+
 async function getCookieStore() {
   const result = cookies();
   return result instanceof Promise ? await result : result;
@@ -58,9 +59,9 @@ async function getSession(): Promise<IronSession<SessionData>> {
   }
 }
 
-/**
- * Strongly typed session data
- */
+
+// Strongly typed session data
+
 export async function getSessionData(): Promise<SessionData | null> {
   const session = await getSession();
 
@@ -74,9 +75,9 @@ export async function getSessionData(): Promise<SessionData | null> {
   };
 }
 
-/**
- * Create a session
- */
+
+// Create a session
+
 export async function createSession(authToken: string, role: string): Promise<void> {
   const session = await getSession();
   session.aut = authToken;
@@ -84,10 +85,11 @@ export async function createSession(authToken: string, role: string): Promise<vo
   await session.save();
 }
 
-/**
- * Delete a session
- */
+
+// Delete a session
+
 export async function deleteSession(): Promise<void> {
   const session = await getSession();
   await session.destroy();
 }
+*/

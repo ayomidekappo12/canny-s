@@ -99,7 +99,7 @@ export default function BookingFormDialog({
     },
   });
 
-  const onSubmit = async (_: BookingFormData) => {
+  const onSubmit = async (_data: BookingFormData) => {
     setIsSubmitting(true);
     try {
       await new Promise((r) => setTimeout(r, 2000));
@@ -147,7 +147,10 @@ export default function BookingFormDialog({
           </DialogHeader>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form
+              onSubmit={(e) => void form.handleSubmit(onSubmit)(e)}
+              className="space-y-8"
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <FormField
                   control={form.control}

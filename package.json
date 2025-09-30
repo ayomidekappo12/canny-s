@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint && tsc --noEmit",
-    "tailwind:init": "tailwindcss init -p"
+    "tailwind:init": "tailwindcss init -p",
+    "clean": "rm -rf .next .turbo .eslintcache *.tsbuildinfo",
+    "rebuild": "npm run clean && npm install && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

@@ -60,7 +60,8 @@ export default [
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "react/prop-types": "off",
-
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+,
       // Accessibility
       "jsx-a11y/alt-text": "warn",
       "jsx-a11y/anchor-is-valid": "warn",
