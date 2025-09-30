@@ -155,7 +155,8 @@ export default function BookingForm() {
     { value: "4", label: "4+ bedrooms" },
   ];
 
-  const onSubmit = async (_data: BookingFormData) => {
+  // Removed unused variable by not prefixing with "_"
+  const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1200));
@@ -166,13 +167,12 @@ export default function BookingForm() {
             Consultation Request Submitted!
           </span>
           <div className="text-[var(--professional-navy)]">
-            We'll review your details and get back to you shortly. Please
+            We&apos;ll review your details and get back to you shortly. Please
             schedule a call below if needed.
           </div>
         </div>
       );
-      setShowCalendly(true); // Open Calendly dialog
-
+      setShowCalendly(true);
       form.reset();
     } catch {
       toast.error(
@@ -196,6 +196,7 @@ export default function BookingForm() {
           <h1 className="text-4xl font-bold text-[#1E293B] mb-4">
             Book Your Cleaning Service
           </h1>
+          {/* Fixed unescaped apostrophe */}
           <p className="text-xl text-muted-foreground mx-2 sm:mx-0">
             Fill out the form below and we&apos;ll get back to you within the
             hour
@@ -204,7 +205,12 @@ export default function BookingForm() {
 
         {/* Form */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          {/* Fixed @typescript-eslint/no-misused-promises
+              by wrapping async submit in void */}
+          <form
+            onSubmit={(e) => void form.handleSubmit(onSubmit)(e)}
+            className="space-y-8"
+          >
             <div className="grid md:grid-cols-2 gap-8">
               {/* Service Details */}
               <Card className="mx-4 md:mx-0 border border-[#dce2e5]">
@@ -567,7 +573,6 @@ export default function BookingForm() {
           </form>
         </Form>
 
-        {/*Calendly Dialog */}
         <Dialog open={showCalendly} onOpenChange={setShowCalendly}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>

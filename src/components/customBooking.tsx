@@ -99,7 +99,7 @@ export default function BookingFormDialog({
     },
   });
 
-  const onSubmit = async (_data: BookingFormData) => {
+  const onSubmit = async (_: BookingFormData) => {
     setIsSubmitting(true);
     try {
       await new Promise((r) => setTimeout(r, 2000));
@@ -116,18 +116,19 @@ export default function BookingFormDialog({
       );
       form.reset();
       setShowCalendly(true); // open Calendly dialog
-    } catch (err) {
-      toast.error(
-        <div>
-          <span className="text-[var(--professional-navy)] font-bold">
-            Submission failed!
-          </span>
-          <div className="text-[var(--professional-navy)]">
-            Please try again later.
-          </div>
+    } catch {
+    toast.error(
+      <div>
+        <span className="text-[var(--professional-navy)] font-bold">
+          Submission failed!
+        </span>
+        <div className="text-[var(--professional-navy)]">
+          Please try again later.
         </div>
-      );
-    } finally {
+      </div>
+    );
+  }
+  finally {
       setIsSubmitting(false);
     }
   };

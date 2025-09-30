@@ -1,4 +1,5 @@
 "use server";
+
 import { cookies } from "next/headers";
 import { getIronSession, IronSession, SessionOptions } from "iron-session";
 
@@ -13,15 +14,12 @@ const isProd = process.env.NODE_ENV === "production";
 let memorySession: SessionData | null = null;
 
 /**
- * Universal cookies helper that works in Next.js 13/14 (sync)
- * and Next.js 15 (async).
+ * Universal cookies helper that always returns a Promise.
+ * Handles Next.js 13/14 (sync) and 15 (async).
  */
 async function getCookieStore() {
   const result = cookies();
-  if (result instanceof Promise) {
-    return await result; // Next.js 15+
-  }
-  return result; // Next.js 13/14
+  return result instanceof Promise ? await result : result;
 }
 
 async function getSession(): Promise<IronSession<SessionData>> {
@@ -41,19 +39,17 @@ async function getSession(): Promise<IronSession<SessionData>> {
   } catch (err) {
     console.warn("[Session] Falling back to in-memory session:", err);
 
-    // ✅ Full stub implementing IronSession<SessionData>
+    // Full stub implementing IronSession<SessionData>
     const fallback: IronSession<SessionData> = {
       aut: memorySession?.aut ?? "",
       role: memorySession?.role ?? "",
-      save() {
+      async save() {
         memorySession = { aut: this.aut, role: this.role };
-        return Promise.resolve();
       },
-      destroy() {
+      async destroy() {
         memorySession = null;
-        return Promise.resolve();
       },
-      updateConfig(_options: SessionOptions) {
+      updateConfig(_: SessionOptions) {
         // no-op for in-memory fallback
       },
     };
@@ -63,7 +59,7 @@ async function getSession(): Promise<IronSession<SessionData>> {
 }
 
 /**
- * ✅ Strongly typed session data
+ * Strongly typed session data
  */
 export async function getSessionData(): Promise<SessionData | null> {
   const session = await getSession();
@@ -78,14 +74,24 @@ export async function getSessionData(): Promise<SessionData | null> {
   };
 }
 
-export async function createSession(authToken: string, role: string) {
-  const session = await getSession();
-  session.aut = authToken;
-  session.role = role;
-  await session.save();
+/**
+ * Create a session
+ */
+export function createSession(authToken: string, role: string): void {
+  void (async () => {
+    const session = await getSession();
+    session.aut = authToken;
+    session.role = role;
+    await session.save();
+  })();
 }
 
-export async function deleteSession() {
-  const session = await getSession();
-  await session.destroy();
+/**
+ * Delete a session
+ */
+export function deleteSession(): void {
+  void (async () => {
+    const session = await getSession();
+    await session.destroy();
+  })();
 }

@@ -155,13 +155,14 @@ export function Hero() {
 
                   <div className="text-center text-sm text-muted-foreground">
                     <div className="flex items-center justify-center space-x-1">
-                      {[...Array(5)].map((_, i) => (
+                      {Array.from({ length: 5 }, (_, i) => (
                         <Star
                           key={i}
                           className="h-4 w-4 fill-yellow-400 text-yellow-400"
                         />
                       ))}
                     </div>
+
                     <p className="mt-1">
                       &quot;Outstanding service, highly recommend!&quot; - Sarah
                       M.

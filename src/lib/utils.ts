@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getSessionData } from "@/app/actions";
 import axios from "axios";
-import { normalizeError } from "@/lib/errors";
+import { normalizeError, AppError } from "@/lib/errors";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -29,11 +29,25 @@ interface SessionData {
   role?: string;
 }
 
+// Custom Error wrapper for normalized errors
+class NormalizedError extends Error {
+  code?: number | string;
+
+  constructor(appError: AppError) {
+    super(appError.message);
+    this.code = appError.code;
+    this.name = "NormalizedError";
+  }
+}
+
 export const fetcher = async <T = unknown>(url: string): Promise<T> => {
   let session: SessionData;
   try {
     const raw = await getSessionData();
-    session = typeof raw === "string" ? JSON.parse(raw) : raw;
+    session =
+      typeof raw === "string"
+        ? (JSON.parse(raw) as SessionData)
+        : (raw as SessionData);
   } catch {
     session = {};
   }
@@ -45,6 +59,6 @@ export const fetcher = async <T = unknown>(url: string): Promise<T> => {
     const res = await api.get<T>(url, config);
     return res.data;
   } catch (err) {
-    throw normalizeError(err);
+    throw new NormalizedError(normalizeError(err));
   }
 };

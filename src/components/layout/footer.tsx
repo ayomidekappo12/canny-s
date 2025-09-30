@@ -135,7 +135,7 @@ export default function Footer() {
               <span className="text-sm text-gray-400">Follow us:</span>
               <div className="flex space-x-3">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/cannyscleaning"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
@@ -151,7 +151,7 @@ export default function Footer() {
                   <SiInstagram className="h-5 w-4" />
                 </a>
                 <a
-                  href="#"
+                  href="https://x.com/cannyscleaning"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
