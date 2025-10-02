@@ -69,15 +69,8 @@ const bookingSchema = z.object({
       message:
         "Enter a valid UK phone number (+44 followed by 9–11 digits or 07 followed by 10 digits)",
     }),
-  address: z.string().min(5, "Please enter your full address"),
-  postcode: z
-    .string()
-    .min(5, "Please enter a valid postcode")
-    .max(8)
-    .regex(
-      /^[A-Z]{1,2}\d{1,2}[A-Z]?\s*\d[A-Z]{2}$/i,
-      "Please enter a valid UK postcode"
-    ),
+  extraTask: z.string().optional(),
+  specialRequest: z.string().optional(),
   notes: z.string().max(500).optional(),
 });
 
@@ -104,19 +97,19 @@ export default function BookingForm() {
       lastName: "",
       email: "",
       phone: "",
-      address: "",
-      postcode: "",
+      extraTask: "",
+      specialRequest: "",
       notes: "",
     },
   });
 
   const services = [
-    { value: "domestic", label: "Domestic Cleaning - £15/hr" },
+    { value: "domestic", label: "Domestic Cleaning - £150/hr" },
     { value: "deep", label: "Deep Cleaning - From £120/hr" },
     { value: "end-tenancy", label: "End of Tenancy - From £180/hr" },
-    { value: "office", label: "Office Cleaning - £12/hr" },
-    { value: "carpet", label: "Carpet & Upholstery - From £80/hr" },
-    { value: "airbnb", label: "AirBnB Cleaning - From £45/hr" },
+    { value: "commercial", label: "Commercial Cleaning - £120/hr" },
+    {value: "builders", label: "After-Builders Cleaning - From £200/hr",},
+    { value: "airbnb", label: "AirBnB Cleaning - From £250/hr" },
   ];
 
   const timeSlots = [
@@ -145,6 +138,22 @@ export default function BookingForm() {
     { value: "house", label: "House" },
     { value: "office", label: "Office" },
     { value: "studio", label: "Studio" },
+    { value: "Commercial Space", label: "Commercial Space" },
+    { value: "Airbnb", label: "Airbnb" },
+  ];
+
+  const specialRequest = [
+    { value: "eco-friendly products", label: "eco-friendly products" },
+    { value: "pet-safe", label: "pet-safe" },
+    { value: "allergen control", label: "allergen control" },
+    { value: "specific rooms", label: "specific rooms" },
+  ];
+
+  const extraTasks = [
+    { value: "ironing", label: "ironing" },
+    { value: "laundry", label: "laundry" },
+    { value: "oven-cleaning", label: "oven-cleaning" },
+    { value: "fridge-cleaning", label: "fridge-cleaning" },
   ];
 
   const bedroomOptions = [
@@ -173,7 +182,21 @@ export default function BookingForm() {
         </div>
       );
       setShowCalendly(true);
-      form.reset();
+      form.reset({
+        service: "",
+        date: undefined,
+        time: "",
+        duration: "",
+        property: "",
+        bedrooms: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        extraTask: "",
+        specialRequest: "",
+        notes: "",
+      });
     } catch {
       toast.error(
         <div>
@@ -431,16 +454,26 @@ export default function BookingForm() {
 
                   <FormField
                     control={form.control}
-                    name="address"
+                    name="extraTask"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Full Address</FormLabel>
+                        <FormLabel>Extra Tasks</FormLabel>
                         <FormControl>
-                          <Textarea
-                            placeholder="Enter your complete address"
-                            className="resize-none"
-                            {...field}
-                          />
+                          <Select
+                            value={field.value}
+                            onValueChange={(val) => field.onChange(val)}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select Extra Tasks" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-background border border-accent/20 z-50">
+                              {extraTasks.map((type) => (
+                                <SelectItem key={type.value} value={type.value}>
+                                  {type.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -449,12 +482,26 @@ export default function BookingForm() {
 
                   <FormField
                     control={form.control}
-                    name="postcode"
+                    name="specialRequest"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Postcode</FormLabel>
+                        <FormLabel>Special request</FormLabel>
                         <FormControl>
-                          <Input placeholder="SW1A 1AA" {...field} />
+                          <Select
+                            value={field.value}
+                            onValueChange={(val) => field.onChange(val)}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select special request" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-background border border-accent/20 z-50">
+                              {specialRequest.map((type) => (
+                                <SelectItem key={type.value} value={type.value}>
+                                  {type.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </FormControl>
                         <FormMessage />
                       </FormItem>

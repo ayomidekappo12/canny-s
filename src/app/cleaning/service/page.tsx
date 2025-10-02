@@ -12,7 +12,7 @@ import {
   Sparkles,
   Key,
   Building,
-  Sofa,
+ Cog,
   Plane,
   CheckCircle,
   Phone,
@@ -113,23 +113,23 @@ export default function Services() {
         "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654250/Web_Page_Pictures.docx.pdf-image-005_ec3pxv.jpg",
     },
     {
-      id: "office",
+      id: "Commercial",
       icon: Building,
-      title: "Office Cleaning",
+      title: "Commercial Cleaning",
       subtitle: "Professional workspace cleaning",
       description:
-        "Keep your workplace clean and professional. Regular cleaning services for offices, shops, and commercial spaces across London.",
+        "Keep your workplace clean and professional. Regular cleaning services for Commercials establishment, shops, and commercial spaces across London.",
       price: "From £12/hr",
       duration: "1-4 hours",
       features: [
-        "Desk cleaning & sanitizing",
-        "Kitchen/break room cleaning",
+        "Office sanitization",
+        "Workspace and Business space cleaning",
+        "Covid-safe practices",
         "Bathroom facilities cleaning",
         "Floor vacuuming & mopping",
         "Waste bin emptying",
         "Reception area cleaning",
         "Meeting room preparation",
-        "Covid-safe practices",
       ],
       includes: [
         "Flexible scheduling",
@@ -142,23 +142,23 @@ export default function Services() {
         "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654244/Web_Page_Pictures.docx.pdf-image-004_vtnqaj.jpg",
     },
     {
-      id: "carpet",
-      icon: Sofa,
-      title: "Carpet & Upholstery Cleaning",
-      subtitle: "Professional steam cleaning",
+      id: "after-builders-cleaning",
+      icon:Cog,
+      title: "After-Builders Cleaning",
+      subtitle: "Thorough post-construction cleaning",
       description:
-        "Revitalize your carpets, rugs, and furniture with our professional steam cleaning service. Effective stain removal and sanitization.",
+        "Our After-Builders Cleaning service ensures your property is spotless and move-in ready after construction or renovation. We removing dust, debris, and stains.",
       price: "From £80/hr",
       duration: "2-4 hours",
       features: [
+        "Post-construction dust and debris removal",
         "Hot water extraction cleaning",
         "Pre-treatment of stains",
         "Pet odor elimination",
         "Fabric protection application",
         "Fast drying techniques",
         "Sofa & chair cleaning",
-        "Rug cleaning service",
-        "Mattress cleaning available",
+        "Rug and mattress cleaning available",
       ],
       includes: [
         "Professional equipment",
@@ -168,7 +168,7 @@ export default function Services() {
       ],
       popular: false,
       image:
-        "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752633083/image1_uim5bi.png",
+        "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1759429947/ChatGPT_Image_Oct_2_2025_01_31_23_PM_tyyhjt.png",
     },
     {
       id: "airbnb",
@@ -326,7 +326,7 @@ export default function Services() {
                               What&apos;s Included:
                             </h4>
                             <ul className="space-y-2">
-                              {service.features.slice(0, 4).map((feature) => (
+                              {service.features.slice(0, 6).map((feature) => (
                                 <li
                                   key={feature}
                                   className="flex items-start space-x-2"

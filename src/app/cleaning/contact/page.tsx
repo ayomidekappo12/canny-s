@@ -75,7 +75,13 @@ export default function ContactForm() {
         </div>
       </div>
     );
-    reset();
+    reset({
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      message: "",
+    });
   };
 
   return (
@@ -175,11 +181,11 @@ export default function ContactForm() {
                         </SelectItem>
                         <SelectItem value="deep">Deep Cleaning</SelectItem>
                         <SelectItem value="move">Move-in/Move-out</SelectItem>
-                        <SelectItem value="carpet">Carpet Cleaning</SelectItem>
+                        <SelectItem value="carpet">After-builder Cleaning</SelectItem>
                         <SelectItem value="domestic">
                           Domestic Cleaning
                         </SelectItem>
-                        <SelectItem value="office">Office Cleaning</SelectItem>
+                        <SelectItem value="office">Commercial Cleaning</SelectItem>
                         <SelectItem value="custom">Custom Service</SelectItem>
                         <SelectItem value="AirBnB Cleaning">
                           AirBnB Cleaning

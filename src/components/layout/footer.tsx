@@ -17,8 +17,7 @@ export default function Footer() {
   "Domestic Cleaning",
   "Deep Cleaning",
   "End of Tenancy",
-  "Office Cleaning",
-  "Carpet Cleaning",
+  "Commercial Cleaning",
   "AirBnB Cleaning",
 ];
 
@@ -79,9 +78,9 @@ export default function Footer() {
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-primary mt-0.5" />
                 <span>
-                  Serving all London boroughs
+                  Serving all London
                   <br />
-                  and surrounding areas
+                  and Kent
                 </span>
               </div>
             </div>

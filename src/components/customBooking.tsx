@@ -61,15 +61,6 @@ const bookingSchema = z.object({
       message:
         "Enter a valid UK phone number (+44 followed by 9–11 digits or 07 followed by 10 digits)",
     }),
-  address: z.string().min(5, "Please enter your full address"),
-  postcode: z
-    .string()
-    .min(5, "Please enter a valid postcode")
-    .max(8, "Please enter a valid postcode")
-    .regex(
-      /^(GIR\s?0AA|(?:(?:AB|AL|B|BA|BB|BD|BH|BL|BN|BR|BS|BT|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)\d{1,2}[A-Z]?\s?\d[A-Z]{2}))$/i,
-      "Please enter a valid UK postcode"
-    ),
   notes: z.string().regex(/^[a-zA-Z0-9 ,.'"\-!@#$%^&*()_+=:;?]{10,500}$/, {
     message: "Please enter a well-formatted about text",
   }),
@@ -114,7 +105,19 @@ export default function BookingFormDialog({
           </div>
         </div>
       );
-      form.reset();
+       form.reset({
+         service: "",
+         date: undefined,
+         time: "",
+         duration: "",
+         property: "",
+         bedrooms: "",
+         firstName: "",
+         lastName: "",
+         email: "",
+         phone: "",
+         notes: "",
+       });
       setShowCalendly(true); // open Calendly dialog
     } catch {
     toast.error(
@@ -347,43 +350,6 @@ export default function BookingFormDialog({
                 />
               </div>
 
-              {/* ADDRESS */}
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Address</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Street, City, Postcode"
-                        {...field}
-                        className="resize-none min-h-[80px]"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="postcode"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Postcode</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="h-12"
-                        placeholder="SW1A 1AA"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
               <FormField
                 control={form.control}
                 name="notes"
@@ -410,7 +376,7 @@ export default function BookingFormDialog({
                   disabled={isSubmitting}
                   className="w-full md:w-auto px-10 cursor-pointer"
                 >
-                  {isSubmitting ? "Submitting..." : "Submit Booking"}
+                  {isSubmitting ? "Submitting..." : "Get a Quote"}
                 </Button>
               </div>
             </form>
