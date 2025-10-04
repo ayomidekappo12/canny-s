@@ -151,7 +151,7 @@ export default function ContactForm() {
                 </Label>
                 <Input
                   id="phone"
-                  placeholder="+44 7700 900123"
+                  placeholder="+44 770 0900 1233"
                   className="bg-[#f0f3f4] h-14"
                   {...register("phone")}
                 />
@@ -181,11 +181,15 @@ export default function ContactForm() {
                         </SelectItem>
                         <SelectItem value="deep">Deep Cleaning</SelectItem>
                         <SelectItem value="move">Move-in/Move-out</SelectItem>
-                        <SelectItem value="carpet">After-builder Cleaning</SelectItem>
+                        <SelectItem value="carpet">
+                          After-builder Cleaning
+                        </SelectItem>
                         <SelectItem value="domestic">
                           Domestic Cleaning
                         </SelectItem>
-                        <SelectItem value="office">Commercial Cleaning</SelectItem>
+                        <SelectItem value="office">
+                          Commercial Cleaning
+                        </SelectItem>
                         <SelectItem value="custom">Custom Service</SelectItem>
                         <SelectItem value="AirBnB Cleaning">
                           AirBnB Cleaning
@@ -235,7 +239,7 @@ export default function ContactForm() {
               <h2 className="text-[#1E293B] text-[20px] md:text-[22px] font-bold">
                 Or Contact Us Directly
               </h2>
-              <p className="text-base pt-2">Phone: +44 020 7946 0958</p>
+              <p className="text-base pt-2">Phone: +44 079 3088 7488</p>
               <p className="text-base pt-1">Email: info@cannyscleaning.com</p>
             </section>
           </div>

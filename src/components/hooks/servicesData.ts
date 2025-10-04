@@ -1,0 +1,178 @@
+import { Home, Sparkles, Key, Building, Cog, Plane } from "lucide-react";
+
+export const services = [
+  {
+    id: "domestic",
+    icon: Home,
+    title: "Domestic Cleaning",
+    subtitle: "Regular house cleaning",
+    description:
+      "Keep your home spotless with our regular cleaning service. Perfect for busy professionals and families who want to maintain a clean, healthy living environment.",
+    price: "From £15/hr",
+    duration: "2-4 hours",
+    features: [
+      "Kitchen cleaning & sanitizing",
+      "Bathroom deep clean",
+      "Hoovering all carpets & rugs",
+      "Mopping hard floors",
+      "Dusting furniture & surfaces",
+      "Bin emptying & fresh liners",
+      "Basic tidying & organizing",
+      "Flexible scheduling options",
+    ],
+    includes: [
+      "All cleaning supplies provided",
+      "Eco-friendly products available",
+      "Insured & vetted cleaners",
+      "Flexible scheduling",
+    ],
+    popular: false,
+    image:
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654243/Web_Page_Pictures.docx.pdf-image-002_yy0vsh.jpg",
+  },
+  {
+    id: "deep",
+    icon: Sparkles,
+    title: "Deep Cleaning",
+    subtitle: "Comprehensive spring clean",
+    description:
+      "Our most thorough cleaning service. Perfect for move-ins, spring cleaning, or when your home needs that extra attention to detail.",
+    price: "From £120/hr",
+    duration: "4-8 hours",
+    features: [
+      "Everything in domestic cleaning",
+      "Inside oven & microwave cleaning",
+      "Inside fridge & freezer cleaning",
+      "Window cleaning (interior)",
+      "Skirting boards & door frames",
+      "Light switches & door handles",
+      "Cabinet fronts & handles",
+      "Behind appliances cleaning",
+    ],
+    includes: [
+      "Professional equipment",
+      "Specialized cleaning products",
+      "Before & after photos",
+      "Satisfaction guarantee",
+    ],
+    popular: true,
+    image:
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654243/Web_Page_Pictures.docx.pdf-image-003_d05kcm.jpg",
+  },
+  {
+    id: "end-of-tenancy",
+    icon: Key,
+    title: "End of Tenancy Cleaning",
+    subtitle: "Get your deposit back",
+    description:
+      "Professional end of tenancy cleaning using the landlord's checklist. We guarantee you'll get your deposit back or we'll return for free.",
+    price: "From £180/hr",
+    duration: "6-10 hours",
+    features: [
+      "Landlord checklist compliance",
+      "Professional carpet cleaning",
+      "Oven & appliance deep clean",
+      "Bathroom descaling & sanitizing",
+      "Window cleaning (inside & out)",
+      "Wall spot cleaning",
+      "Cupboard cleaning (inside & out)",
+      "Garden area tidying (if applicable)",
+    ],
+    includes: [
+      "Deposit back guarantee",
+      "Landlord communication",
+      "Certificate of cleaning",
+      "48-hour completion",
+    ],
+    popular: false,
+    image:
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654250/Web_Page_Pictures.docx.pdf-image-005_ec3pxv.jpg",
+  },
+  {
+    id: "Commercial",
+    icon: Building,
+    title: "Commercial Cleaning",
+    subtitle: "Professional workspace cleaning",
+    description:
+      "Keep your workplace clean and professional. Regular cleaning services for Commercials establishment, shops, and commercial spaces across London.",
+    price: "From £12/hr",
+    duration: "1-4 hours",
+    features: [
+      "Office sanitization",
+      "Workspace and Business space cleaning",
+      "Covid-safe practices",
+      "Bathroom facilities cleaning",
+      "Floor vacuuming & mopping",
+      "Waste bin emptying",
+      "Reception area cleaning",
+      "Meeting room preparation",
+    ],
+    includes: [
+      "Flexible scheduling",
+      "After-hours service available",
+      "Commercial insurance",
+      "Regular quality checks",
+    ],
+    popular: false,
+    image:
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654244/Web_Page_Pictures.docx.pdf-image-004_vtnqaj.jpg",
+  },
+  {
+    id: "after-builders-cleaning",
+    icon: Cog,
+    title: "After-Builders Cleaning",
+    subtitle: "Thorough post-construction cleaning",
+    description:
+      "Our After-Builders Cleaning service ensures your property is spotless and move-in ready after construction or renovation. We removing dust, debris, and stains.",
+    price: "From £80/hr",
+    duration: "2-4 hours",
+    features: [
+      "Post-construction dust and debris removal",
+      "Hot water extraction cleaning",
+      "Pre-treatment of stains",
+      "Pet odor elimination",
+      "Fabric protection application",
+      "Fast drying techniques",
+      "Sofa & chair cleaning",
+      "Rug and mattress cleaning available",
+    ],
+    includes: [
+      "Professional equipment",
+      "Eco-friendly solutions",
+      "Stain removal guarantee",
+      "Same-day service available",
+    ],
+    popular: false,
+    image:
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1759429947/ChatGPT_Image_Oct_2_2025_01_31_23_PM_tyyhjt.png",
+  },
+  {
+    id: "airbnb",
+    icon: Plane,
+    title: "AirBnB Cleaning",
+    subtitle: "Guest-ready turnarounds",
+    description:
+      "Quick, reliable cleaning between guests to maintain your 5-star rating. Same-day service available with linen changes and restocking.",
+    price: "From £45/hr",
+    duration: "1-3 hours",
+    features: [
+      "Complete property reset",
+      "Fresh linen & towels",
+      "Bathroom restocking",
+      "Kitchen cleaning & restocking",
+      "Trash removal",
+      "Quick maintenance checks",
+      "Guest welcome setup",
+      "Emergency cleaning available",
+    ],
+    includes: [
+      "Same-day availability",
+      "Supply restocking",
+      "Property condition reports",
+      "Host communication",
+    ],
+    popular: false,
+    image:
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752633083/image2_ih0xxw.png",
+  },
+];

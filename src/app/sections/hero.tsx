@@ -1,20 +1,29 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import Link from "next/link";
 import {
   Star,
-  Shield,
   Clock,
   CheckCircle,
   Phone,
   NotebookPen,
   ArrowRight,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import QuoteForm from "@/components/quote";
 
 export function Hero() {
+  const [open, setOpen] = useState(false);
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[var(--clean-blue)] to-white py-20 lg:py-32">
       {/* Background Pattern */}
@@ -30,10 +39,6 @@ export function Hero() {
                 4.9/5 Rating
               </Badge>
               <Badge variant="secondary" className="bg-white/80 text-[#1E293B]">
-                <Shield className="h-3 w-3 mr-1" />
-                DBS Checked
-              </Badge>
-              <Badge variant="secondary" className="bg-white/80 text-[#1E293B]">
                 <CheckCircle className="h-3 w-3 mr-1" />
                 Fully Insured
               </Badge>
@@ -44,10 +49,10 @@ export function Hero() {
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-[#1E293B]">
                 Canny&apos;s Professional{" "}
                 <span className="text-primary">Cleaning Services</span> Across
-                London
+                London and Kent
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Trusted by 2,400+ customers. Same-day bookings available.
+                Trusted by our customers. Same-day bookings available.
                 Eco-friendly products. 100% satisfaction guarantee.
               </p>
             </div>
@@ -99,16 +104,15 @@ export function Hero() {
                 </Link>
               </Button>
               <Button variant="outline" size="xl" asChild className="text-lg">
-                <a href="tel:02079460958">
+                <a href="tel:07930887488">
                   <Phone className="mx-1.5 h-4 w-5" />
-                  Call 020 7946 0958
+                  Call 079 3088 7488
                 </a>
               </Button>
             </div>
 
             {/* Quick Stats */}
             <div className="flex flex-wrap items-center gap-6 pt-4 text-sm text-muted-foreground">
-              <span>✓ 2,400+ Happy Customers</span>
               <span>✓ 24/7 Customer Support</span>
               <span>✓ All London Boroughs</span>
             </div>
@@ -128,30 +132,28 @@ export function Hero() {
                     </p>
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center p-3 bg-[#f8fdff] rounded-lg">
-                      <span className="font-medium">Domestic Cleaning</span>
-                      <span className="text-primary font-bold">
-                        From £15/hr
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center p-3 bg-[#f8fdff] rounded-lg">
-                      <span className="font-medium">Deep Cleaning</span>
-                      <span className="text-primary font-bold">
-                        From £120/hr
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center p-3 bg-[#f8fdff] rounded-lg">
-                      <span className="font-medium">End of Tenancy</span>
-                      <span className="text-primary font-bold">
-                        From £180/hr
-                      </span>
-                    </div>
-                  </div>
+                  <div>
+                    <Button
+                      size="lg"
+                      className="w-full cursor-pointer"
+                      onClick={() => setOpen(true)}
+                    >
+                      Get your Quote
+                    </Button>
 
-                  <Button size="lg" className="w-full" asChild>
-                    <Link href="/cleaning/booking/">Get Instant Quote</Link>
-                  </Button>
+                    <Dialog open={open} onOpenChange={setOpen}>
+                      <DialogContent className="max-w-5xl overflow-y-auto max-h-[90vh]">
+                        <DialogHeader>
+                          <DialogTitle>
+                            <VisuallyHidden>
+                              Hidden but accessible title
+                            </VisuallyHidden>
+                          </DialogTitle>
+                        </DialogHeader>
+                        <QuoteForm />
+                      </DialogContent>
+                    </Dialog>
+                  </div>
 
                   <div className="text-center text-sm text-muted-foreground">
                     <div className="flex items-center justify-center space-x-1">
@@ -163,6 +165,18 @@ export function Hero() {
                       ))}
                     </div>
 
+                    <p className="mt-1">
+                      &quot;Outstanding service, highly recommend!&quot; - Sarah
+                      M.
+                    </p>
+                    <p className="mt-1">
+                      &quot;Outstanding service, highly recommend!&quot; - Sarah
+                      M.
+                    </p>
+                    <p className="mt-1">
+                      &quot;Outstanding service, highly recommend!&quot; - Sarah
+                      M.
+                    </p>
                     <p className="mt-1">
                       &quot;Outstanding service, highly recommend!&quot; - Sarah
                       M.

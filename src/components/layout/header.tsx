@@ -85,11 +85,10 @@ export default function Header() {
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
             <span className="font-medium">4.9/5</span>
-            <span className="text-xs">2,400+ reviews</span>
           </div>
           <div className="flex items-center space-x-2">
             <Phone className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium">020 7946 0958</span>
+            <span className="text-sm font-medium">079 3088 7488</span>
           </div>
           <Button size="sm" asChild>
             <Link href="/cleaning/booking/">Book Now</Link>
@@ -113,11 +112,11 @@ export default function Header() {
               <div className="border-t pt-4 space-y-3">
                 <div className="flex items-center space-x-2">
                   <Phone className="h-4 w-4 text-primary" />
-                  <span className="font-medium">020 7946 0958</span>
+                  <span className="font-medium">079 3088 7488</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span>4.9/5 rating • 2,400+ reviews</span>
+                  <span>4.9/5 rating</span>
                 </div>
                 <Button size="lg" className="w-full" asChild>
                   <Link

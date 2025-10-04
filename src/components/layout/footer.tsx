@@ -14,12 +14,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const cleaningServices = [
-  "Domestic Cleaning",
-  "Deep Cleaning",
-  "End of Tenancy",
-  "Commercial Cleaning",
-  "AirBnB Cleaning",
-];
+    "Domestic Cleaning",
+    "Deep Cleaning",
+    "End of Tenancy",
+    "AirBnB Cleaning",
+    "Commercial Cleaning",
+    "After-builder Cleaning",
+  ];
 
   return (
     <footer className="text-white bg-[#1E293B]">
@@ -42,8 +43,8 @@ export default function Footer() {
               <span className="font-bold text-xl">Canny&apos;s cleaning</span>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Professional cleaning services across London and surrounding
-              areas. Trusted by over 2,400 satisfied customers.
+              Professional cleaning services across London and Kent. Trusted by
+              our satisfied customers.
             </p>
             <div className="flex items-center space-x-2">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -69,11 +70,11 @@ export default function Footer() {
             <div className="space-y-3 text-sm text-gray-300">
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-primary" />
-                <span>+44 020 7946 0958</span>
+                <span>+44 079 3088 7488</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <span>hello@canny.co.uk</span>
+                <span>info@cannyscleaning.com</span>
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-primary mt-0.5" />
@@ -134,7 +135,7 @@ export default function Footer() {
               <span className="text-sm text-gray-400">Follow us:</span>
               <div className="flex space-x-3">
                 <a
-                  href="https://www.facebook.com/cannyscleaning"
+                  href="https://www.facebook.com/share/1A9Uquyytg/?mibextid=wwXIfr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
@@ -148,14 +149,6 @@ export default function Footer() {
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <SiInstagram className="h-5 w-4" />
-                </a>
-                <a
-                  href="https://x.com/cannyscleaning"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <SiX className="h-5 w-4" />
                 </a>
               </div>
             </div>
@@ -186,7 +179,6 @@ export default function Footer() {
           <div className="mt-6 pt-6 border-t border-gray-600">
             <div className="flex flex-wrap justify-center items-center space-x-6 text-xs text-gray-400">
               <span>✓ Fully Insured</span>
-              <span>✓ DBS Checked Staff</span>
               <span>✓ GDPR Compliant</span>
               <span>✓ COVID-19 Safe</span>
               <span>✓ Licensed & Bonded</span>

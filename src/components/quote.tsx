@@ -6,12 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { BookingFormSchema, type BookingFormData } from "@/components/hooks/bookingSchema";
-import ServiceDetailsCard from "./ServiceDetailsCard";
-import PropertyDetailsCard from "./PropertyDetailsCard";
-import ContactDetailsCard from "./ContactDetailsCard";
-import CalendlyDialog from "./CalendlyDialog";
+import ServiceDetailsCard from "@/app/cleaning/booking/ServiceDetailsCard";
+import PropertyDetailsCard from "@/app/cleaning/booking/PropertyDetailsCard";
+import ContactDetailsCard from "@/app/cleaning/booking/ContactDetailsCard";
+import CalendlyDialog from "@/app/cleaning/booking/CalendlyDialog";
 
-export default function BookingForm() {
+export default function QuoteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
 
@@ -101,12 +101,12 @@ export default function BookingForm() {
   }
 
   return (
-    <div className="container py-14 sm:py-20">
+    <div className="container py-5 sm:py-10">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-[#1E293B] mb-4">
-            Book Your Cleaning Service
+          <h1 className="text-4xl font-bold text-[#1E293B] mb-2">
+            Get Your Quote
           </h1>
           <p className="text-xl text-muted-foreground mx-2 sm:mx-0">
             Fill out the form below and we&apos;ll get back to you within the
@@ -139,10 +139,10 @@ export default function BookingForm() {
               >
                 {isSubmitting
                   ? "Submitting..."
-                  : "Book My Cleaning Service"}
+                  : "get quote"}
               </Button>
               <p className="text-sm text-muted-foreground mt-4">
-                We&apos;ll contact you within 1 hour to confirm your booking
+                We&apos;ll contact you within 1 hour to confirm your Quote
               </p>
             </div>
           </form>

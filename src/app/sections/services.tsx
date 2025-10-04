@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import BookingFormDialog from "@/components/customBooking";
+import BookingFormDialog from "@/components/custom/page";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -72,7 +72,7 @@ export function Services() {
       title: "Commercial Cleaning",
       description:
         "Keep your workplace clean and professional. Daily, weekly, or one-off commercial cleaning.",
-      price: "From £12/hr",
+      price: "price on request",
       features: [
         "Office sanitization",
         "Workspace and Business space cleaning",
@@ -87,7 +87,7 @@ export function Services() {
       title: "After-Builders Cleaning",
       description:
         "Clearing the dirt and dust after your building work's complete. Make your space shine again.",
-      price: "From £80/hr",
+      price: "price on request",
       features: [
         "removal of paint, plaster and glue",
         "polished free of all dirt and dust",
