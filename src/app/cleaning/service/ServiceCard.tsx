@@ -5,16 +5,35 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Star, ArrowRight } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
-interface ServiceCardProps {
-  service: any;
-  index: number;
+/**
+ * @interface Service
+ * Describes a cleaning service item displayed on the ServiceCard.
+ */
+export interface Service {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  price: string;
+  duration: string;
+  image: string;
+  icon: LucideIcon;
+  popular?: boolean;
+  features: string[];
+  includes: string[];
 }
 
 /**
  * @component ServiceCard
  * Displays an individual cleaning service with image, details, and call-to-action button.
  */
+interface ServiceCardProps {
+  service: Service;
+  index: number;
+}
+
 export function ServiceCard({ service, index }: ServiceCardProps) {
   const Icon = service.icon;
   const isEven = index % 2 === 0;
@@ -93,7 +112,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
               <section aria-label="Included features">
                 <h4 className="font-semibold mb-3">What&apos;s Included:</h4>
                 <ul className="space-y-2">
-                  {service.features.slice(0, 6).map((feature: string) => (
+                  {service.features.slice(0, 6).map((feature) => (
                     <li
                       key={feature}
                       className="flex items-start space-x-2 text-sm"
@@ -111,7 +130,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
               <section aria-label="Service benefits">
                 <h4 className="font-semibold mb-3">Service Benefits:</h4>
                 <ul className="space-y-2">
-                  {service.includes.map((item: string) => (
+                  {service.includes.map((item) => (
                     <li
                       key={item}
                       className="flex items-start space-x-2 text-sm"

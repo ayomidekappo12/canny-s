@@ -7,7 +7,7 @@ import {
   MapPin,
   Star,
 } from "lucide-react";
-import { SiFacebook, SiX, SiInstagram } from "react-icons/si";
+import { SiFacebook, SiInstagram } from "react-icons/si";
 import Image from "next/image";
 
 export default function Footer() {

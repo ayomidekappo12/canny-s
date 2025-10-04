@@ -8,10 +8,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Control, FieldValues, Path } from "react-hook-form";
 
-interface InputFieldProps {
-  control: any;
-  name: string;
+interface InputFieldProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
   label: string;
   placeholder?: string;
   type?: string;
@@ -19,16 +20,17 @@ interface InputFieldProps {
 
 /**
  * Accessible and reusable text input form field.
- * - Uses react-hook-form's FormField for full form context support.
- * - Automatically wires validation errors and ARIA attributes.
+ * - Strongly typed for react-hook-form.
+ * - Automatically handles validation, ARIA, and styling.
+ * - No need to manually attach <FormDataType> — it infers from control.
  */
-export function InputField({
+export function InputField<T extends FieldValues = FieldValues>({
   control,
   name,
   label,
   placeholder,
   type = "text",
-}: InputFieldProps) {
+}: InputFieldProps<T>) {
   return (
     <FormField
       control={control}
@@ -52,4 +54,5 @@ export function InputField({
     />
   );
 }
+
 InputField.displayName = "InputField";

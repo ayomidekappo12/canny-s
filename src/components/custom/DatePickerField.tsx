@@ -17,10 +17,11 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { Control, FieldValues, Path } from "react-hook-form";
 
-interface DatePickerFieldProps {
-  control: any;
-  name: string;
+interface DatePickerFieldProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
   label: string;
 }
 
@@ -29,11 +30,11 @@ interface DatePickerFieldProps {
  * - Prevents past date selection.
  * - Provides visual feedback with formatted date display.
  */
-export function DatePickerField({
+export function DatePickerField<T extends FieldValues>({
   control,
   name,
   label,
-}: DatePickerFieldProps) {
+}: DatePickerFieldProps<T>) {
   return (
     <FormField
       control={control}
@@ -52,7 +53,9 @@ export function DatePickerField({
                     !field.value && "text-muted-foreground"
                   )}
                 >
-                  {field.value ? format(field.value, "PPP") : "Pick a date"}
+                  {field.value
+                    ? format(field.value as Date, "PPP")
+                    : "Pick a date"}
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
               </FormControl>
@@ -60,7 +63,7 @@ export function DatePickerField({
             <PopoverContent align="start" className="p-0">
               <Calendar
                 mode="single"
-                selected={field.value}
+                selected={field.value as Date | undefined}
                 onSelect={field.onChange}
                 disabled={(date) => date < new Date()}
               />
