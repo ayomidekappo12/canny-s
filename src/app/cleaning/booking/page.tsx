@@ -43,16 +43,20 @@ export default function BookingForm() {
     "https://calendly.com/eventstaffingsolutions/30min?back_to=https://yourdomain.com/booking?booking=success";
 
   // NOTE: onSubmit matches Zod schema via react-hook-form resolver.
-  async function onSubmit(_data: BookingFormData) {
+  async function onSubmit(data: BookingFormData) {
     setIsSubmitting(true);
     try {
-      // Simulate submission (replace with real API call)
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
+      if (!res.ok) throw new Error("Failed to send booking request");
       toast.success(
         <div>
           <span className="text-[var(--professional-navy)] font-bold">
-            Consultation Request Submitted!
+            Your booking request has been sent successfully!
           </span>
           <div className="text-[var(--professional-navy)]">
             We&apos;ll review your details and get back to you shortly. Please
@@ -85,8 +89,6 @@ export default function BookingForm() {
         supplies: "",
       });
     } catch (err) {
-      // Show a helpful error toast and keep stack trace in console
-      console.error("Booking submit failed", err);
       toast.error(
         <div>
           <span className="text-red-400 font-bold">Submission failed</span>

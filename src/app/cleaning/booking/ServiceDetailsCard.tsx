@@ -34,12 +34,12 @@ interface Props {
 }
 
 const services = [
-  { value: "domestic", label: "Domestic Cleaning - £150/hr" },
-  { value: "deep", label: "Deep Cleaning - From £120/hr" },
-  { value: "end-tenancy", label: "End of Tenancy - From £180/hr" },
-  { value: "commercial", label: "Commercial Cleaning - £120/hr" },
-  { value: "builders", label: "After-Builders Cleaning - From £200/hr" },
-  { value: "airbnb", label: "AirBnB Cleaning - From £250/hr" },
+  { value: "domestic cleaning", label: "Domestic Cleaning - £150/hr" },
+  { value: "deep cleaning", label: "Deep Cleaning - From £120/hr" },
+  { value: "end-tenancy cleaning", label: "End of Tenancy - From £180/hr" },
+  { value: "commercial cleaning", label: "Commercial Cleaning - £120/hr" },
+  { value: "builders cleaning", label: "After-Builders Cleaning - From £200/hr" },
+  { value: "airbnb cleaning", label: "AirBnB Cleaning - From £250/hr" },
 ];
 
 const timeSlots = [
@@ -56,11 +56,11 @@ const timeSlots = [
 ];
 
 const durations = [
-  { value: "2", label: "2 hours" },
-  { value: "3", label: "3 hours" },
-  { value: "4", label: "4 hours" },
-  { value: "5", label: "5 hours" },
-  { value: "6", label: "6+ hours" },
+  { value: "2 hours", label: "2 hours" },
+  { value: "3 hours", label: "3 hours" },
+  { value: "4 hours", label: "4 hours" },
+  { value: "5 hours", label: "5 hours" },
+  { value: "6+ hours", label: "6+ hours" },
 ];
 
 const frequencies = [
@@ -71,8 +71,8 @@ const frequencies = [
 ];
 
 const supplyOptions = [
-  { value: "1", label: "client cleaning suppliers" },
-  { value: "2", label: "canny's cleaning suppliers" },
+  { value: "client cleaning suppliers", label: "Client cleaning suppliers" },
+  { value: "canny's cleaning suppliers", label: "Canny's cleaning suppliers" },
 ];
 
 export default function ServiceDetailsCard({ form }: Props) {

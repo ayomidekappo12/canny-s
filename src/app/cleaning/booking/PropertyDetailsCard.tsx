@@ -27,29 +27,29 @@ interface Props {
 }
 
 const propertyTypes = [
-  { value: "flat", label: "Flat/Apartment" },
+  { value: "flat/apartment", label: "Flat/Apartment" },
   { value: "house", label: "House" },
   { value: "office", label: "Office" },
   { value: "studio", label: "Studio" },
-  { value: "Commercial Space", label: "Commercial Space" },
-  { value: "Airbnb", label: "Airbnb" },
+  { value: "commercial Space", label: "Commercial Space" },
+  { value: "airbnb", label: "Airbnb" },
 ];
 
 const bedroomOptions = [
   { value: "studio", label: "Studio" },
-  { value: "1", label: "1 bedroom" },
-  { value: "2", label: "2 bedrooms" },
-  { value: "3", label: "3 bedrooms" },
-  { value: "4", label: "4 bedrooms" },
-  { value: "5", label: "5+ bedrooms" },
+  { value: "1 bedroom", label: "1 bedroom" },
+  { value: "2 bedrooms", label: "2 bedrooms" },
+  { value: "3 bedrooms", label: "3 bedrooms" },
+  { value: "4 bedrooms", label: "4 bedrooms" },
+  { value: "5+ bedrooms", label: "5+ bedrooms" },
 ];
 
 const bathroomOptions = [
-  { value: "1", label: "1 bathroom" },
-  { value: "2", label: "2 bathrooms" },
-  { value: "3", label: "3 bathrooms" },
-  { value: "4", label: "4 bathrooms" },
-  { value: "5", label: "5+ bathrooms" },
+  { value: "1 bathroom", label: "1 bathroom" },
+  { value: "2 bathrooms", label: "2 bathrooms" },
+  { value: "3 bathrooms", label: "3 bathrooms" },
+  { value: "4 bathrooms", label: "4 bathrooms" },
+  { value: "5 bathrooms", label: "5+ bathrooms" },
 ];
 
 export default function PropertyDetailsCard({ form }: Props) {

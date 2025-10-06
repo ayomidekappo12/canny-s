@@ -62,26 +62,36 @@ export default function ContactForm() {
     },
   });
 
-  const onSubmit = async (_data: FormData) => {
-    console.log("Form submitted:", _data);
-    await new Promise((r) => setTimeout(r, 1000));
-    toast.success(
-      <div>
-        <span className="text-[var(--professional-navy)] font-bold">
-          Message sent successfully!
-        </span>
-        <div className="text-[var(--professional-navy)]">
-          We&apos;ll get back to you shortly.
+  const onSubmit = async (data: FormData) => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error("Failed to send message");
+
+      toast.success(
+        <div>
+          <span className="text-[var(--professional-navy)] font-bold">
+            Message sent successfully!
+          </span>
+          <div className="text-[var(--professional-navy)]">
+            We&apos;ll get back to you shortly.
+          </div>
         </div>
-      </div>
-    );
-    reset({
-      name: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    });
+      );
+      reset({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      });
+    } catch (error) {
+      toast.error("Failed to send message. Please try again later.");
+    }
   };
 
   return (
@@ -228,7 +238,7 @@ export default function ContactForm() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-primary text-white rounded-lg px-4 h-10 text-sm font-bold"
+                  className="bg-primary text-white rounded-lg px-4 h-10 text-sm font-bold cursor-pointer"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>

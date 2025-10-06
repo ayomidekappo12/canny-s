@@ -92,21 +92,38 @@ export default function BookingFormDialog({
     },
   });
 
-  const onSubmit = async (_data: BookingFormData) => {
+  const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     try {
-      await new Promise((r) => setTimeout(r, 1500));
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        // Handle validation errors from backend (Zod)
+        if (result.errors) {
+          toast.error(`Validation error: ${result.errors.join(", ")}`);
+        } else {
+          toast.error(result.message || "Failed to send booking");
+        }
+        return;
+      }
+
       toast.success(
         <div>
           <span className="text-[var(--professional-navy)] font-bold">
-            Booking Confirmed!
+            Custom Quote Confirmed!
           </span>
           <div className="text-[var(--professional-navy)]">
-            We&apos;ll review your details and get back to you shortly. Please
-            schedule a call below if needed.
+            We&apos;ve received your request and will contact you soon.
           </div>
         </div>
       );
+
       form.reset({
         service: "",
         date: undefined,
