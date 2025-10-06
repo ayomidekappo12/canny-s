@@ -106,7 +106,7 @@ export default function BookingFormDialog({
         | { success: true; message: string }
         | { success: false; message: string; errors?: string[] };
 
-      const result: ApiResponse = await res.json();
+      const result: ApiResponse = (await res.json()) as ApiResponse;
 
       if (!res.ok || !result.success) {
         if ("errors" in result && Array.isArray(result.errors)) {
