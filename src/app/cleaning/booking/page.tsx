@@ -88,7 +88,7 @@ export default function BookingForm() {
         frequency: "",
         supplies: "",
       });
-    } catch (err) {
+    } catch {
       toast.error(
         <div>
           <span className="text-red-400 font-bold">Submission failed</span>

@@ -5,11 +5,21 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { BookingFormSchema, type BookingFormData } from "@/components/hooks/bookingSchema";
+import {
+  BookingFormSchema,
+  type BookingFormData,
+} from "@/components/hooks/bookingSchema";
 import ServiceDetailsCard from "@/app/cleaning/booking/ServiceDetailsCard";
 import PropertyDetailsCard from "@/app/cleaning/booking/PropertyDetailsCard";
 import ContactDetailsCard from "@/app/cleaning/booking/ContactDetailsCard";
 import CalendlyDialog from "@/app/cleaning/booking/CalendlyDialog";
+
+// Explicit response type from backend
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  errors?: string[];
+}
 
 export default function QuoteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +52,6 @@ export default function QuoteForm() {
   const calendlyUrl =
     "https://calendly.com/eventstaffingsolutions/30min?back_to=https://yourdomain.com/booking?booking=success";
 
-  // NOTE: onSubmit matches Zod schema via react-hook-form resolver.
   async function onSubmit(data: BookingFormData) {
     setIsSubmitting(true);
     try {
@@ -52,9 +61,12 @@ export default function QuoteForm() {
         body: JSON.stringify(data),
       });
 
-      const result = await res.json();
+      // Safely typed JSON response
+      const result = (await res.json()) as ApiResponse;
 
-      if (!res.ok) throw new Error(result.message);
+      if (!res.ok || !result.success) {
+        throw new Error(result.message || "Quote request failed");
+      }
 
       toast.success(
         <div>
@@ -67,36 +79,20 @@ export default function QuoteForm() {
         </div>
       );
 
-      // Offer user to schedule a call
       setShowCalendly(true);
 
-      // Reset form to defaults (preserves controlled components)
-      form.reset({
-        service: "",
-        date: undefined,
-        time: "",
-        duration: "",
-        property: "",
-        bedrooms: "",
-        bathrooms: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        extraTask: "",
-        specialRequest: "",
-        notes: "",
-        condition: "",
-        frequency: "",
-        supplies: "",
-      });
-    } catch (err) {
+      // Reset form safely
+      form.reset();
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Something went wrong — please try again or call us.";
+
       toast.error(
         <div>
           <span className="text-red-400 font-bold">Submission failed</span>
-          <div className="text-[var(--professional-navy)]">
-            Something went wrong — please try again or call us.
-          </div>
+          <div className="text-[var(--professional-navy)]">{message}</div>
         </div>
       );
     } finally {
@@ -118,7 +114,7 @@ export default function QuoteForm() {
           </p>
         </div>
 
-        {/* Main form: keep layout & styles unchanged */}
+        {/* Main form */}
         <FormProvider {...form}>
           <form
             onSubmit={(e) => void form.handleSubmit(onSubmit)(e)}
@@ -141,16 +137,15 @@ export default function QuoteForm() {
                 disabled={isSubmitting}
                 className="w-fit sm:w-auto px-12 cursor-pointer"
               >
-                {isSubmitting
-                  ? "Submitting..."
-                  : "get quote"}
+                {isSubmitting ? "Submitting..." : "Get Quote"}
               </Button>
               <p className="text-sm text-muted-foreground mt-4">
-                We&apos;ll contact you within 1 hour to confirm your Quote
+                We&apos;ll contact you within 1 hour to confirm your quote
               </p>
             </div>
           </form>
         </FormProvider>
+
         <CalendlyDialog
           open={showCalendly}
           onOpenChange={setShowCalendly}

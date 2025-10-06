@@ -44,7 +44,7 @@ const QuoteFormSchema = z.object({
 export async function POST(request: Request) {
   try {
     // Parse and validate request data
-    const body = await request.json();
+    const body = (await request.json()) as unknown;
     const data = QuoteFormSchema.parse(body);
 
     const {

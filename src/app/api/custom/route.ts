@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import * as z from "zod";
 
-// Match your frontend schema exactly, with safe coercion for date
+// Matches your frontend schema — coerces ISO or date strings safely
 const bookingSchema = z.object({
   service: z.string(),
   date: z.coerce.date(),
@@ -23,14 +23,17 @@ const bookingSchema = z.object({
   notes: z.string(),
 });
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
+// Shared type with frontend for safety
+type ApiResponse =
+  | { success: true; message: string }
+  | { success: false; message: string; errors?: string[] };
 
-    // Validate incoming data
+export async function POST(req: Request): Promise<NextResponse<ApiResponse>> {
+  try {
+    const body = (await req.json()) as unknown;
     const data = bookingSchema.parse(body);
 
-    // 🗓 Format date cleanly, e.g., "Saturday, Oct 4, 2025"
+    // 🗓 UK-style long date (Saturday, 4 October 2025)
     const formattedDate = data.date.toLocaleDateString("en-GB", {
       weekday: "long",
       day: "numeric",
@@ -40,7 +43,7 @@ export async function POST(req: Request) {
 
     // Email content
     const html = `
-      <h2>🧾 New Cleaning Custom-Quote Request</h2>
+      <h2>🧾 New Cleaning Booking Request</h2>
       <p><strong>Service:</strong> ${data.service}</p>
       <p><strong>Date:</strong> ${formattedDate}</p>
       <p><strong>Time:</strong> ${data.time}</p>
@@ -69,19 +72,20 @@ export async function POST(req: Request) {
       <p><strong>Notes:</strong> ${data.notes}</p>
     `;
 
-    // Configure Nodemailer (use your email service or SMTP)
+    // Configure email transport
     const transporter = nodemailer.createTransport({
-      service: "gmail", // or "SendGrid" / "Outlook"
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true,
       auth: {
-        user: process.env.EMAIL_USER!,
-        pass: process.env.EMAIL_PASS!,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
-    // Send email
     await transporter.sendMail({
-      from: `"Clean London" <${process.env.EMAIL_USER}>`,
-      to: process.env.BOOKING_RECEIVER_EMAIL ?? process.env.EMAIL_USER!,
+      from: `"Clean London" <${process.env.SMTP_USER}>`,
+      to: process.env.CONTACT_RECEIVER ?? process.env.SMTP_USER!,
       subject: `🧾 New Cleaning Booking from ${data.firstName} ${data.lastName}`,
       html,
     });
@@ -100,7 +104,6 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-
 
     return NextResponse.json(
       { success: false, message: "Internal Server Error" },

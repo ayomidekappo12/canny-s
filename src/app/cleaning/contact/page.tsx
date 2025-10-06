@@ -89,7 +89,7 @@ export default function ContactForm() {
         service: "",
         message: "",
       });
-    } catch (error) {
+    } catch {
       toast.error("Failed to send message. Please try again later.");
     }
   };

@@ -95,17 +95,21 @@ export default function BookingFormDialog({
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/booking", {
+      const res = await fetch("/api/custom", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      const result = await res.json();
+      // Explicitly type the JSON response
+      type ApiResponse =
+        | { success: true; message: string }
+        | { success: false; message: string; errors?: string[] };
 
-      if (!res.ok) {
-        // Handle validation errors from backend (Zod)
-        if (result.errors) {
+      const result: ApiResponse = await res.json();
+
+      if (!res.ok || !result.success) {
+        if ("errors" in result && Array.isArray(result.errors)) {
           toast.error(`Validation error: ${result.errors.join(", ")}`);
         } else {
           toast.error(result.message || "Failed to send booking");
@@ -124,6 +128,7 @@ export default function BookingFormDialog({
         </div>
       );
 
+      // Reset form safely
       form.reset({
         service: "",
         date: undefined,
@@ -143,6 +148,7 @@ export default function BookingFormDialog({
         phone: "",
         notes: "",
       });
+
       setShowCalendly(true);
     } catch {
       toast.error("Submission failed. Please try again later.");
@@ -150,6 +156,7 @@ export default function BookingFormDialog({
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <>

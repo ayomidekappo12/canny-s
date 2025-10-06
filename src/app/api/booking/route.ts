@@ -43,7 +43,8 @@ const BookingFormSchema = z.object({
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as unknown;
+
 
     // Validate request against schema
     const data = BookingFormSchema.parse(body);
