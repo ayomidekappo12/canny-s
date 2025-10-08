@@ -27,7 +27,7 @@ export function Services() {
       title: "Domestic Cleaning",
       description:
         "Regular house cleaning to keep your home spotless. Weekly, bi-weekly, or monthly visits.",
-      price: "From £15/hr",
+      price: "From £25/hr",
       features: [
         "Kitchen & bathrooms",
         "Hoovering & mopping",
@@ -42,10 +42,11 @@ export function Services() {
       title: "Deep Cleaning",
       description:
         "Comprehensive top-to-bottom cleaning for move-ins, spring cleaning, or special occasions.",
-      price: "From £120/hr",
+      price: "From £35/hr",
       features: [
         "Inside appliances",
         "Window cleaning",
+        "Everything in domestic cleaning",
         "Skirting boards",
         "Light fixtures",
       ],
@@ -59,7 +60,7 @@ export function Services() {
         "Professional cleaning to secure your deposit. Landlord approved checklist included.",
       price: "From £180/hr",
       features: [
-        "Deposit back guarantee",
+        "Guaranted satisfaction",
         "Landlord checklist",
         "All appliances",
         "Professional equipment",
