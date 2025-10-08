@@ -8,11 +8,11 @@ export const services = [
     subtitle: "Regular house cleaning",
     description:
       "Keep your home spotless with our regular cleaning service. Perfect for busy professionals and families who want to maintain a clean, healthy living environment.",
-    price: "From £15/hr",
+    price: "From £25/hr",
     duration: "2-4 hours",
     features: [
       "Kitchen cleaning & sanitizing",
-      "Bathroom deep clean",
+      "Bathroom cleaning",
       "Hoovering all carpets & rugs",
       "Mopping hard floors",
       "Dusting furniture & surfaces",
@@ -37,7 +37,7 @@ export const services = [
     subtitle: "Comprehensive spring clean",
     description:
       "Our most thorough cleaning service. Perfect for move-ins, spring cleaning, or when your home needs that extra attention to detail.",
-    price: "From £120/hr",
+    price: "From £35/hr",
     duration: "4-8 hours",
     features: [
       "Everything in domestic cleaning",
@@ -65,7 +65,7 @@ export const services = [
     title: "End of Tenancy Cleaning",
     subtitle: "Get your deposit back",
     description:
-      "Professional end of tenancy cleaning using the landlord's checklist. We guarantee you'll get your deposit back or we'll return for free.",
+      "Professional end of tenancy cleaning using the landlord's checklist. We guarantee satisfaction.",
     price: "From £180/hr",
     duration: "6-10 hours",
     features: [
@@ -79,7 +79,7 @@ export const services = [
       "Garden area tidying (if applicable)",
     ],
     includes: [
-      "Deposit back guarantee",
+      "Guaranted satisfaction",
       "Landlord communication",
       "Certificate of cleaning",
       "48-hour completion",
@@ -95,7 +95,7 @@ export const services = [
     subtitle: "Professional workspace cleaning",
     description:
       "Keep your workplace clean and professional. Regular cleaning services for Commercials establishment, shops, and commercial spaces across London.",
-    price: "From £12/hr",
+    price: "Price on request",
     duration: "1-4 hours",
     features: [
       "Office sanitization",
@@ -124,7 +124,7 @@ export const services = [
     subtitle: "Thorough post-construction cleaning",
     description:
       "Our After-Builders Cleaning service ensures your property is spotless and move-in ready after construction or renovation. We removing dust, debris, and stains.",
-    price: "From £80/hr",
+    price: "Price on request",
     duration: "2-4 hours",
     features: [
       "Post-construction dust and debris removal",
