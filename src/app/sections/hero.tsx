@@ -13,6 +13,7 @@ import {
   Phone,
   NotebookPen,
   ArrowRight,
+  Goal,
 } from "lucide-react";
 import {
   Dialog,
@@ -41,6 +42,13 @@ export function Hero() {
               <Badge variant="secondary" className="bg-white/80 text-[#1E293B]">
                 <CheckCircle className="h-3 w-3 mr-1" />
                 Fully Insured
+              </Badge>
+              <Badge variant="secondary" className="bg-white/80 text-[#1E293B]">
+                <Goal
+                  className="h-3 w-3 mr-1"
+                  style={{ color: "var(--success-green)" }}
+                />
+                Where Clean Meets Perfection
               </Badge>
             </div>
 
@@ -115,6 +123,7 @@ export function Hero() {
             <div className="flex flex-wrap items-center gap-6 pt-4 text-sm text-muted-foreground">
               <span>✓ 24/7 Customer Support</span>
               <span>✓ All London Boroughs</span>
+              <span>✓ Where Clean Meets Perfection</span>
             </div>
           </div>
 

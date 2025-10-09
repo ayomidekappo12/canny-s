@@ -63,7 +63,7 @@ export const services = [
     id: "end-of-tenancy",
     icon: Key,
     title: "End of Tenancy Cleaning",
-    subtitle: "Get your deposit back",
+    subtitle: "Guaranted satisfaction",
     description:
       "Professional end of tenancy cleaning using the landlord's checklist. We guarantee satisfaction.",
     price: "From £180/hr",
