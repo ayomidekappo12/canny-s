@@ -5,11 +5,19 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { BookingFormSchema, type BookingFormData } from "@/components/hooks/bookingSchema";
+import {
+  BookingFormSchema,
+  type BookingFormData,
+} from "@/components/hooks/bookingSchema";
 import ServiceDetailsCard from "./ServiceDetailsCard";
 import PropertyDetailsCard from "./PropertyDetailsCard";
 import ContactDetailsCard from "./ContactDetailsCard";
 import CalendlyDialog from "./CalendlyDialog";
+import emailjs from "@emailjs/browser";
+
+interface HoneypotForm extends HTMLFormElement {
+  _honeypot?: HTMLInputElement;
+}
 
 export default function BookingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,17 +50,41 @@ export default function BookingForm() {
   const calendlyUrl =
     "https://calendly.com/eventstaffingsolutions/30min?back_to=https://yourdomain.com/booking?booking=success";
 
-  // NOTE: onSubmit matches Zod schema via react-hook-form resolver.
   async function onSubmit(data: BookingFormData) {
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_BOOKING!,
+        {
+          firstName: data.firstName.trim(),
+          lastName: data.lastName.trim(),
+          email: data.email.trim(),
+          phone: data.phone.trim(),
+          service: data.service || "N/A",
+          date: data.date
+            ? new Date(data.date).toLocaleDateString("en-GB", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })
+            : "N/A",
+          time: data.time || "N/A",
+          duration: data.duration || "N/A",
+          property: data.property || "N/A",
+          bedrooms: data.bedrooms || "N/A",
+          bathrooms: data.bathrooms || "N/A",
+          extraTask: data.extraTask || "None",
+          specialRequest: data.specialRequest || "None",
+          notes: data.notes || "None",
+          condition: data.condition || "N/A",
+          frequency: data.frequency || "N/A",
+          supplies: data.supplies || "N/A",
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      );
 
-      if (!res.ok) throw new Error("Failed to send booking request");
       toast.success(
         <div>
           <span className="text-[var(--professional-navy)] font-bold">
@@ -65,10 +97,7 @@ export default function BookingForm() {
         </div>
       );
 
-      // Offer user to schedule a call
       setShowCalendly(true);
-
-      // Reset form to defaults (preserves controlled components)
       form.reset({
         service: "",
         date: undefined,
@@ -88,7 +117,8 @@ export default function BookingForm() {
         frequency: "",
         supplies: "",
       });
-    } catch {
+    } catch (error) {
+      console.error("Booking form submission failed:", error);
       toast.error(
         <div>
           <span className="text-red-400 font-bold">Submission failed</span>
@@ -105,7 +135,6 @@ export default function BookingForm() {
   return (
     <div className="container py-14 sm:py-20">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#1E293B] mb-4">
             Book Your Cleaning Service
@@ -116,10 +145,14 @@ export default function BookingForm() {
           </p>
         </div>
 
-        {/* Main form: keep layout & styles unchanged */}
         <FormProvider {...form}>
           <form
-            onSubmit={(e) => void form.handleSubmit(onSubmit)(e)}
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formEl = e.target as HoneypotForm;
+              if (formEl._honeypot?.value) return; // honeypot check
+              void form.handleSubmit(onSubmit)(e);
+            }}
             className="space-y-8"
             aria-labelledby="booking-form-heading"
           >
@@ -130,18 +163,26 @@ export default function BookingForm() {
 
             <ContactDetailsCard form={form} />
 
-            {/* Submit */}
+            {/* Honeypot Field */}
+            <input
+              type="text"
+              name="_honeypot"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
+
             <div className="text-center">
               <Button
                 type="submit"
                 variant="default"
                 size="xl"
                 disabled={isSubmitting}
+                aria-disabled={isSubmitting}
                 className="w-fit sm:w-auto px-12 cursor-pointer"
               >
-                {isSubmitting
-                  ? "Submitting..."
-                  : "Book My Cleaning Service"}
+                {isSubmitting ? "Submitting..." : "Book My Cleaning Service"}
               </Button>
               <p className="text-sm text-muted-foreground mt-4">
                 We&apos;ll contact you within 1 hour to confirm your booking
@@ -149,6 +190,7 @@ export default function BookingForm() {
             </div>
           </form>
         </FormProvider>
+
         <CalendlyDialog
           open={showCalendly}
           onOpenChange={setShowCalendly}

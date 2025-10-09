@@ -15,7 +15,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 import * as z from "zod";
+
+interface HoneypotForm extends HTMLFormElement {
+  _honeypot?: HTMLInputElement;
+}
 
 //  More forgiving & realistic UK schema
 const formSchema = z.object({
@@ -63,35 +68,41 @@ export default function ContactForm() {
   });
 
   const onSubmit = async (data: FormData) => {
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+   try {
+     // Send email via EmailJS
+     await emailjs.send(
+       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_CONTACT!,
+       {
+         name: data.name,
+         email: data.email,
+         phone: data.phone,
+         service: data.service,
+         message: data.message,
+       },
+       process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+     );
 
-      if (!res.ok) throw new Error("Failed to send message");
-
-      toast.success(
-        <div>
-          <span className="text-[var(--professional-navy)] font-bold">
-            Message sent successfully!
-          </span>
-          <div className="text-[var(--professional-navy)]">
-            We&apos;ll get back to you shortly.
-          </div>
-        </div>
-      );
-      reset({
-        name: "",
-        email: "",
-        phone: "",
-        service: "",
-        message: "",
-      });
-    } catch {
-      toast.error("Failed to send message. Please try again later.");
-    }
+     toast.success(
+       <div>
+         <span className="text-[var(--professional-navy)] font-bold">
+           Message sent successfully!
+         </span>
+         <div className="text-[var(--professional-navy)]">
+           We&apos;ll get back to you shortly.
+         </div>
+       </div>
+     );
+     reset({
+       name: "",
+       email: "",
+       phone: "",
+       service: "",
+       message: "",
+     });
+   } catch {
+     toast.error("Failed to send message. Please try again later.");
+   }
   };
 
   return (
@@ -113,6 +124,11 @@ export default function ContactForm() {
 
             <form
               onSubmit={(e) => {
+                e.preventDefault();
+
+                const form = e.target as HoneypotForm;
+                if (form._honeypot?.value) return;
+
                 void handleSubmit(onSubmit)(e);
               }}
               className="space-y-2 w-auto"
@@ -233,11 +249,22 @@ export default function ContactForm() {
                 )}
               </div>
 
+              {/* Honeypot Field (Anti-Spam) */}
+              <input
+                type="text"
+                name="_honeypot"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
+
               {/* Submit Button */}
               <div className="flex px-4 py-3 justify-end">
                 <Button
                   type="submit"
                   disabled={isSubmitting}
+                  aria-disabled={isSubmitting}
                   className="bg-primary text-white rounded-lg px-4 h-10 text-sm font-bold cursor-pointer"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}

@@ -12,6 +12,7 @@
     "rebuild": "npm run clean && npm install && npm run build"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@hookform/resolvers": "^5.1.1",
     "@next/bundle-analyzer": "^15.3.5",
     "@radix-ui/react-alert-dialog": "^1.1.14",

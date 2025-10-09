@@ -71,8 +71,8 @@ const frequencies = [
 ];
 
 const supplyOptions = [
-  { value: "client cleaning suppliers", label: "Client cleaning suppliers" },
-  { value: "canny's cleaning suppliers", label: "Canny's cleaning suppliers" },
+  { value: "client cleaning suppliers and equipments", label: "Client cleaning suppliers and equipments" },
+  { value: "canny's cleaning suppliers and equipments", label: "Canny's cleaning suppliers and equipments" },
 ];
 
 export default function ServiceDetailsCard({ form }: Props) {
