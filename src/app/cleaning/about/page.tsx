@@ -31,16 +31,13 @@ function StorySection() {
         Our Story
       </h1>
       <p className="text-sm md:text-base max-w-3xl">
-        At Canny&apos;s cleaning, we believe in more than just cleaning;
-        we&apos;re dedicated to creating healthier, happier spaces for our
-        clients. Founded in 2010 by Sarah Thompson, our journey began with a
-        simple mission: to provide exceptional cleaning services with a personal
-        touch. Over the years, we&apos;ve grown from a small team to a trusted
-        name in London, known for our commitment to quality, reliability, and
-        customer satisfaction. Our values are rooted in integrity,
-        professionalism, and a passion for excellence. We take pride in our
-        meticulous attention to detail and our use of eco-friendly products,
-        ensuring a safe and sustainable clean for every home and office.
+        Canny&apos;s Cleaning Services is a family-owned business, proudly
+        serving London and Kent since 2019. We bring together strong work ethics
+        and real-life experience to deliver reliable, high-quality cleaning
+        tailored to each client&apos;s needs. Operating in two of the most
+        diverse and dynamic areas in the UK, we understand the importance of a
+        clean, welcoming space for people from all walks of life — whether at
+        home or at work.
       </p>
     </section>
   );
@@ -80,12 +77,12 @@ function MissionSection() {
         Our Mission
       </h2>
       <p className="text-base text-[#1E293B]">
-        Our mission is to provide exceptional cleaning services that exceed our
-        client&apos;s expectations, creating healthier and more comfortable
-        environments. We are committed to using eco-friendly products and
-        sustainable practices to minimize our environmental impact. Our goal is
-        to build lasting relationships with our clients based on trust,
-        reliability, and outstanding service.
+        At Canny&apos;s Cleaning Services, we offer a wide range of domestic and
+        commercial cleaning to help keep your space safe, healthy, and looking
+        its best. We treat every job like it&apos;s our own home or workplace,
+        using safe but powerful disinfectants to move you from the red zone to
+        the green — so you can breathe easy and focus on what matters. or —
+        giving you and your team peace of mind every step of the way.
       </p>
     </section>
   );
@@ -115,12 +112,12 @@ function ValuesSection() {
         ))}
       </div>
       <p className="text-base text-[#1E293B] pt-4">
-        At Canny&apos;s, our core values guide everything we do. We believe in
-        honesty, transparency, and ethical practices in all our interactions. We
-        are committed to delivering consistent, high-quality service that our
-        clients can depend on. We prioritize environmentally responsible
-        cleaning solutions, using products that are safe for our clients, our
-        team, and the planet.
+        Our vision is to be recognised by our clients, customers, and employees
+        as one of the leading cleaning contract service providers in the UK. We
+        are committed to creating the healthiest and most productive
+        environments—whether in restaurants, gyms, schools, offices, nurseries,
+        shopping centres, hotels, workshops, homes, or any other space—by
+        effectively eliminating bacteria and ensuring top-level cleanliness.
       </p>
     </section>
   );
