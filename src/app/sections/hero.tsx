@@ -13,7 +13,6 @@ import {
   Phone,
   NotebookPen,
   ArrowRight,
-  Goal,
 } from "lucide-react";
 import {
   Dialog,
@@ -42,13 +41,6 @@ export function Hero() {
               <Badge variant="secondary" className="bg-white/80 text-[#1E293B]">
                 <CheckCircle className="h-3 w-3 mr-1" />
                 Fully Insured
-              </Badge>
-              <Badge variant="secondary" className="bg-white/80 text-[#1E293B]">
-                <Goal
-                  className="h-3 w-3 mr-1"
-                  style={{ color: "var(--success-green)" }}
-                />
-                Where Clean Meets Perfection
               </Badge>
             </div>
 
@@ -133,7 +125,7 @@ export function Hero() {
               <CardContent className="p-8">
                 <div className="space-y-6">
                   <div className="text-center">
-                    <h3 className="text-2xl font-bold text-[#131620] mb-2">
+                    <h3 className="text-2xl font-bold text-[#1E293B] mb-2">
                       Get Your Free Quote
                     </h3>
                     <p className="text-muted-foreground">
@@ -165,6 +157,7 @@ export function Hero() {
                   </div>
 
                   <div className="text-center text-sm text-muted-foreground">
+                    <h3 className="text-xl font-bold text-[#1E293B] mb-2">Motto: Where Clean Meets Perfection</h3>
                     <div className="flex items-center justify-center space-x-1">
                       {Array.from({ length: 5 }, (_, i) => (
                         <Star
@@ -173,23 +166,6 @@ export function Hero() {
                         />
                       ))}
                     </div>
-
-                    <p className="mt-1">
-                      &quot;Outstanding service, highly recommend!&quot; - Sarah
-                      M.
-                    </p>
-                    <p className="mt-1">
-                      &quot;Outstanding service, highly recommend!&quot; - Sarah
-                      M.
-                    </p>
-                    <p className="mt-1">
-                      &quot;Outstanding service, highly recommend!&quot; - Sarah
-                      M.
-                    </p>
-                    <p className="mt-1">
-                      &quot;Outstanding service, highly recommend!&quot; - Sarah
-                      M.
-                    </p>
                   </div>
                 </div>
               </CardContent>

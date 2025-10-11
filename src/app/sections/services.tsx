@@ -1,8 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import BookingFormDialog from "@/components/custom/page";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -13,14 +11,11 @@ import {
   Building,
   Cog,
   Plane,
-  Clock,
-  NotebookPen,
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
 
 export function Services() {
-  const [open, setOpen] = useState(false);
   const services = [
     {
       icon: Home,
@@ -120,7 +115,7 @@ export function Services() {
       <section className="bg-gradient-to-br from-[var(--clean-blue)] to-white py-20">
         <div className="mx-8">
           {/* Header */}
-          <div className="text-center space-y-4 mb-16">
+          <div className="text-center space-y-4 mb-10">
             <Badge
               variant="outline"
               className="mb-4 px-4 text-lg lg:text-xl font-bold rounded-2xl border border-gray-200"
@@ -212,46 +207,9 @@ export function Services() {
                 </Card>
               );
             })}
-          </div>
-
-          {/* Bottom CTA */}
-          <div className="text-center space-y-6">
-            <Card
-              className="border-0 shadow-[var(--shadow-medium)]"
-              style={{ backgroundImage: "var(--gradient-card)" }}
-            >
-              <CardContent className="p-8">
-                <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-                  <div className="text-left space-y-2">
-                    <h3 className="text-2xl font-bold text-[#1E293B]">
-                      Need a Custom Quote?
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Get personalized pricing for multiple services or large
-                      properties.
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-5">
-                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                      <Clock className="h-4 w-4" />
-                      <span>Response within 1 hour</span>
-                    </div>
-                    <Button
-                      onClick={() => setOpen(true)}
-                      size="lg"
-                      className="px-2.5 cursor-pointer sm:px-10 h-14"
-                    >
-                      <NotebookPen className="mx-1.5 w-5 h-5" />
-                      Get Custom Quote
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          </div> 
         </div>
       </section>
-      <BookingFormDialog open={open} onOpenChange={setOpen} />
     </>
   );
 }
