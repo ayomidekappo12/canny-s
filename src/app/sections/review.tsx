@@ -7,9 +7,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import BookingFormDialog from "@/components/custom/page";
 import { MapPin, Star, Clock, NotebookPen } from "lucide-react";
 
+interface Testimonial {
+  name: string;
+  location: string;
+  service: string;
+  quote: string;
+  rating: number;
+}
+
 const Review = () => {
   const [open, setOpen] = useState(false);
-  const testimonials = [
+  const testimonials: Testimonial[] = [
     {
       name: "Adrien.",
       location: "Prison Island London",
@@ -28,7 +36,7 @@ const Review = () => {
       name: "Minya.",
       location: "London",
       service: "Cleaning (Airbnb)",
-      quote: `A job well done on every property; guests were happy with how clean the place looked. The carpets look really good, from the stains that were there. Thank you.`,
+      quote: `Great work on maintaining the properties; the guests noticed and appreciated the cleanliness. The carpets have shown significant improvement, with the stains being effectively addressed. Thank you for your efforts!`,
       rating: 5,
     },
     {
@@ -51,8 +59,8 @@ const Review = () => {
                 Our Clients Review
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Don't just take our word for it - hear from our satisfied
-                customers
+                Don&apos;t just take our word for it&nbsp;&mdash;&nbsp;hear from
+                our satisfied customers
               </p>
             </div>
 
@@ -60,7 +68,7 @@ const Review = () => {
               {testimonials.map((testimonial, index) => (
                 <Card
                   key={index}
-                  className="p-4 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-card to-muted/10 border border-[#dce2e5]"
+                  className="py-6 px-4 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-card to-muted/10 border border-[#dce2e5]"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex gap-1">
@@ -77,7 +85,7 @@ const Review = () => {
                   </div>
 
                   <p className="text-[#1E293B] mb-6 leading-relaxed">
-                    "{testimonial.quote}"
+                    &ldquo;{testimonial.quote}&rdquo;
                   </p>
 
                   <div className="flex items-center gap-3 pt-4 border-t border-[#dce2e5]">
