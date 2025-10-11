@@ -115,7 +115,6 @@ export function Hero() {
             <div className="flex flex-wrap items-center gap-6 pt-4 text-sm text-muted-foreground">
               <span>✓ 24/7 Customer Support</span>
               <span>✓ All London Boroughs</span>
-              <span>✓ Where Clean Meets Perfection</span>
             </div>
           </div>
 
@@ -157,7 +156,9 @@ export function Hero() {
                   </div>
 
                   <div className="text-center text-sm text-muted-foreground">
-                    <h3 className="text-xl font-bold text-[#1E293B] mb-2">Motto: Where Clean Meets Perfection</h3>
+                    <h3 className="text-xl font-bold text-[#1E293B] mb-2">
+                      &ldquo;Where Clean Meets Perfection&ldquo;
+                    </h3>
                     <div className="flex items-center justify-center space-x-1">
                       {Array.from({ length: 5 }, (_, i) => (
                         <Star

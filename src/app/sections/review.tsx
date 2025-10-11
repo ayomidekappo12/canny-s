@@ -22,7 +22,7 @@ const Review = () => {
       name: "Adrien.",
       location: "Prison Island London",
       service: "Cleaning",
-      quote: `I really want to thank you and your team for the amazing job you did at the London venue. To be honest, usually when a company finishes their work, there is still some mess left behind, but this time you really did an outstanding job. I truly appreciate it and will definitely recommend your services to others.`,
+      quote: `I really want to thank you and your team for the amazing job you did at the London venue. To be honest, usually when a company finishes their work, there is still some mess left behind, but this time you really did an outstanding job. I truly appreciate it.`,
       rating: 5,
     },
     {
@@ -41,7 +41,7 @@ const Review = () => {
     },
     {
       name: "Bayo.",
-      location: "London",
+      location: "Kent",
       service: "Cleaning",
       quote: `I can't believe how well the flat looked. Your team really did an amazing job. To have the place turned around in a short time is impressive. I will definitely be using your services again.`,
       rating: 5,
