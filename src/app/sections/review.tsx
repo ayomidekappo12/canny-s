@@ -72,7 +72,7 @@ const Review = () => {
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex gap-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
+                      {Array.from({ length: testimonial.rating }, (_, i) => (
                         <Star
                           key={i}
                           className="w-5 h-5 text-yellow-500 fill-yellow-500"
