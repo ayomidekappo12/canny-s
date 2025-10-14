@@ -19,7 +19,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-
+import { sendEmail } from "@/lib/sendEmail";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -60,7 +60,7 @@ interface BookingFormDialogProps {
  * - Modular, accessible, and fully validated with zod & react-hook-form.
  * - Uses helper components for cleaner and reusable form fields.
  */
-export default function BookingFormDialog({
+export default function CustomQuoteFormDialog({
   open,
   onOpenChange,
 }: BookingFormDialogProps) {
@@ -95,30 +95,9 @@ export default function BookingFormDialog({
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/custom", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      // Explicitly type the JSON response
-      type ApiResponse =
-        | { success: true; message: string }
-        | { success: false; message: string; errors?: string[] };
-
-      const result: ApiResponse = (await res.json()) as ApiResponse;
-
-      if (!res.ok || !result.success) {
-        if ("errors" in result && Array.isArray(result.errors)) {
-          toast.error(`Validation error: ${result.errors.join(", ")}`);
-        } else {
-          toast.error(result.message || "Failed to send booking");
-        }
-        return;
-      }
-
+      await sendEmail(data, "Custom Quote Form");
       toast.success(
-        <div>
+        <div aria-live="polite">
           <span className="text-[var(--professional-navy)] font-bold">
             Custom Quote Confirmed!
           </span>

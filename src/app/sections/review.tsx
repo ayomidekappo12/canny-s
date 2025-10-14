@@ -26,7 +26,7 @@ const Review = () => {
       rating: 5,
     },
     {
-      name: "Obanye Ltd.",
+      name: "Ike.",
       location: "London",
       service: "Cleaning (Office)",
       quote: `Thank you once again for the excellent service you provided. It was just as good as the last job you helped me with!!! Both the team and I are truly grateful for the quality of the cleaning and the way you kindly accommodated other trades who were still working on site at the same time. I am grateful!`,

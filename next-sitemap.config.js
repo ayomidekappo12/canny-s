@@ -7,7 +7,6 @@ module.exports = {
   exclude: ["*"],
 
   additionalPaths: async (config) => [
-    { loc: "/pricing", lastmod: new Date().toISOString(), priority: 0.8 },
     {
       loc: "/",
       lastmod: new Date().toISOString(),
@@ -19,6 +18,5 @@ module.exports = {
       priority: 0.8,
     },
     { loc: "/", lastmod: new Date().toISOString(), priority: 0.7 },
-    { loc: "/contact-us", lastmod: new Date().toISOString(), priority: 0.6 },
   ],
 };

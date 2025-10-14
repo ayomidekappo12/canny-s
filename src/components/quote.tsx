@@ -9,17 +9,12 @@ import {
   BookingFormSchema,
   type BookingFormData,
 } from "@/components/hooks/bookingSchema";
+import { sendEmail } from "@/lib/sendEmail";
 import ServiceDetailsCard from "@/app/cleaning/booking/ServiceDetailsCard";
 import PropertyDetailsCard from "@/app/cleaning/booking/PropertyDetailsCard";
 import ContactDetailsCard from "@/app/cleaning/booking/ContactDetailsCard";
 import CalendlyDialog from "@/app/cleaning/booking/CalendlyDialog";
 
-// Explicit response type from backend
-interface ApiResponse {
-  success: boolean;
-  message: string;
-  errors?: string[];
-}
 
 export default function QuoteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,19 +50,7 @@ export default function QuoteForm() {
   async function onSubmit(data: BookingFormData) {
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      // Safely typed JSON response
-      const result = (await res.json()) as ApiResponse;
-
-      if (!res.ok || !result.success) {
-        throw new Error(result.message || "Quote request failed");
-      }
-
+      await sendEmail(data, "Standard Quote Form");
       toast.success(
         <div>
           <span className="text-[var(--professional-navy)] font-bold">

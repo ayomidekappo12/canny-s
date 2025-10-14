@@ -86,7 +86,7 @@ export default function BookingForm() {
       );
 
       toast.success(
-        <div>
+        <div aria-live="polite">
           <span className="text-[var(--professional-navy)] font-bold">
             Your booking request has been sent successfully!
           </span>
@@ -120,7 +120,7 @@ export default function BookingForm() {
     } catch (error) {
       console.error("Booking form submission failed:", error);
       toast.error(
-        <div>
+        <div aria-live="polite">
           <span className="text-red-400 font-bold">Submission failed</span>
           <div className="text-[var(--professional-navy)]">
             Something went wrong — please try again or call us.

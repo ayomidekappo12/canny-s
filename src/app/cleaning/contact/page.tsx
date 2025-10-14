@@ -15,14 +15,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import emailjs from "@emailjs/browser";
 import * as z from "zod";
 
 interface HoneypotForm extends HTMLFormElement {
   _honeypot?: HTMLInputElement;
 }
 
-//  More forgiving & realistic UK schema
+// Validation schema
 const formSchema = z.object({
   name: z
     .string()
@@ -35,10 +34,10 @@ const formSchema = z.object({
   phone: z
     .string()
     .trim()
-    .transform((val) => val.replace(/\s|[-()]/g, "")) // remove spaces, dashes, parentheses
-    .refine((val) => /^(\+44\d{9,11}|07\d{10})$/.test(val), {
+    .transform((val) => val.replace(/\s|[-()]/g, ""))
+    .refine((val) => /^(\+44\d{9,11}|07\d{11})$/.test(val), {
       message:
-        "Enter a valid UK phone number (+44 followed by 9–11 digits or 07 followed by 10 digits)",
+        "Enter a valid UK phone number (+44 followed by 9-11 digits or 07 followed by 9-11 digits)",
     }),
   service: z.string().min(1, "Please select a service"),
   message: z
@@ -58,51 +57,58 @@ export default function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    },
   });
 
   const onSubmit = async (data: FormData) => {
-   try {
-     // Send email via EmailJS
-     await emailjs.send(
-       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_CONTACT!,
-       {
-         name: data.name,
-         email: data.email,
-         phone: data.phone,
-         service: data.service,
-         message: data.message,
-       },
-       process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-     );
+    try {
+      const phoneNumber =
+        process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "447930887488";
 
-     toast.success(
-       <div>
-         <span className="text-[var(--professional-navy)] font-bold">
-           Message sent successfully!
-         </span>
-         <div className="text-[var(--professional-navy)]">
-           We&apos;ll get back to you shortly.
-         </div>
-       </div>
-     );
-     reset({
-       name: "",
-       email: "",
-       phone: "",
-       service: "",
-       message: "",
-     });
-   } catch {
-     toast.error("Failed to send message. Please try again later.");
-   }
+      // Build message text
+      const message = `
+New Cleaning Inquiry 👋
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Service: ${data.service}
+Message: ${data.message}
+`;
+
+      // Detect device
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      // Encode message properly
+      const encodedMessage = encodeURIComponent(message.trim());
+
+      // Correctly form WhatsApp URL for mobile vs desktop
+      const whatsappURL = isMobile
+        ? `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+        : `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+      // Show success toast
+      toast.success(
+        <div aria-live="polite">
+          <span className="text-[var(--professional-navy)] font-bold">
+            Redirecting to WhatsApp...
+          </span>
+          <div className="text-[var(--professional-navy)]">
+            Please wait while we open your chat.
+          </div>
+        </div>
+      );
+
+      // Wait a bit for UX smoothness
+      setTimeout(() => {
+        const newTab = window.open(whatsappURL, "_blank");
+        if (!newTab) {
+          toast.error("Please allow popups to continue to WhatsApp.");
+        }
+        reset({ name: "", email: "", phone: "", service: "", message: "" });
+      }, 1000);
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -116,8 +122,8 @@ export default function ContactForm() {
                   Get in Touch
                 </h1>
                 <p className="text-[#637c88] text-base leading-normal">
-                  We&apos;re here to help with your cleaning needs. Reach out to
-                  us for inquiries, bookings, or any questions you may have.
+                  We&apos;re here to help with your cleaning needs. Fill out the
+                  form below — we’ll message you directly on WhatsApp.
                 </p>
               </div>
             </section>
@@ -125,10 +131,8 @@ export default function ContactForm() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-
                 const form = e.target as HoneypotForm;
                 if (form._honeypot?.value) return;
-
                 void handleSubmit(onSubmit)(e);
               }}
               className="space-y-2 w-auto"
@@ -188,7 +192,7 @@ export default function ContactForm() {
                 )}
               </div>
 
-              {/* Service Select - now with Controller */}
+              {/* Service */}
               <div className="px-4 py-3">
                 <Label htmlFor="service" className="py-2 px-1">
                   Service of Interest
@@ -207,7 +211,7 @@ export default function ContactForm() {
                         </SelectItem>
                         <SelectItem value="deep">Deep Cleaning</SelectItem>
                         <SelectItem value="move">Move-in/Move-out</SelectItem>
-                        <SelectItem value="carpet">
+                        <SelectItem value="after-builder">
                           After-builder Cleaning
                         </SelectItem>
                         <SelectItem value="domestic">
@@ -216,10 +220,8 @@ export default function ContactForm() {
                         <SelectItem value="office">
                           Commercial Cleaning
                         </SelectItem>
+                        <SelectItem value="airbnb">AirBnB Cleaning</SelectItem>
                         <SelectItem value="custom">Custom Service</SelectItem>
-                        <SelectItem value="AirBnB Cleaning">
-                          AirBnB Cleaning
-                        </SelectItem>
                       </SelectContent>
                     </Select>
                   )}
@@ -249,7 +251,7 @@ export default function ContactForm() {
                 )}
               </div>
 
-              {/* Honeypot Field (Anti-Spam) */}
+              {/* Honeypot Field */}
               <input
                 type="text"
                 name="_honeypot"
@@ -259,7 +261,7 @@ export default function ContactForm() {
                 aria-hidden="true"
               />
 
-              {/* Submit Button */}
+              {/* Submit */}
               <div className="flex px-4 py-3 justify-end">
                 <Button
                   type="submit"
@@ -267,7 +269,7 @@ export default function ContactForm() {
                   aria-disabled={isSubmitting}
                   className="bg-primary text-white rounded-lg px-4 h-10 text-sm font-bold cursor-pointer"
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {isSubmitting ? "Sending..." : "Send Message on WhatsApp"}
                 </Button>
               </div>
             </form>
@@ -276,7 +278,7 @@ export default function ContactForm() {
               <h2 className="text-[#1E293B] text-[20px] md:text-[22px] font-bold">
                 Or Contact Us Directly
               </h2>
-              <p className="text-base pt-2">Phone: +44 079 3088 7488</p>
+              <p className="text-base pt-2">Phone: +44 7930 887488</p>
               <p className="text-base pt-1">Email: info@cannyscleaning.com</p>
             </section>
           </div>

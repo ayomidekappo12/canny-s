@@ -30,7 +30,7 @@ export const BookingFormSchema = z.object({
     .transform((val) => val.replace(/\s|[-()]/g, ""))
     .refine((val) => /^(\+44\d{9,11}|07\d{11})$/.test(val), {
       message:
-        "Enter a valid UK phone number (+44 followed by 9–11 digits or 07 followed by 11 digits)",
+        "Enter a valid UK phone number (+44 followed by 9-11 digits or 07 followed by 9-11 digits)",
     }),
   extraTask: z.string().optional(),
   specialRequest: z.string().optional(),

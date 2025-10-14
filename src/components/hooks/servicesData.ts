@@ -128,10 +128,10 @@ export const services = [
     duration: "2-4 hours",
     features: [
       "Post-construction dust and debris removal",
-      "Hot water extraction cleaning",
+      "Windows and glass cleaning",
       "Pre-treatment of stains",
       "Pet odor elimination",
-      "Fabric protection application",
+      "Deep cleaning of all surfaces",
       "Fast drying techniques",
       "Sofa & chair cleaning",
       "Rug and mattress cleaning available",
