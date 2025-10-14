@@ -59,7 +59,7 @@ export default function ContactForm() {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = (data: FormData) => {
     try {
       const phoneNumber =
         process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "447930887488";
