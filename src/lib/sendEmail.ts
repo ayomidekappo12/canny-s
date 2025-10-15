@@ -3,6 +3,15 @@ import type { BookingFormData } from "@/components/hooks/bookingSchema";
 
 export async function sendEmail(data: BookingFormData, formType: string) {
   try {
+     const formattedDate = data.date
+      ? new Date(data.date).toLocaleDateString("en-GB", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })
+      : "N/A";
+
     return await emailjs.send(
       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_QUOTE!,
@@ -12,14 +21,7 @@ export async function sendEmail(data: BookingFormData, formType: string) {
         email: data.email?.trim() || "N/A",
         phone: data.phone?.trim() || "N/A",
         service: data.service || "N/A",
-        date: data.date
-          ? new Date(data.date).toLocaleDateString("en-GB", {
-              weekday: "long",
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })
-          : "N/A",
+        date: formattedDate,
         time: data.time || "N/A",
         duration: data.duration || "N/A",
         property: data.property || "N/A",

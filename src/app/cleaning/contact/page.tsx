@@ -209,19 +209,24 @@ Message: ${data.message}
                         <SelectItem value="end-of-tenancy">
                           End-of-tenancy Cleaning
                         </SelectItem>
-                        <SelectItem value="deep">Deep Cleaning</SelectItem>
-                        <SelectItem value="move">Move-in/Move-out</SelectItem>
+                        <SelectItem value="Deep Cleaning">
+                          Deep Cleaning
+                        </SelectItem>
+                        <SelectItem value="Move-in/Move-out">
+                          Move-in/Move-out
+                        </SelectItem>
                         <SelectItem value="after-builder">
                           After-builder Cleaning
                         </SelectItem>
-                        <SelectItem value="domestic">
+                        <SelectItem value="Domestic Cleaning">
                           Domestic Cleaning
                         </SelectItem>
-                        <SelectItem value="office">
+                        <SelectItem value="Commercial Cleaning">
                           Commercial Cleaning
                         </SelectItem>
-                        <SelectItem value="airbnb">AirBnB Cleaning</SelectItem>
-                        <SelectItem value="custom">Custom Service</SelectItem>
+                        <SelectItem value="AirBnB Cleaning">
+                          AirBnB Cleaning
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   )}

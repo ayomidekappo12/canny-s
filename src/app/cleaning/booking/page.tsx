@@ -53,6 +53,15 @@ export default function BookingForm() {
   async function onSubmit(data: BookingFormData) {
     setIsSubmitting(true);
     try {
+      const formattedDate = data.date
+        ? new Date(data.date).toLocaleDateString("en-GB", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })
+        : "N/A";
+
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_BOOKING!,
@@ -62,14 +71,7 @@ export default function BookingForm() {
           email: data.email.trim(),
           phone: data.phone.trim(),
           service: data.service || "N/A",
-          date: data.date
-            ? new Date(data.date).toLocaleDateString("en-GB", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })
-            : "N/A",
+          date: formattedDate,
           time: data.time || "N/A",
           duration: data.duration || "N/A",
           property: data.property || "N/A",
