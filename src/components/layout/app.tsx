@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ErrorProvider } from "@/lib/ErrorHandlerProvider";
 import Header from "./header";
 import Footer from "./footer";
+import CookieConsent from "@/components/CookieConsent";
 import { Toaster } from "@/components/ui/sonner";
 import { LoadingIndicatorProvider } from "@/lib/LoadingIndicatorProvider";
 
@@ -21,6 +22,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
             <Sonner />
             <Header />
             {children}
+            <CookieConsent />
             <Footer />
             <Toaster />
           </TooltipProvider>

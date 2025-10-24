@@ -1,17 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Star,
-} from "lucide-react";
+import * as React from "react";
+import { Suspense } from "react";
+import { Phone, Mail, MapPin, Star } from "lucide-react";
 import { SiFacebook, SiInstagram } from "react-icons/si";
 import Image from "next/image";
 
+// Lazy-load the LegalDialog for performance
+const LegalDialog = React.lazy(() => import("@/app/termsPolicy/legal/page"));
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  // One state instead of two — simpler and cleaner
+  const [legalType, setLegalType] = React.useState<"privacy" | "terms" | null>(
+    null
+  );
 
   const cleaningServices = [
     "Domestic Cleaning",
@@ -31,7 +36,7 @@ export default function Footer() {
             <div className="flex items-center space-x-2">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-hero">
                 <Image
-                  src={`https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg`}
+                  src="https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg"
                   alt="Logo"
                   width={300}
                   height={300}
@@ -40,7 +45,7 @@ export default function Footer() {
                   priority
                 />
               </div>
-              <span className="font-bold text-xl">Canny&apos;s cleaning</span>
+              <span className="font-bold text-xl">Canny&apos;s Cleaning</span>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
               Professional cleaning services across London and Kent. Trusted by
@@ -155,23 +160,21 @@ export default function Footer() {
 
             {/* Legal Links */}
             <div className="flex items-center space-x-4 text-sm text-gray-400">
-              <Link
-                href="/privacy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+              <button
+                onClick={() => setLegalType("privacy")}
+                onKeyDown={(e) => e.key === "Enter" && setLegalType("privacy")}
+                className="hover:text-white focus:outline-none focus:underline transition-colors cursor-pointer"
               >
                 Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+              </button>
+              <button
+                onClick={() => setLegalType("terms")}
+                onKeyDown={(e) => e.key === "Enter" && setLegalType("terms")}
+                className="hover:text-white focus:outline-none focus:underline transition-colors cursor-pointer"
               >
                 Terms of Service
-              </Link>
-              <span>© {currentYear} Canny&apos;s cleaning</span>
+              </button>
+              <span>© {currentYear} Canny&apos;s Cleaning</span>
             </div>
           </div>
 
@@ -186,6 +189,17 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Single LegalDialog instance */}
+      <Suspense fallback={null}>
+        {legalType && (
+          <LegalDialog
+            open={!!legalType}
+            onOpenChange={(open) => !open && setLegalType(null)}
+            type={legalType}
+          />
+        )}
+      </Suspense>
     </footer>
   );
 }
