@@ -8,7 +8,7 @@ import { SiFacebook, SiInstagram } from "react-icons/si";
 import Image from "next/image";
 
 // Lazy-load the LegalDialog for performance
-const LegalDialog = React.lazy(() => import("@/app/termsPolicy/legal/page"));
+const LegalDialog = React.lazy(() => import("@/components/LegalDialog"));
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();

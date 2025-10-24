@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 
-const LegalDialog = React.lazy(() => import("@/app/termsPolicy/legal/page"));
+const LegalDialog = React.lazy(() => import("@/components/LegalDialog"));
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
