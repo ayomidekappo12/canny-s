@@ -270,7 +270,7 @@ export default function LegalDialog({
               <strong className="text-primary">
                 Canny&apos;s Cleaning Ltd
               </strong>
-              ("we", "our", "us") is committed to protecting your privacy. This
+              (&ldquo;we&ldquo;, &ldquo;our&ldquo;, &ldquo;us&ldquo;) is committed to protecting your privacy. This
               Privacy Policy explains how we collect, use, disclose, and
               safeguard your information when you visit our website or use our
               services.
