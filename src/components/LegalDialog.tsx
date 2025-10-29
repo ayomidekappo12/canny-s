@@ -107,12 +107,10 @@ export default function LegalDialog({
           content: (
             <>
               If you have any questions about these Terms, please contact us at:
-              <div className="mt-3 text-sm leading-6">
+              <div className="mt-3 text-base leading-6">
                 <strong className="text-primary">
                   Canny&apos;s Cleaning Ltd
                 </strong>
-                <br />
-                Address: [Insert Address]
                 <br />
                 Email:
                 <a
@@ -222,8 +220,6 @@ export default function LegalDialog({
                 <strong className="text-primary">
                   Canny&apos;s Cleaning Ltd
                 </strong>
-                <br />
-                Address: [Insert Address]
                 <br />
                 Email:
                 <a
