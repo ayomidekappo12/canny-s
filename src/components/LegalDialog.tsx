@@ -109,7 +109,7 @@ export default function LegalDialog({
               If you have any questions about these Terms, please contact us at:
               <div className="mt-3 text-base leading-6">
                 <strong className="text-primary">
-                  Canny&apos;s Cleaning Ltd
+                  Canny&apos;s Cleaning Service Ltd
                 </strong>
                 <br />
                 Email:
@@ -216,9 +216,9 @@ export default function LegalDialog({
             <>
               If you have questions or concerns about this Privacy Policy,
               please contact us at:
-              <div className="mt-3 text-sm leading-6">
+              <div className="mt-3 text-base leading-6">
                 <strong className="text-primary">
-                  Canny&apos;s Cleaning Ltd
+                  Canny&apos;s Cleaning Service Ltd
                 </strong>
                 <br />
                 Email:
@@ -255,7 +255,7 @@ export default function LegalDialog({
             <p className="text-base">
               Welcome to
               <strong className="text-primary px-1">
-                Canny&apos;s Cleaning Ltd.
+                Canny&apos;s Cleaning Service Ltd.
               </strong>
               By accessing or using our website and services, you agree to be
               bound by the following Terms of Service. Please read them
@@ -263,8 +263,8 @@ export default function LegalDialog({
             </p>
           ) : (
             <p className="text-base">
-              <strong className="text-primary">
-                Canny&apos;s Cleaning Ltd
+              <strong className="text-primary px-1">
+                Canny&apos;s Cleaning Service Ltd
               </strong>
               (&ldquo;we&ldquo;, &ldquo;our&ldquo;, &ldquo;us&ldquo;) is committed to protecting your privacy. This
               Privacy Policy explains how we collect, use, disclose, and
