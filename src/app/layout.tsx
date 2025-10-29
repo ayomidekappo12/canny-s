@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["Organization", "LocalBusiness"],
   name: "Canny's Cleaning Services",
   image:
     "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg",
@@ -69,6 +69,30 @@ const organizationSchema = {
     ratingValue: "5.0",
     reviewCount: "1000",
   },
+  review: [
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Adrien." },
+      datePublished: "2025-08-12",
+      reviewBody: `I really want to thank you and your team for the amazing job you did at the London venue. To be honest, usually when a company finishes their work, there is still some mess left behind, but this time you really did an outstanding job. I truly appreciate it.`,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+    },
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Ike." },
+      datePublished: "2025-09-01",
+      reviewBody: `Thank you once again for the excellent service you provided. It was just as good as the last job you helped me with!!! Both the team and I are truly grateful for the quality of the cleaning and the way you kindly accommodated other trades who were still working on site at the same time. I am grateful!`,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+    },
+  ],
   address: {
     "@type": "PostalAddress",
     addressCountry: "GB",
