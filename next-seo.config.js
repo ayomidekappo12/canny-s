@@ -7,7 +7,7 @@ export default {
   openGraph: {
     type: "website",
     locale: "en_UK",
-    url: "https://cannyscleaning.com",
+    url: "https://www.cannyscleaning.com",
     site_name: "Canny's Cleaning Services",
     title: "Canny's Cleaning Services - 5★ Rated by 1,000+ Customers",
     description:
@@ -23,7 +23,7 @@ export default {
   additionalLinkTags: [
     {
       rel: "canonical",
-      href: "https://cannyscleaning.com",
+      href: "https://www.cannyscleaning.com",
     },
   ],
 };

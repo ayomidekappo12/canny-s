@@ -85,8 +85,8 @@ export function Services() {
         "Clearing the dirt and dust after your building work's complete. Make your space shine again.",
       price: "price on request",
       features: [
-        "removal of paint, plaster and glue",
-        "polished free of all dirt and dust",
+        "Removal of paint, plaster and glue",
+        "Polished free of all dirt and dust",
         "Tilework deep cleaned of limescale",
         "All appliance and equipment exteriors cleaned",
       ],
