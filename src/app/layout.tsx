@@ -13,9 +13,9 @@ export const revalidate = 3600; // Re-generate every hour
 
 export const metadata: Metadata = {
   title:
-    "Canny's Cleaning Services - 5★ Rated Cleaning Company Trusted by 1,000+ Happy Customers",
+    "Cannys Cleaning Services - 5★ Rated Cleaning Company Trusted by 1,000+ Happy Customers",
   description:
-    "Canny's Cleaning Services provides professional and reliable cleaning for homes and offices across the UK. Rated 5 stars by over 1,000 happy customers — your trusted partner for spotless results.",
+    "Cannys Cleaning Services provides professional and reliable cleaning for homes and offices across the UK. Rated 5 stars by over 1,000 happy customers — your trusted partner for spotless results.",
 
   alternates: {
     canonical: "https://www.cannyscleaning.com",
@@ -34,24 +34,24 @@ export const metadata: Metadata = {
 
   // Open Graph (Facebook, LinkedIn, WhatsApp, etc.)
   openGraph: {
-    title: "Canny's Cleaning Services - 5★ Rated by 1,000+ Satisfied Customers",
+    title: "Cannys Cleaning Services - 5★ Rated by 1,000+ Satisfied Customers",
     description:
       "Rated 5 stars by over 1,000 satisfied clients — professional, affordable, and reliable cleaning for homes and offices in the UK.",
     url: "https://www.cannyscleaning.com",
-    siteName: "Canny's Cleaning Services",
+    siteName: "Cannys Cleaning Services",
     locale: "en_GB",
     type: "website",
     images: [
       {
         url: "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg",
-        alt: "Canny's Cleaning Services Logo",
+        alt: "Cannys Cleaning Services Logo",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Canny's Cleaning Services - 5★ Rated Cleaning Company",
+    title: "Cannys Cleaning Services - 5★ Rated Cleaning Company",
     description:
       "Professional, affordable, and reliable cleaning for homes and offices across the UK. Trusted by over 1,000 happy clients.",
     images: [
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Canny's Cleaning Services",
+  name: "Cannys Cleaning Services",
   url: "https://www.cannyscleaning.com",
   description:
     "Professional cleaning company in the UK, trusted by over 1,000 happy customers. Book reliable cleaners for your home or office.",
@@ -105,7 +105,7 @@ const websiteSchema = {
   },
   publisher: {
     "@type": "Organization",
-    name: "Canny's Cleaning Services",
+    name: "Cannys Cleaning Services",
     logo: {
       "@type": "ImageObject",
       url: "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg",
@@ -117,7 +117,7 @@ const websiteSchema = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness"],
-  name: "Canny's Cleaning Services",
+  name: "Cannys Cleaning Services",
   image:
     "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg",
   url: "https://www.cannyscleaning.com",
