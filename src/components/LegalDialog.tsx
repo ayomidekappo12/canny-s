@@ -117,10 +117,17 @@ export default function LegalDialog({
                   href="mailto:info@cannyscleaning.com"
                   className="text-primary hover:underline px-1"
                 >
-                  info@cannyscleaning.com
+                  <strong>info@cannyscleaning.com</strong>
                 </a>
                 <br />
-                Phone: +44 79 3088 7488
+                Address:{" "}
+                <strong className="text-primary">
+                  167 - 169 Great Portland Street, 5th Floor, London, W1W 5PF,
+                  UK.
+                </strong>
+                <br />
+                Phone:{" "}
+                <strong className="text-[#1E293B]">+44 79 3088 7488</strong>
               </div>
             </>
           ),
@@ -226,10 +233,17 @@ export default function LegalDialog({
                   href="mailto:info@cannyscleaning.com"
                   className="text-primary hover:underline px-1"
                 >
-                  info@cannyscleaning.com
+                  <strong>info@cannyscleaning.com</strong>
                 </a>
                 <br />
-                Phone: +44 79 3088 7488
+                Address:{" "}
+                <strong className="text-primary">
+                  167 - 169 Great Portland Street, 5th Floor, London, W1W 5PF,
+                  UK.
+                </strong>
+                <br />
+                Phone:{" "}
+                <strong className="text-[#1E293B]">+44 79 3088 7488</strong>
               </div>
             </>
           ),

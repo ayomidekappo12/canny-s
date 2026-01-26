@@ -283,7 +283,9 @@ Message: ${data.message}
               <h2 className="text-[#1E293B] text-[20px] md:text-[22px] font-bold">
                 Or Contact Us Directly
               </h2>
-              <p className="text-base pt-2">Phone: +44 7930 887488</p>
+              <p className="text-base pt-2">Company Incorpation Date: 14/09/2016</p>
+              <p className="text-base pt-1">Company House Number: 10375630</p>
+              <p className="text-base pt-1">Phone: +44 7930 887488</p>
               <p className="text-base pt-1">Email: info@cannyscleaning.com</p>
             </section>
           </div>

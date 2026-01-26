@@ -113,6 +113,7 @@ const websiteSchema = {
   },
 };
 
+
 // Organization Schema (with reviews & rating)
 const organizationSchema = {
   "@context": "https://schema.org",
