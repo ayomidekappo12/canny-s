@@ -55,6 +55,14 @@ export default function Footer() {
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
               <span className="text-sm font-medium">4.9/5 Customer Rating</span>
             </div>
+            <div className="flex-col items-center space-x-2">
+              <p className="text-sm font-normal">
+                Company Incorpated Date: 14/09/2016
+              </p>
+              <p className="text-sm font-normal">
+                Companies House Number: 10375630
+              </p>
+            </div>
           </div>
 
           {/* Services */}

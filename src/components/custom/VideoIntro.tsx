@@ -14,7 +14,8 @@ export default function VideoIntro() {
     const player = new Player(iframeRef.current);
     playerRef.current = player;
 
-    player.on("ended", () => {
+    // Explicitly ignore the returned Promise
+    void player.on("ended", () => {
       setEnded(true);
     });
 
@@ -24,9 +25,11 @@ export default function VideoIntro() {
   }, []);
 
   const replayVideo = async () => {
+    if (!playerRef.current) return;
+
     setEnded(false);
-    await playerRef.current?.setCurrentTime(0);
-    await playerRef.current?.play();
+    await playerRef.current.setCurrentTime(0);
+    await playerRef.current.play();
   };
 
   return (
@@ -64,12 +67,14 @@ export default function VideoIntro() {
                 backgroundImage:
                   "url('https://res.cloudinary.com/dxvf9uqwe/image/upload/v1769454226/Professional_Cleaning_Services_in_Action_vzpzam.png')",
               }}
-              onClick={replayVideo}
+              onClick={() => {
+                void replayVideo();
+              }}
               role="button"
               aria-label="Replay video"
             >
-              <div className="rounded-full w-20 h-20 flex items-center justify-center">
-                <span className="text-3xl">▶</span>
+              <div className="rounded-full w-20 h-20 flex items-center justify-center bg-black/60 backdrop-blur">
+                <span className="text-3xl text-white">▶</span>
               </div>
             </div>
           )}

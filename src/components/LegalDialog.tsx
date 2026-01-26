@@ -34,12 +34,12 @@ export default function LegalDialog({
         {
           title: "1. Introduction",
           content:
-            "These Terms govern your use of the Canny's Cleaning Ltd website and services. By using our site or booking our services, you agree to comply with these Terms and all applicable laws and regulations.",
+            "These Terms govern your use of the Canny's Cleaning website and services. By using our site or booking our services, you agree to comply with these Terms and all applicable laws and regulations.",
         },
         {
           title: "2. Services",
           content:
-            "Canny's Cleaning Ltd provides residential and commercial cleaning services across London and Kent. Service availability may vary by location and is subject to scheduling and staff availability.",
+            "Canny's Cleaning provides residential and commercial cleaning services across London and Kent. Service availability may vary by location and is subject to scheduling and staff availability.",
         },
         {
           title: "3. Booking and Payment",
@@ -61,7 +61,7 @@ export default function LegalDialog({
         {
           title: "5. Liability and Insurance",
           list: [
-            "Canny's Cleaning Ltd is insured for public liability and employee coverage.",
+            "Canny's Cleaning is insured for public liability and employee coverage.",
             "We are not liable for pre-existing damage or wear and tear.",
             "Any claims for damage must be reported within 24 hours of service completion.",
           ],
@@ -69,7 +69,7 @@ export default function LegalDialog({
         {
           title: "6. Intellectual Property",
           content:
-            "All content on this website, including text, graphics, logos, and images, is the property of Canny's Cleaning Ltd or its licensors and is protected by UK copyright laws.",
+            "All content on this website, including text, graphics, logos, and images, is the property of Canny's Cleaning or its licensors and is protected by UK copyright laws.",
         },
         {
           title: "7. Privacy Policy",
@@ -109,7 +109,7 @@ export default function LegalDialog({
               If you have any questions about these Terms, please contact us at:
               <div className="mt-3 text-base leading-6">
                 <strong className="text-primary">
-                  Canny&apos;s Cleaning Service Ltd
+                  Canny&apos;s Cleaning Service
                 </strong>
                 <br />
                 Email:
@@ -225,7 +225,7 @@ export default function LegalDialog({
               please contact us at:
               <div className="mt-3 text-base leading-6">
                 <strong className="text-primary">
-                  Canny&apos;s Cleaning Service Ltd
+                  Canny&apos;s Cleaning
                 </strong>
                 <br />
                 Email:
@@ -269,7 +269,7 @@ export default function LegalDialog({
             <p className="text-base">
               Welcome to
               <strong className="text-primary px-1">
-                Canny&apos;s Cleaning Service Ltd.
+                Canny&apos;s Cleaning.
               </strong>
               By accessing or using our website and services, you agree to be
               bound by the following Terms of Service. Please read them
@@ -278,7 +278,7 @@ export default function LegalDialog({
           ) : (
             <p className="text-base">
               <strong className="text-primary px-1">
-                Canny&apos;s Cleaning Service Ltd
+                Canny&apos;s Cleaning
               </strong>
               (&ldquo;we&ldquo;, &ldquo;our&ldquo;, &ldquo;us&ldquo;) is committed to protecting your privacy. This
               Privacy Policy explains how we collect, use, disclose, and
