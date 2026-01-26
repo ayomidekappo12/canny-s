@@ -10,7 +10,8 @@ const videoSchema = {
   name: "How Cannys Cleaning Services Works",
   description:
     "Watch a short video explaining how Cannys Cleaning Services delivers reliable, 5-star rated cleaning services for homes and businesses across the UK.",
-  thumbnailUrl: "https://cannyscleaning.com/video-thumbnail.jpg",
+  thumbnailUrl:
+    "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1769454226/Professional_Cleaning_Services_in_Action_vzpzam.png",
   uploadDate: "2025-01-10",
   duration: "PT41S",
   contentUrl: "https://vimeo.com/1158448550",
