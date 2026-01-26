@@ -20,7 +20,7 @@ export default function VideoIntro() {
     });
 
     return () => {
-      player.destroy();
+      void player.destroy();
     };
   }, []);
 
@@ -73,7 +73,7 @@ export default function VideoIntro() {
               role="button"
               aria-label="Replay video"
             >
-              <div className="rounded-full w-20 h-20 flex items-center justify-center bg-black/60 backdrop-blur">
+              <div className="rounded-full w-20 h-20 flex items-center justify-center bg-black/50 backdrop-blur">
                 <span className="text-3xl text-white">▶</span>
               </div>
             </div>
