@@ -24,42 +24,45 @@ export default function Footer() {
     "End of Tenancy",
     "AirBnB Cleaning",
     "Commercial Cleaning",
-    "After-builder Cleaning",
+    "After-builders Cleaning",
   ];
 
   return (
     <footer className="text-white bg-[#1E293B]">
       <div className="mx-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 md:gap-12 max-w-7xl mx-auto w-full">
+          {/* Company Info - Takes more width on large screens */}
+          <div className="space-y-4 lg:pr-6">
+            <div className="flex items-center space-x-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-hero">
                 <Image
                   src="https://res.cloudinary.com/dxvf9uqwe/image/upload/v1756848808/Logo_qaj4rw.jpg"
-                  alt="Logo"
-                  width={300}
-                  height={300}
+                  alt="Canny's Cleaning Logo"
+                  width={48}
+                  height={48}
                   className="brightness-110 contrast-125"
                   quality={90}
                   priority
                 />
               </div>
-              <span className="font-bold text-xl">Canny&apos;s Cleaning</span>
+              <span className="font-bold text-xl whitespace-nowrap">
+                Canny&apos;s Cleaning
+              </span>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Professional cleaning services across London and Kent. Trusted by
-              our satisfied customers.
+              Professional cleaning services across London and Kent.
+              <br/>
+              Trusted by our satisfied customers.
             </p>
             <div className="flex items-center space-x-2">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
               <span className="text-sm font-medium">4.9/5 Customer Rating</span>
             </div>
-            <div className="flex-col items-center space-x-2">
-              <p className="text-sm font-normal">
-                Company Incorpated Date: 14/09/2016
+            <div className="space-y-1">
+              <p className="text-sm text-gray-300">
+                Company Incorporated Date: 14/09/2016
               </p>
-              <p className="text-sm font-normal">
+              <p className="text-sm text-gray-300">
                 Companies House Number: 10375630
               </p>
             </div>
@@ -67,10 +70,13 @@ export default function Footer() {
 
           {/* Services */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Our Services</h3>
-            <ul className="space-y-2 text-sm text-gray-300">
+            <h3 className="font-semibold text-lg text-white">Our Services</h3>
+            <ul className="space-y-2">
               {cleaningServices.map((service, index) => (
-                <li key={index} className="hover:text-white transition-colors">
+                <li
+                  key={index}
+                  className="text-sm text-gray-300 hover:text-white transition-colors cursor-pointer"
+                >
                   {service}
                 </li>
               ))}
@@ -79,18 +85,18 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Contact Us</h3>
+            <h3 className="font-semibold text-lg text-white">Contact Us</h3>
             <div className="space-y-3 text-sm text-gray-300">
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-primary" />
+              <div className="flex items-center space-x-3">
+                <Phone className="h-4 w-4 text-primary flex-shrink-0" />
                 <span>+44 79 3088 7488</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-primary" />
+              <div className="flex items-center space-x-3">
+                <Mail className="h-4 w-4 text-primary flex-shrink-0" />
                 <span>info@cannyscleaning.com</span>
               </div>
-              <div className="flex items-start space-x-2">
-                <MapPin className="h-4 w-4 text-primary mt-0.5" />
+              <div className="flex items-start space-x-3">
+                <MapPin className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                 <span>
                   Serving all London
                   <br />
@@ -102,40 +108,23 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-gray-300">
-              <li>
-                <Link
-                  href="/cleaning/booking/"
-                  className="hover:text-white transition-colors"
-                >
-                  Book Now
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cleaning/about"
-                  className="hover:text-white transition-colors"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cleaning/contact"
-                  className="hover:text-white transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cleaning/service"
-                  className="hover:text-white transition-colors"
-                >
-                  Services
-                </Link>
-              </li>
+            <h3 className="font-semibold text-lg text-white">Quick Links</h3>
+            <ul className="space-y-2">
+              {[
+                { href: "/cleaning/booking/", label: "Book Now" },
+                { href: "/cleaning/about", label: "About Us" },
+                { href: "/cleaning/contact", label: "Contact" },
+                { href: "/cleaning/service", label: "Services" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-gray-300 hover:text-white transition-colors inline-block"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
