@@ -8,7 +8,6 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import Link from "next/link";
 import {
   Star,
-  Clock,
   CheckCircle,
   Phone,
   NotebookPen,
