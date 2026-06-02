@@ -45,13 +45,18 @@ export default function Footer() {
                   priority
                 />
               </div>
-              <span className="font-bold text-xl whitespace-nowrap">
-                Canny&apos;s Cleaning
-              </span>
+              <div className="flex flex-col">
+                <span className="font-bold text-lg whitespace-nowrap">
+                  Canny&apos;s Service Limited
+                </span>
+                <p className="font-bold text-sm italic whitespace-nowrap">
+                  Canny&apos;s Cleaning
+                </p>
+              </div>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
               Professional cleaning services across London and Kent.
-              <br/>
+              <br />
               Trusted by our satisfied customers.
             </p>
             <div className="flex items-center space-x-2">
@@ -137,7 +142,7 @@ export default function Footer() {
               <span className="text-sm text-gray-400">Follow us:</span>
               <div className="flex space-x-3">
                 <a
-                  href="https://www.facebook.com/share/1A9Uquyytg/?mibextid=wwXIfr"
+                  href="https://www.facebook.com/share/17QNyQpqsx/?mibextid=wwXIfr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"

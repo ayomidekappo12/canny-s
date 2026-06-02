@@ -60,22 +60,6 @@ export function Hero() {
             {/* USPs */}
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-lg bg-[#dcf7de]">
-                  <Clock
-                    className="h-5 w-5"
-                    style={{ color: "var(--success-green)" }}
-                  />
-                </div>
-                <div>
-                  <p className="font-semibold text-[#131620]">
-                    Same Day Service
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Book today, clean today
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <CheckCircle className="h-5 w-5 text-primary" />
                 </div>
