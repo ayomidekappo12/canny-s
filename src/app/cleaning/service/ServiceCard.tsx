@@ -56,7 +56,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
             className="object-cover brightness-110 contrast-100"
             fill
             priority={index === 0}
-            quality={90}
+            quality={75}
           />
           {service.popular && (
             <Badge

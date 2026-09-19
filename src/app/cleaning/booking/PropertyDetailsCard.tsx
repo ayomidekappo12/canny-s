@@ -33,6 +33,7 @@ const propertyTypes = [
   { value: "studio", label: "Studio" },
   { value: "commercial Space", label: "Commercial Space" },
   { value: "airbnb", label: "Airbnb" },
+  { value: "Event Space", label: "Event Space" },
 ];
 
 const bedroomOptions = [
@@ -42,6 +43,7 @@ const bedroomOptions = [
   { value: "3 bedrooms", label: "3 bedrooms" },
   { value: "4 bedrooms", label: "4 bedrooms" },
   { value: "5+ bedrooms", label: "5+ bedrooms" },
+  { value: "Event/Commercial Space", label: "Event/Commercial Space" },
 ];
 
 const bathroomOptions = [
@@ -50,6 +52,7 @@ const bathroomOptions = [
   { value: "3 bathrooms", label: "3 bathrooms" },
   { value: "4 bathrooms", label: "4 bathrooms" },
   { value: "5 bathrooms", label: "5+ bathrooms" },
+  { value: "Event/Commercial Space", label: "Event/Commercial Space" },
 ];
 
 export default function PropertyDetailsCard({ form }: Props) {

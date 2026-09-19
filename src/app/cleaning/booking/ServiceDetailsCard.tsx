@@ -38,8 +38,12 @@ const services = [
   { value: "deep cleaning", label: "Deep Cleaning - From £120/hr" },
   { value: "end-tenancy cleaning", label: "End of Tenancy - From £180/hr" },
   { value: "commercial cleaning", label: "Commercial Cleaning - £120/hr" },
-  { value: "builders cleaning", label: "After-Builders Cleaning - From £200/hr" },
+  {
+    value: "builders cleaning",
+    label: "After-Builders Cleaning - From £200/hr",
+  },
   { value: "airbnb cleaning", label: "AirBnB Cleaning - From £250/hr" },
+  { value: "event cleaning", label: "Event Cleaning - Price on request" },
 ];
 
 const timeSlots = [
@@ -71,8 +75,14 @@ const frequencies = [
 ];
 
 const supplyOptions = [
-  { value: "client cleaning suppliers and equipments", label: "Client cleaning suppliers and equipments" },
-  { value: "canny's cleaning suppliers and equipments", label: "Canny's cleaning suppliers and equipments" },
+  {
+    value: "client cleaning suppliers and equipments",
+    label: "Client cleaning suppliers and equipments",
+  },
+  {
+    value: "canny's cleaning suppliers and equipments",
+    label: "Canny's cleaning suppliers and equipments",
+  },
 ];
 
 export default function ServiceDetailsCard({ form }: Props) {
@@ -127,7 +137,7 @@ export default function ServiceDetailsCard({ form }: Props) {
                     variant="outline"
                     className={cn(
                       "w-full pl-3 text-left font-normal",
-                      !field.value && "text-muted-foreground"
+                      !field.value && "text-muted-foreground",
                     )}
                   >
                     {field.value instanceof Date ? (
@@ -139,7 +149,6 @@ export default function ServiceDetailsCard({ form }: Props) {
                   </Button>
                 </PopoverTrigger>
                 <FormControl />{" "}
-
                 <PopoverContent
                   className="w-auto p-0 bg-background border z-50"
                   align="start"

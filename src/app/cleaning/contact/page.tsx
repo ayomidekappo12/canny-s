@@ -227,6 +227,9 @@ Message: ${data.message}
                         <SelectItem value="AirBnB Cleaning">
                           AirBnB Cleaning
                         </SelectItem>
+                        <SelectItem value="Event Cleaning">
+                          Event Cleaning
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   )}

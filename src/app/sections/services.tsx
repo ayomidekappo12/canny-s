@@ -11,6 +11,7 @@ import {
   Building,
   Cog,
   Plane,
+  PartyPopper,
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
@@ -104,6 +105,21 @@ export function Services() {
         "Fresh linens",
         "Restocking supplies",
         "Guest-ready standards",
+      ],
+      popular: false,
+      href: "/cleaning/service",
+    },
+    {
+      icon: PartyPopper,
+      title: "Event Cleaning",
+      description:
+        "Keep your venue spotless before, during, and after private parties, corporate functions, concerts/festivals.",
+      price: "Price on request",
+      features: [
+        "Venue preparation",
+        "Litter and waste removal",
+        "Restroom maintenance",
+        "During-event touch-ups",
       ],
       popular: false,
       href: "/cleaning/service",
@@ -207,7 +223,7 @@ export function Services() {
                 </Card>
               );
             })}
-          </div> 
+          </div>
         </div>
       </section>
     </>

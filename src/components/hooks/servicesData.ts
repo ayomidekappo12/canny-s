@@ -1,4 +1,12 @@
-import { Home, Sparkles, Key, Building, Cog, Plane } from "lucide-react";
+import {
+  Home,
+  Sparkles,
+  Key,
+  Building,
+  Cog,
+  Plane,
+  PartyPopper,
+} from "lucide-react";
 
 export const services = [
   {
@@ -28,7 +36,7 @@ export const services = [
     ],
     popular: false,
     image:
-      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654243/Web_Page_Pictures.docx.pdf-image-002_yy0vsh.jpg",
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789846317/WhatsApp_Image_2026-09-19_at_14.26.09_kpjrxy.jpg",
   },
   {
     id: "deep",
@@ -57,7 +65,7 @@ export const services = [
     ],
     popular: true,
     image:
-      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654243/Web_Page_Pictures.docx.pdf-image-003_d05kcm.jpg",
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789846318/WhatsApp_Image_2026-09-19_at_14.26.08_qoytbp.jpg",
   },
   {
     id: "end-of-tenancy",
@@ -115,7 +123,7 @@ export const services = [
     ],
     popular: false,
     image:
-      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752654244/Web_Page_Pictures.docx.pdf-image-004_vtnqaj.jpg",
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789846320/ChatGPT_Image_Sep_19_2026_02_07_41_PM_psnxwl.png",
   },
   {
     id: "after-builders-cleaning",
@@ -173,6 +181,35 @@ export const services = [
     ],
     popular: false,
     image:
-      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1752633083/image2_ih0xxw.png",
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789846317/WhatsApp_Image_2026-09-19_at_14.26.108_pi2dqn.jpg",
+  },
+  {
+    id: "event-cleaning",
+    icon: PartyPopper,
+    title: "Event Cleaning",
+    subtitle: "Before, during & after event support",
+    description:
+      "Keep your event space spotless from setup through pack-down. Our team handles litter removal, floor care, restroom maintenance, and waste disposal so you can focus on your guests.",
+    price: "Price on request",
+    duration: "2-8 hours",
+    features: [
+      "Pre-event venue preparation",
+      "Litter and waste removal",
+      "Floor cleaning and spot care",
+      "Restroom cleaning and restocking",
+      "During-event touch-ups",
+      "Post-event venue clean-up",
+      "Furniture and surface cleaning",
+      "Discreet, flexible team support",
+    ],
+    includes: [
+      "Private parties and celebrations",
+      "Corporate functions and conferences",
+      "Concerts and festivals",
+      "Event-specific cleaning plan",
+    ],
+    popular: false,
+    image:
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789846322/ChatGPT_Image_Sep_19_2026_02_07_26_PM_q2ztic.png",
   },
 ];

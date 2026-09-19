@@ -25,6 +25,7 @@ export default function Footer() {
     "AirBnB Cleaning",
     "Commercial Cleaning",
     "After-builders Cleaning",
+    "Event Cleaning",
   ];
 
   return (
