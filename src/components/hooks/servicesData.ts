@@ -65,7 +65,7 @@ export const services = [
     ],
     popular: true,
     image:
-      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789846318/WhatsApp_Image_2026-09-19_at_14.26.08_qoytbp.jpg",
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789977241/ChatGPT_Image_Sep_21_2026_02_40_18_AM_fivxha.png",
   },
   {
     id: "end-of-tenancy",
@@ -123,7 +123,7 @@ export const services = [
     ],
     popular: false,
     image:
-      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789846320/ChatGPT_Image_Sep_19_2026_02_07_41_PM_psnxwl.png",
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789977236/ChatGPT_Image_Sep_21_2026_02_45_35_AM_k3wvgq.png",
   },
   {
     id: "after-builders-cleaning",
@@ -210,6 +210,6 @@ export const services = [
     ],
     popular: false,
     image:
-      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789846322/ChatGPT_Image_Sep_19_2026_02_07_26_PM_q2ztic.png",
+      "https://res.cloudinary.com/dxvf9uqwe/image/upload/v1789977235/ChatGPT_Image_Sep_21_2026_02_52_17_AM_dbajuv.png",
   },
 ];
