@@ -40,4 +40,6 @@ export const BookingFormSchema = z.object({
   supplies: z.string().min(1, "Please select your cleaning supplies option"),
 });
 
+//export booking form data
+
 export type BookingFormData = z.infer<typeof BookingFormSchema>;
